@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>UNLa</title>
+		<!-- Bootstrap core CSS -->
+		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" /><!-- Custom styles for this template -->
+		<link href="/css/modern-business.css" rel="stylesheet" />
+	</head>
+	<body><!-- Navigation -->
+		<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="/index">HOME</a>
+				<button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"></button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="/degrees/">Degrees</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownBlog">
+								User <span th:text="${username}" />
+							</a>
+							<div aria-labelledby="navbarDropdownBlog" class="dropdown-menu dropdown-menu-right">
+								<form th:action="@{/logout}" method="post">
+									<input class="dropdown-item" style="cursor:pointer" type="submit" value="Logout" />
+								</form>
+								<a class="dropdown-item" href="/person">CRUD Person</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<header>
+			<div class="carousel slide" data-ride="carousel" id="carouselExampleIndicators">
+				<ol class="carousel-indicators">
+					<li class="active" data-slide-to="0" data-target="#carouselExampleIndicators">&nbsp;</li>
+					<li data-slide-to="1" data-target="#carouselExampleIndicators">&nbsp;</li>
+					<li data-slide-to="2" data-target="#carouselExampleIndicators">&nbsp;</li>
+				</ol>
+				<div class="carousel-inner" role="listbox"><!-- Slide One - Set the background image for this slide in the line below -->
+					<div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
+						<div class="carousel-caption d-none d-md-block">
+							<h3>First Slide</h3>	
+							<p>This is a description for the first slide.</p>
+						</div>
+					</div>
+					<!-- Slide Two - Set the background image for this slide in the line below -->
+					<div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+						<div class="carousel-caption d-none d-md-block">
+							<h3>Second Slide</h3>
+							<p>This is a description for the second slide.</p>
+						</div>
+					</div>
+					<!-- Slide Three - Set the background image for this slide in the line below -->
+					<div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+						<div class="carousel-caption d-none d-md-block">
+							<h3>Third Slide</h3>
+							<p>This is a description for the third slide.</p>
+						</div>
+					</div>
+				</div>
+				<a class="carousel-control-prev" data-slide="prev" href="#carouselExampleIndicators" role="button"><span class="sr-only">Previous</span> </a> <a class="carousel-control-next" data-slide="next" href="#carouselExampleIndicators" role="button"> <span class="sr-only">Next</span> </a>
+			</div>
+		</header>
+		<!-- Page Content -->
+		<div class="container">
+			<h1 class="my-4">Welcome to Modern Business</h1>
+			<!-- Marketing Icons Section -->
+			<div class="row">
+				<div class="col-lg-4 mb-4">
+					<div class="card h-100">
+						<h4 class="card-header">Card Title</h4>
+						<div class="card-body">
+							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+						</div>
+						<div class="card-footer"><a class="btn btn-primary" href="#">Learn More</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<div class="card h-100">
+						<h4 class="card-header">Card Title</h4>	
+						<div class="card-body">
+							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
+						</div>
+						<div class="card-footer"><a class="btn btn-primary" href="#">Learn More</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<div class="card h-100">
+						<h4 class="card-header">Card Title</h4>
+						<div class="card-body">
+							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+						</div>
+						<div class="card-footer"><a class="btn btn-primary" href="#">Learn More</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="py-5 bg-dark">
+			<div class="container">
+				<p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+			</div>
+		</footer>
+		<!-- Bootstrap core JavaScript -->
+		<script src="/vendor/jquery/jquery.min.js"></script>
+		<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <html> -->
+<!-- <head> -->
+<!--     <meta charset="utf-8" /> -->
+<!--     <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<!--     <title>:: UNLA ::</title>    -->
+<!--     <link href="/css/fontawesome-free/font-awesome.css" rel="stylesheet"> -->
+<!--     <link href="/css/sb-admin-2.min.css" rel="stylesheet">     -->
+<!-- </head> -->
+
+
+<!-- <body id="page-top"> -->
+<!--     Page Wrapper -->
+<!--     <div id="wrapper"> -->
+<!--         Sidebar -->
+<!--         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"> -->
+
+<!--             Sidebar - Brand -->
+<!--             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="~/Home"> -->
+<!--                 <div class="sidebar-brand-on "> -->
+<!--                     <div class="sidebar-brand-icon"> -->
+<!--                         <img src="~/Content/Images/agro.png" id="imgLogo" alt="Agro" style="height:50px;"> -->
+<!--                     </div> -->
+<!--                     <div class="sidebar-brand-text"> -->
+<!--                         <img src="~/Content/Images/Logo.png" id="imgLogo" alt="Agro" style="height:30px;margin-top:-10px"> -->
+<!--                     </div> -->
+<!--                 </div> -->
+
+<!--             </a> -->
+
+<!--             Divider -->
+<!--             <hr class="sidebar-divider my-0"> -->
+
+<!--             Divider -->
+<!--             @*<hr class="sidebar-divider">*@ -->
+
+<!--             Heading -->
+<!--             <div class="sidebar-heading">Interface</div> -->
+
+<!--             Nav Item - Pages Collapse Menu -->
+<!--             <li class="nav-item"> -->
+<!--                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"> -->
+<!--                     <i class="fa fa-fw fa-cutlery"></i> -->
+<!--                     <span></span> -->
+<!--                 </a> -->
+<!--                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar"> -->
+                   
+<!--                 </div> -->
+<!--             </li> -->
+
+<!--             Nav Item - Utilities Collapse Menu -->
+<!--             <li class="nav-item"> -->
+<!--                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities"> -->
+<!--                     <i class="fa fa-fw fa-coffee"></i> -->
+<!--                     <span></span> -->
+<!--                 </a> -->
+<!--                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar"> -->
+<!--                     <div class="bg-white py-2 collapse-inner rounded"> -->
+<!--                         <h6 class="collapse-header">Sectores:</h6> -->
+<!--                         <a class="collapse-item" href="~/PuestoVianda">Puesto De Vianda</a> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </li> -->
+
+<!--             Divider -->
+<!--             <hr class="sidebar-divider"> -->
+<!--             <li class="nav-item"> -->
+<!--             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages"> -->
+<!--                 <i class="fa fa-fw fa-cog"></i> -->
+<!--                 <span></span> -->
+<!--             </a> -->
+<!--             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar"> -->
+<!--                 <div class="bg-white py-2 collapse-inner rounded"> -->
+                   
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </li> -->
+<!--             Divider -->
+<!--             <hr class="sidebar-divider d-none d-md-block"> -->
+
+<!--             Sidebar Toggler (Sidebar) -->
+<!--             <div class="text-center d-none d-md-inline"> -->
+<!--                 <button class="rounded-circle border-0" id="sidebarToggle"></button> -->
+<!--             </div> -->
+
+<!--         </ul> -->
+<!--         End of Sidebar -->
+
+<!--         <div class="container body-content"> -->
+<!--             Topbar -->
+<!--             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"> -->
+
+<!--         Sidebar Toggle (Topbar) -->
+<!--         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"> -->
+<!--             <i class="fa fa-bars"></i> -->
+<!--         </button> -->
+
+<!--         Topbar Search -->
+<!--         <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"> -->
+<!--             <div class="input-group"> -->
+<!--                 <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"> -->
+<!--                 <div class="input-group-append"> -->
+<!--                     <button class="btn btn-primary" type="button"> -->
+<!--                         <i class="fa fa-search fa-sm"></i> -->
+<!--                     </button> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </form> -->
+
+<!--         Topbar Navbar -->
+<!--         <ul class="navbar-nav ml-auto"> -->
+
+<!--             Nav Item - Search Dropdown (Visible Only XS) -->
+<!--             <li class="nav-item dropdown no-arrow d-sm-none"> -->
+<!--                 <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+<!--                     <i class="fa fa-search fa-fw"></i> -->
+<!--                 </a> -->
+<!--                 Dropdown - Messages -->
+<!--                 <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown"> -->
+<!--                     <form class="form-inline mr-auto w-100 navbar-search"> -->
+<!--                         <div class="input-group"> -->
+<!--                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"> -->
+<!--                             <div class="input-group-append"> -->
+<!--                                 <button class="btn btn-primary" type="button"> -->
+<!--                                     <i class="fa fa-search fa-sm"></i> -->
+<!--                                 </button> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </form> -->
+<!--                 </div> -->
+<!--             </li> -->
+
+<!--             Nav Item - Alerts -->
+<!--             <li class="nav-item dropdown no-arrow mx-1"> -->
+
+
+<!--             </li> -->
+<!--             </ul> -->
+
+<!--             </nav> -->
+<!--             End of Topbar -->
+<!--             <hr /> -->
+
+<!--         </div> -->
+<!--     </div>   -->
+<!-- </body> -->
+
+<!-- <script src="/vendor/jquery/jquery.min.js"></script> -->
+<!-- <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>  -->
+<!-- <script src="/vendor/jquery-easing/jquery.easing.min.js"></script> -->
+<!-- <script src="/js/sb-admin-2.min.js"></script> -->
+<!-- </html> -->
