@@ -114,9 +114,4 @@ public class User {
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
-
-	public static Object withDefaultPasswordEncoder() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

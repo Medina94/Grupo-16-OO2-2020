@@ -25,25 +25,8 @@ public class HomeController {
 		return modelAndView;
 	}
 	
-	//GET Example: SERVER/hello?name=someName
-	@GetMapping("/hello")
-	public ModelAndView helloParams1(@RequestParam(name="name", required=false, defaultValue="null") String name) {
-		ModelAndView mV = new ModelAndView(ViewRouteHelper.HELLO);
-		mV.addObject("name", name);
-		return mV;
-	}
-	
-	//GET Example: SERVER/hello/someName
-	@GetMapping("/hello/{name}")
-	public ModelAndView helloParams2(@PathVariable("name") String name) {
-		ModelAndView mV = new ModelAndView(ViewRouteHelper.HELLO);
-		mV.addObject("name", name);
-		return mV;
-	}
-	
 	@GetMapping("/")
 	public RedirectView redirectToHomeIndex() {
 		return new RedirectView(ViewRouteHelper.ROUTE);
 	}
 }
-

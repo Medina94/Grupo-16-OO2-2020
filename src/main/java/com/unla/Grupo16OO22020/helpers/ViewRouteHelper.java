@@ -4,7 +4,6 @@ public class ViewRouteHelper {
 	/**** Views ****/
 	//HOME
 	public final static String INDEX = "home/index";
-	public final static String HELLO = "home/hello";
 	
 	//DEGREE
 //	public final static String DEGREE_INDEX = "degree/index";
