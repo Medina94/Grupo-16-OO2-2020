@@ -1,22 +1,30 @@
 package com.unla.Grupo16OO22020.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="localidad")
-public class Localidad {
-	
+@Table(name="local")
+public class Local {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="nombre")
-	private String nombre;
+	@Column(name="telefono")
+	private int telefono;
+	
+	@Column(name="direccion")
+	private String direccion;
 	
 	@Column(name="latitud")
 	private int latitud;
@@ -24,12 +32,16 @@ public class Localidad {
 	@Column(name="longitud")
 	private int longitud;
 	
-	public Localidad() {}
+//	@OneToMany(fetch=FetchType.LAZY, mappedBy="empleado")
+//	private Set<Empleado> empleados = new HashSet<Empleado>();
+	
+	public Local() {}
 
-	public Localidad(int id, String nombre, int latitud, int longitud) {
+	public Local(int id, int telefono, String direccion, int latitud, int longitud) {
 		super();
 		this.id = id;
-		this.nombre = nombre;
+		this.telefono = telefono;
+		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
 	}
@@ -42,12 +54,20 @@ public class Localidad {
 		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public int getTelefono() {
+		return telefono;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
 	public int getLatitud() {
@@ -67,6 +87,4 @@ public class Localidad {
 	}
 	
 	
-	
 }
-

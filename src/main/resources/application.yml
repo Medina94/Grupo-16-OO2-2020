@@ -11,4 +11,3 @@ spring:
       dialect: org.hibernate.dialect.MySQL5Dialect
   thymeleaf:
     cache: false
-server:  port: 8081

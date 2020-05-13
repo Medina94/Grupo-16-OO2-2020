@@ -2,13 +2,20 @@
 	layout:decorate="~{layout}">
 <body>
 	<div layout:fragment="content">
-	<form action="#" th:action="@{/localidad/actualizar}" th:object="${localidad}" method="post">
+	<form action="#" th:action="@{/local/actualizar}" th:object="${local}" method="post">
 			<input type="hidden" th:field="*{id}" />
 			<div id="form-crear-modificar">
+			<div class="form-row">
+					<div class="form-group col">
+						<p>
+						  Telefono: <input class="form-control" style="width: 20% !important" type="text" th:field="*{telefono}" />
+						</p>
+					</div>
+				</div>	
 				<div class="form-row">
 					<div class="form-group col">
 						<p>
-						  Nombre: <input class="form-control" style="width: 20% !important" type="text" th:field="*{nombre}" />
+						  Direccion: <input class="form-control" style="width: 20% !important" type="text" th:field="*{direccion}" />
 						</p>
 					</div>
 				</div>			
