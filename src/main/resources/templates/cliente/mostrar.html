@@ -29,12 +29,12 @@
             <td><span th:text="${cliente.apellido}" /></td>
             <td><span th:text="${cliente.mail}" /></td>
             <td><span th:text="${cliente.fechaNacimiento}" /></td>
-            <!-- <td style="text-align:center"><a th:href="@{/persona/empleado/{id}(id=${empleado.id})}"><i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i></a></td>
+            <td style="text-align:center"><a th:href="@{/persona/cliente/{id}(id=${cliente.id})}"><i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i></a></td>
             <td  style="text-align:center">
-            <form action="#" th:action="@{/persona/empleado/eliminar/{id}(id=${empleado.id})}" method="post">
+            <form action="#" th:action="@{/persona/cliente/eliminar/{id}(id=${cliente.id})}" method="post">
 	              <button class="fa fa-trash" type="submit" style="font-size: 24px; color: black;border: 0 !important;" aria-hidden="true"></button>
             </form>
-            </td> -->
+            </td>
         </tr>        
     </tbody>
 </table>

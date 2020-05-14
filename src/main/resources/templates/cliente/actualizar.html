@@ -1,0 +1,40 @@
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<body>
+	<div layout:fragment="content">
+	<form action="#" th:action="@{/persona/cliente/actualizar}" th:object="${cliente}" method="post">
+			<input type="hidden" th:field="*{id}" />
+			<div id="form-crear-modificar">
+			<div class="form-row">
+					<div class="form-group col">
+						<p>
+						  Nombre: <input class="form-control" style="width: 20% !important" type="text" th:field="*{nombre}" />
+						</p>
+					</div>
+				</div>	
+				<div class="form-row">
+					<div class="form-group col">
+						<p>
+						  Apellido: <input class="form-control" style="width: 20% !important" type="text" th:field="*{apellido}" />
+						</p>
+					</div>
+				</div>			
+				<div class="form-row">
+					<div class="form-group col">
+						<p>
+							Email: <input class="form-control" style="width: 20% !important" type="text" th:field="*{mail}" />
+						</p>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col">
+						<p>
+							Telefono: <input class="form-control" style="width: 20% !important" type="text" th:field="*{telefono}" />
+						</p>
+					</div>
+				</div>
+			</div>
+			<input type="submit" style="width: 7%;" value="Editar"/>
+		</form>
+	</div>
+</body>
