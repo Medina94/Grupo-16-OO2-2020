@@ -27,6 +27,7 @@ public class PersonaController {
 		return mAV;
 	}
 	
+	
 	@GetMapping("empleado/{id}")
 	public ModelAndView empleadoGetById(@PathVariable ("id") int id) {
 		ModelAndView mAV = new ModelAndView("empleado/datos");
@@ -42,7 +43,7 @@ public class PersonaController {
 	}
 	
 	@PostMapping("empleado/crear")
-	public RedirectView createEmpleado(@ModelAttribute EmpleadoModel modelo) {
+	public RedirectView createEmpleado(@ModelAttribute("empleado") EmpleadoModel modelo) {
 		personaService.empleadoInsertOrUpdate(modelo); 
 		return new RedirectView("");
 	}
@@ -71,14 +72,14 @@ public class PersonaController {
 	@GetMapping("cliente/crear")
 	public ModelAndView createCliente() {
 		ModelAndView mAV = new ModelAndView("cliente/crear"); 
-		mAV.addObject("empleado", new EmpleadoModel());
+		mAV.addObject("cliente", new ClienteModel());
 		return mAV;
 	}
 	
 	@PostMapping("cliente/crear")
-	public RedirectView createCliente(@ModelAttribute ClienteModel modelo) {
+	public RedirectView createCliente(@ModelAttribute("cliente") ClienteModel modelo) {
 		personaService.clienteInsertOrUpdate(modelo); 
-		return new RedirectView("");
+		return new RedirectView("/persona/cliente/all");
 	}
 	
 	@PostMapping("/cliente/eliminar/{id}")

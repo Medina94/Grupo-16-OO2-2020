@@ -2,10 +2,14 @@ package com.unla.Grupo16OO22020.models;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
 public class PersonaModel {
 	private int id;
 	private String nombre;
 	private String apellido;
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private LocalDate fechaNacimiento;
 	private String mail;
 	
