@@ -12,6 +12,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.Grupo16OO22020.models.ClienteModel;
 import com.unla.Grupo16OO22020.models.EmpleadoModel;
+import com.unla.Grupo16OO22020.services.ILocalService;
 import com.unla.Grupo16OO22020.services.IPersonaService;
 
 @Controller
@@ -19,6 +20,8 @@ import com.unla.Grupo16OO22020.services.IPersonaService;
 public class PersonaController {
 	@Autowired
 	private IPersonaService personaService;
+	@Autowired
+	private ILocalService localService;
 	
 	@GetMapping("/empleado/all")
 	public ModelAndView mostrarEmpleados() {
@@ -30,28 +33,36 @@ public class PersonaController {
 	
 	@GetMapping("empleado/{id}")
 	public ModelAndView empleadoGetById(@PathVariable ("id") int id) {
-		ModelAndView mAV = new ModelAndView("empleado/datos");
-		mAV.addObject("empleado", personaService.empleadoFindById(id));
+		ModelAndView mAV = new ModelAndView("empleado/actualizar");
+		EmpleadoModel empleado = personaService.empleadoFindById(id);
+		mAV.addObject("empleado", empleado);
+		mAV.addObject("local", localService.findById(empleado.getId()));
 		return mAV;
+	}
+	@PostMapping("empleado/actualizar")
+	public RedirectView modificarEmpleado(@ModelAttribute("empleado") EmpleadoModel modelo) {
+		personaService.empleadoInsertOrUpdate(modelo);
+		return new RedirectView("/persona/empleado/all");
 	}
 	
 	@GetMapping("empleado/crear")
 	public ModelAndView createEmpleado() {
 		ModelAndView mAV = new ModelAndView("empleado/crear"); 
 		mAV.addObject("empleado", new EmpleadoModel());
+		mAV.addObject("locales", localService.getAll());
 		return mAV;
 	}
 	
 	@PostMapping("empleado/crear")
 	public RedirectView createEmpleado(@ModelAttribute("empleado") EmpleadoModel modelo) {
 		personaService.empleadoInsertOrUpdate(modelo); 
-		return new RedirectView("");
+		return new RedirectView("empleado/mostrar");
 	}
 	
 	@PostMapping("/empleado/eliminar/{id}")
 	public RedirectView deleteEmpleado(@PathVariable("id") int id) {
 		personaService.EmpleadoRemove(id);
-		return new RedirectView("/empleado");
+		return new RedirectView("/persona/empleado/all");
 	}
 	//***************************************************
 
@@ -64,9 +75,15 @@ public class PersonaController {
 	
 	@GetMapping("cliente/{id}")
 	public ModelAndView clienteGetById(@PathVariable ("id") int id) {
-		ModelAndView mAV = new ModelAndView("cliente/datos");
+		ModelAndView mAV = new ModelAndView("cliente/actualizar");
 		mAV.addObject("empleado", personaService.clienteFindById(id));
 		return mAV;
+	}
+	
+	@PostMapping("cliente/actualizar")
+	public RedirectView modificarCliente(@ModelAttribute("cliente") ClienteModel modelo) {
+		personaService.clienteInsertOrUpdate(modelo);
+		return new RedirectView("/persona/cliente/all");
 	}
 	
 	@GetMapping("cliente/crear")
@@ -85,6 +102,6 @@ public class PersonaController {
 	@PostMapping("/cliente/eliminar/{id}")
 	public RedirectView deleteCliente(@PathVariable("id") int id) {
 		personaService.clienteRemove(id);
-		return new RedirectView("/cliente");
+		return new RedirectView("/persona/cliente/all");
 	}
 }

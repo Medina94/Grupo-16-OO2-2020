@@ -9,7 +9,7 @@ public class PersonaModel {
 	private int id;
 	private String nombre;
 	private String apellido;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaNacimiento;
 	private String mail;
 	
