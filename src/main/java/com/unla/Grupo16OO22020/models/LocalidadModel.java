@@ -2,13 +2,13 @@ package com.unla.Grupo16OO22020.models;
 
 public class LocalidadModel {
 	
-	private int id;
-	
+	private int id;	
 	private String nombre;
 	private int latitud;
 	private int longitud;
 	
 	public LocalidadModel() {}
+	
 	public LocalidadModel(int id, String nombre, int longitud, int latitud) {
 		this.setId(id);
 		this.nombre = nombre;		
