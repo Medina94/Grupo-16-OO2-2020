@@ -56,7 +56,7 @@ public class PersonaController {
 	@PostMapping("empleado/crear")
 	public RedirectView createEmpleado(@ModelAttribute("empleado") EmpleadoModel modelo) {
 		personaService.empleadoInsertOrUpdate(modelo); 
-		return new RedirectView("empleado/mostrar");
+		return new RedirectView("/persona/empleado/all");
 	}
 	
 	@PostMapping("/empleado/eliminar/{id}")
