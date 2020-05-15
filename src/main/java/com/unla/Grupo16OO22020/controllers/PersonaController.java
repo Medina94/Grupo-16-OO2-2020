@@ -1,6 +1,7 @@
 package com.unla.Grupo16OO22020.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,8 +20,10 @@ import com.unla.Grupo16OO22020.services.IPersonaService;
 @RequestMapping("/persona")
 public class PersonaController {
 	@Autowired
+	@Qualifier("personaService")
 	private IPersonaService personaService;
 	@Autowired
+	@Qualifier("localService")
 	private ILocalService localService;
 	
 	@GetMapping("/empleado/all")
@@ -36,7 +39,7 @@ public class PersonaController {
 		ModelAndView mAV = new ModelAndView("empleado/actualizar");
 		EmpleadoModel empleado = personaService.empleadoFindById(id);
 		mAV.addObject("empleado", empleado);
-		mAV.addObject("local", localService.findById(empleado.getId()));
+		mAV.addObject("locales", localService.getAll());
 		return mAV;
 	}
 	@PostMapping("empleado/actualizar")
@@ -76,7 +79,7 @@ public class PersonaController {
 	@GetMapping("cliente/{id}")
 	public ModelAndView clienteGetById(@PathVariable ("id") int id) {
 		ModelAndView mAV = new ModelAndView("cliente/actualizar");
-		mAV.addObject("empleado", personaService.clienteFindById(id));
+		mAV.addObject("cliente", personaService.clienteFindById(id));
 		return mAV;
 	}
 	
@@ -88,7 +91,7 @@ public class PersonaController {
 	
 	@GetMapping("cliente/crear")
 	public ModelAndView createCliente() {
-		ModelAndView mAV = new ModelAndView("cliente/crear"); 
+		ModelAndView mAV = new ModelAndView("/cliente/crear"); 
 		mAV.addObject("cliente", new ClienteModel());
 		return mAV;
 	}

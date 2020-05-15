@@ -1,6 +1,9 @@
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">      
 
+<script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
+<link href="/vendor/bootstrap/css/bootstrap-select.min.css" rel="stylesheet">
+ 
 <body>
 
 <div layout:fragment="content">
@@ -20,6 +23,7 @@
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Gerente</th>
+            <th>Sueldo</th>
             <th>Local</th>
             <th></th>
             <th></tr>
@@ -30,7 +34,8 @@
             <td><span th:text="${empleado.nombre}" /></td>
             <td><span th:text="${empleado.apellido}" /></td>
             <td><span th:text="${empleado.esGerente}" /></td>
-            <!-- <td><span th:text="${local.direccion}" /></td> -->
+               <td><span th:text="${empleado.sueldo}" /></td>
+             <td><span th:text="${empleado.local.direccion}" /></td>
             <td style="text-align:center"><a th:href="@{/persona/empleado/{id}(id=${empleado.id})}"><i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i></a></td>
             <td  style="text-align:center">
             <form action="#" th:action="@{/persona/empleado/eliminar/{id}(id=${empleado.id})}" method="post">

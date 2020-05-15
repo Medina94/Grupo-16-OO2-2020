@@ -1,6 +1,12 @@
+
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout}">
+
+
 <body>
+<script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
+<link href="/vendor/bootstrap/css/bootstrap-select.min.css" rel="stylesheet">
+  
 	<div layout:fragment="content">
 	<form action="#" th:action="@{/persona/empleado/crear}" th:object="${empleado}" method="post">
 			<div id="form-crear-modificar">
@@ -32,13 +38,19 @@
 						</p>
 					</div>
 				</div>
+						
 				<div class="form-row">
 					<div class="form-group col">
-						<select id="select-local">
-							<option>Locales</option>
-							<option th:each="local : ${locales}">
-								<p th:text="${local.direccion}"/>
-							</option>
+						<p>
+							Sueldo: <input class="form-control" style="width: 20% !important" type="text" th:field="*{sueldo}" />
+						</p>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col">
+						<select  class="form-group selectpicker" placeholder="Seleccionar Local" th:field="*{localModel.id}">
+							<option th:each="local : ${locales}" th:value="${local.id}"
+							 th:text="${local.direccion}"></option>
 						</select>
 					</div>
 				</div>
@@ -46,4 +58,12 @@
 			<input type="submit" style="width: 7%;" value="crear"/>
 		</form>
 	</div>
+
 </body>
+
+<script>
+$(document).ready(function () {
+	$('.selectpicker').selectpicker();	
+});
+</script>
+

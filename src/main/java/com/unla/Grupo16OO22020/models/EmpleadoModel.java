@@ -1,14 +1,29 @@
 package com.unla.Grupo16OO22020.models;
 
+import java.time.LocalDate;
+
 import com.unla.Grupo16OO22020.entities.Empleado;
 
 public class EmpleadoModel extends PersonaModel{
 	private int sueldo;
 	private boolean esGerente;
-	private int idLocal;
+	private LocalModel localModel;
 	
 	public EmpleadoModel() {}
 	
+	
+	public EmpleadoModel(int id, String nombre, String mail, String apellido, LocalDate fecha, int sueldo, boolean esGerente, LocalModel localModel) {
+		super();
+		setId(id);
+		setNombre(nombre);
+		setMail(mail);
+		setApellido(apellido);
+		setFechaNacimiento(fecha);
+		this.sueldo = sueldo;
+		this.esGerente = esGerente;
+		this.localModel = localModel;
+	}
+
 	public int getSueldo() {
 		return sueldo;
 	}
@@ -21,23 +36,14 @@ public class EmpleadoModel extends PersonaModel{
 	public void setEsGerente(boolean esGerente) {
 		this.esGerente = esGerente;
 	}
-	public int getIdLocal() {
-		return idLocal;
+	
+
+	public LocalModel getLocalModel() {
+		return localModel;
 	}
 
-	public void setIdLocal(int idLocal) {
-		this.idLocal = idLocal;
+	public void setLocalModel(LocalModel localModel) {
+		this.localModel = localModel;
 	}
 
-	public EmpleadoModel build(Empleado entidad) {
-		this.setId(entidad.getId());
-		this.setNombre(entidad.getNombre());
-		this.setApellido(entidad.getApellido());
-		this.setFechaNacimiento(entidad.getFechaNacimiento());
-		this.setMail(entidad.getMail());
-		this.sueldo = entidad.getSueldo();
-		this.setEsGerente(entidad.isEsGerente());
-		this.setIdLocal(entidad.getIdLocal());
-		return this;
-	}
 }

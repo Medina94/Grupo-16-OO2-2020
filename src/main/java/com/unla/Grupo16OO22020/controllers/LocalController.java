@@ -14,8 +14,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.services.ILocalService;
 
-
-
 @Controller
 @RequestMapping("/local")
 public class LocalController {
@@ -26,11 +24,18 @@ public class LocalController {
 	
 	@GetMapping("")
 	public ModelAndView index() {
-		ModelAndView mAV = new ModelAndView("local/index");
+		ModelAndView mAV = new ModelAndView("local/index");			
 		mAV.addObject("locales", localService.getAll());
 		return mAV;
 	}
 	
+//	@GetMapping("/consultarLocal")
+//	public ModelAndView index(LocalModel localModel) {
+//		ModelAndView mAV = new ModelAndView("local/index");	
+//		
+//		mAV.addObject("locales", localService.getAll());
+//		return mAV;
+//	}
 	@GetMapping("/crear")
 	public ModelAndView create() {
 		ModelAndView mAV = new ModelAndView("local/crear");
@@ -62,4 +67,6 @@ public class LocalController {
 		localService.remove(id);
 		return new RedirectView("/local");
 	}
+	
+	
 }

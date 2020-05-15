@@ -3,6 +3,7 @@ package com.unla.Grupo16OO22020.services.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.unla.Grupo16OO22020.converters.PersonaCoverter;
@@ -16,12 +17,19 @@ import com.unla.Grupo16OO22020.services.IPersonaService;
 
 @Service("personaService")
 public class PersonaService implements IPersonaService {
+	
 	@Autowired
+	@Qualifier("localService")
+	private LocalService localService;
+	@Autowired
+	@Qualifier("clienteRepository")
 	private IClienteRepository clienteRepository;
 	@Autowired
+	@Qualifier("empleadoRepository")
 	private IEmpleadoRepository empleadoRepository;
 	@Autowired
-	private PersonaCoverter converter;
+	@Qualifier("personaConverter")
+	private PersonaCoverter personaConverter;
 
 	@Override
 	public List<Cliente> getAllCliente() {
@@ -35,24 +43,25 @@ public class PersonaService implements IPersonaService {
 
 	@Override
 	public ClienteModel clienteFindById(int id) {
-		return converter.ClienteEntitytoModel(clienteRepository.findById(id));
+		return personaConverter.ClienteEntitytoModel(clienteRepository.findById(id));
 	}
 
 	@Override
 	public EmpleadoModel empleadoFindById(int id) {
-		return converter.EmpleadoEntitytoModel(empleadoRepository.findById(id));
+		return personaConverter.EmpleadoEntitytoModel(empleadoRepository.findById(id));
 	}
 
 	@Override
 	public ClienteModel clienteInsertOrUpdate(ClienteModel modelo) {
-		Cliente cliente = clienteRepository.save(converter.ClienteModelToEntity(modelo));
-		return converter.ClienteEntitytoModel(cliente);
+		Cliente cliente = clienteRepository.save(personaConverter.ClienteModelToEntity(modelo));
+		return personaConverter.ClienteEntitytoModel(cliente);
 	}
 
 	@Override
 	public EmpleadoModel empleadoInsertOrUpdate(EmpleadoModel modelo) {
-		Empleado empleado = empleadoRepository.save(converter.EmpleadoModelToEntity(modelo));
-		return converter.EmpleadoEntitytoModel(empleado);
+		modelo.setLocalModel(localService.findById(modelo.getLocalModel().getId()));
+		Empleado empleado = empleadoRepository.save(personaConverter.EmpleadoModelToEntity(modelo));
+		return personaConverter.EmpleadoEntitytoModel(empleado);
 	}
 
 	@Override

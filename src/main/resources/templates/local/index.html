@@ -5,7 +5,7 @@
 <body>
 
 <div layout:fragment="content">
-
+</form>
 <div class="row">
      <h3 class="col-md-4">Local</h3>
     <div class="col-md-2 abrirModal">
@@ -21,7 +21,6 @@
             <th>Direccion</th>
             <th>Longitud</th>
             <th>Latitud</th>
-            <th>Empleado</th>
             <th></th>
             <th></tr>
     </thead>
@@ -31,7 +30,6 @@
             <td><span th:text="${local.direccion}" /></td>
             <td><span th:text="${local.longitud}" /></td>
             <td><span th:text="${local.latitud}" /></td>
-            <td><span th:text="a"/></td>
             <td style="text-align:center"><a th:href="@{/local/{id}(id=${local.id})}"><i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i></a></td>
             <td  style="text-align:center">
             <form action="#" th:action="@{/local/eliminar/{id}(id=${local.id})}" method="post">

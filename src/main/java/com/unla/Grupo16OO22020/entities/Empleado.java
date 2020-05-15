@@ -1,17 +1,42 @@
 package com.unla.Grupo16OO22020.entities;
 
-import javax.persistence.Entity;
+import java.time.LocalDate;
 
-import com.unla.Grupo16OO22020.models.EmpleadoModel;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+
 
 @Entity
 public class Empleado extends Persona{
 	private int sueldo;
 	private boolean esGerente;
-	private int idLocal;
+	
+	@OneToOne(cascade = CascadeType.MERGE)
+	private Local local;
 
 	public Empleado() {
 		super();
+	}
+
+	public Empleado(int id, String nombre, String mail, String apellido, LocalDate fecha, int sueldo, boolean esGerente, Local local) {
+		super();
+		setId(id);
+		setNombre(nombre);
+		setMail(mail);
+		setApellido(apellido);
+		setFechaNacimiento(fecha);
+		this.sueldo = sueldo;
+		this.esGerente = esGerente;
+		this.local = local;
+	}
+
+	public Local getLocal() {
+		return local;
+	}
+
+	public void setLocal(Local local) {
+		this.local = local;
 	}
 
 	public int getSueldo() {
@@ -28,25 +53,5 @@ public class Empleado extends Persona{
 
 	public void setEsGerente(boolean esGerente) {
 		this.esGerente = esGerente;
-	}
-	
-	public int getIdLocal() {
-		return idLocal;
-	}
-
-	public void setIdLocal(int idLocal) {
-		this.idLocal = idLocal;
-	}
-
-	public Empleado build(EmpleadoModel modelo) {
-		this.setId(modelo.getId());
-		this.setNombre(modelo.getNombre());
-		this.setApellido(modelo.getApellido());
-		this.setFechaNacimiento(modelo.getFechaNacimiento());
-		this.setMail(modelo.getMail());
-		this.sueldo = modelo.getSueldo();
-		this.setEsGerente(modelo.isEsGerente());
-		this.setIdLocal(modelo.getIdLocal());
-		return this;
 	}
 }
