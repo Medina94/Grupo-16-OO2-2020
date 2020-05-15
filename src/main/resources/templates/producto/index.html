@@ -1,0 +1,93 @@
+
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">      
+
+<body>
+
+<div layout:fragment="content">
+
+<div class="row">
+     <h3 class="col-md-4">Productos</h3>
+    <div class="col-md-2 abrirModal">
+    <i class="fa fa-plus-circle" style="font-size: 24px; color: black;margin-left: 9px; padding-top: 8px;" aria-hidden="true"></i>
+    </div>
+ </div>        
+<br/>
+    
+<table id="tabla" class="table table-striped table-bordered table-hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th></th>
+            <th></tr>
+    </thead>
+    <tbody>        
+        <tr th:each="p : ${productos}">  
+           <td><span th:text="${p.descripcion}" /></td>
+           <td><span th:text="${p.precioUnitario}" /></td>
+           <td style="text-align:center"><div class="actualizar" th:data-value="${p.id}">
+           <i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
+           </div>
+           </td>
+            <td style="text-align:center">
+            <form action="#" th:action="@{/producto/eliminar/{id}(id=${p.id})}" method="post">
+	              <button class="fa fa-trash" type="submit" style="font-size: 24px; color: black;border: 0 !important;" aria-hidden="true"></button>
+            </form>
+            </td>
+        </tr>        
+    </tbody>
+</table>
+
+<div id="modal">
+
+</div>
+<div id="modalActualizar">
+
+</div>
+</div>
+</body>
+</html>
+<script>	
+$(document).ready(function () {
+		$(".abrirModal").click(function() {
+				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+					method: "GET",
+				 	url: "/producto/crear",
+				})
+				.done(function(result) {
+					$("#modal").html(result);
+					$("#modalProducto").modal("show");
+				})
+				.fail(function() {
+					alert("error");
+				});
+				
+		});	
+		
+		$(".actualizar").click(function() {
+			var id = $(this)[0].getAttribute("data-value");
+			id = parseInt(id);
+			if($.isNumeric(id)){
+				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+					method: "GET",
+				 	url: "/producto/" + id,
+				})
+				.done(function(result) {
+					$("#modalActualizar").html(result);
+					$("#modalProductoActualizar").modal("show");
+				})
+				.fail(function() {
+					alert("error");
+				});
+			}else $("#modalActualizar").html("");
+			
+			
+		});
+});
+
+
+	
+</script>
+
+

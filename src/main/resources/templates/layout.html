@@ -8,7 +8,21 @@
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">    
 </head>
-
+<style>
+.bg-gradient-primary {
+    background-color: #864483;
+    background-image: linear-gradient(180deg, #864483 10%, #864483 100%);
+    background-size: cover;
+    
+}
+.boton {
+    background: #b165ae !important;
+    width: 100% !important;
+}
+.botonCancelar{
+width: 100% !important; 
+}
+</style>
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -19,10 +33,10 @@
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="~/Home">
                 <div class="sidebar-brand-on ">
                     <div class="sidebar-brand-icon">
-                        <img src="~/Content/Images/agro.png" id="imgLogo" alt="" style="height:50px;">
+<!--                         <img src="~/Content/Images/agro.png" id="imgLogo" alt="" style="height:50px;"> -->
                     </div>
                     <div class="sidebar-brand-text">
-                        <img src="~/Content/Images/Logo.png" id="imgLogo" alt="" style="height:30px;margin-top:-10px">
+<!--                         <img src="~/Content/Images/Logo.png" id="imgLogo" alt="" style="height:30px;margin-top:-10px"> -->
                     </div>
                 </div>
             </a>
@@ -55,16 +69,29 @@
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fa fa-shopping-bag"></i>
-                    <span>Producto</span>
+                    <i class="fa fa-chart-pie"></i>
+                    <span>Lote</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Sectores:</h6>
-                        <a class="collapse-item" href="~/PuestoVianda">Configuración</a>
+                        <a class="collapse-item" href="/lote">Configuración</a>
                     </div>
                 </div>
             </li>
+              <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducto" aria-expanded="true" aria-controls="collapseProducto">
+                    <i class="fa fa-shopping-bag"></i>
+                    <span>Producto</span>
+                </a>
+                <div id="collapseProducto" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Sectores:</h6>
+                        <a class="collapse-item" href="/producto">Configuración</a>
+                    </div>
+                </div>
+            </li>        
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -82,7 +109,7 @@
                    
                 </div>
             </div>
-        </li>}
+        </li>
 
             <!-- Nav Item - Tables -->
             
