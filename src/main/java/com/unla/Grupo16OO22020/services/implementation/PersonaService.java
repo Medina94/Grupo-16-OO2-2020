@@ -50,6 +50,8 @@ public class PersonaService implements IPersonaService {
 	public EmpleadoModel empleadoFindById(int id) {
 		return personaConverter.EmpleadoEntitytoModel(empleadoRepository.findById(id));
 	}
+	
+	
 
 	@Override
 	public ClienteModel clienteInsertOrUpdate(ClienteModel modelo) {
