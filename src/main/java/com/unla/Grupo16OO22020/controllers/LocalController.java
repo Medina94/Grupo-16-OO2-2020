@@ -29,13 +29,14 @@ public class LocalController {
 		return mAV;
 	}
 	
-//	@GetMapping("/consultarLocal")
-//	public ModelAndView index(LocalModel localModel) {
-//		ModelAndView mAV = new ModelAndView("local/index");	
-//		
-//		mAV.addObject("locales", localService.getAll());
-//		return mAV;
-//	}
+	@GetMapping("/consultarLocal/{id}")
+	public ModelAndView index(@PathVariable ("id") int id) {
+		ModelAndView mAV = new ModelAndView("local/localesCercanos");	
+		LocalModel localModel = localService.findById(id); 
+		mAV.addObject("locales", localService.getLocalesCercanos(localModel));
+		return mAV;
+	}
+	
 	@GetMapping("/crear")
 	public ModelAndView create() {
 		ModelAndView mAV = new ModelAndView("local/crear");
