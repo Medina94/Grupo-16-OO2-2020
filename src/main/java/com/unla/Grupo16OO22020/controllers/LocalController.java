@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.unla.Grupo16OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.services.ILocalService;
 
@@ -24,21 +25,22 @@ public class LocalController {
 	
 	@GetMapping("")
 	public ModelAndView index() {
-		ModelAndView mAV = new ModelAndView("local/index");			
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_INDEX);			
 		mAV.addObject("locales", localService.getAll());
 		return mAV;
 	}
 	
-//	@GetMapping("/consultarLocal")
-//	public ModelAndView index(LocalModel localModel) {
-//		ModelAndView mAV = new ModelAndView("local/index");	
-//		
-//		mAV.addObject("locales", localService.getAll());
-//		return mAV;
-//	}
+	@GetMapping("/consultarLocal/{id}")
+	public ModelAndView index(@PathVariable ("id") int id) {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_VER_CERCANOS);	
+		LocalModel localModel = localService.findById(id); 
+		mAV.addObject("locales", localService.getLocalesCercanos(localModel));
+		return mAV;
+	}
+	
 	@GetMapping("/crear")
 	public ModelAndView create() {
-		ModelAndView mAV = new ModelAndView("local/crear");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_CREAR);
 		mAV.addObject("local", new LocalModel());
 		return mAV;
 	}
@@ -46,12 +48,12 @@ public class LocalController {
 	@PostMapping("/crear")
 	public RedirectView create(@ModelAttribute("local") LocalModel LocalModel) {
 		localService.insertOrUpdate(LocalModel);
-		return new RedirectView("/local");
+		return new RedirectView(ViewRouteHelper.LOCAL_ROOT);
 	}
 	
 	@GetMapping("/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
-		ModelAndView mAV = new ModelAndView("/local/actualizar");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOCAL_ACTUALIZAR);
 		mAV.addObject("local", localService.findById(id));
 		return mAV;
 	}
@@ -59,13 +61,13 @@ public class LocalController {
 	@PostMapping("/actualizar")
 	public RedirectView update(@ModelAttribute("local") LocalModel LocalModel) {
 		localService.insertOrUpdate(LocalModel);
-		return new RedirectView("/local");
+		return new RedirectView(ViewRouteHelper.LOCAL_ROOT);
 	}
 	
 	@PostMapping("/eliminar/{id}")
 	public RedirectView delete(@PathVariable("id") int id) {
 		localService.remove(id);
-		return new RedirectView("/local");
+		return new RedirectView(ViewRouteHelper.LOCAL_ROOT);
 	}
 	
 	
