@@ -6,9 +6,9 @@
 <div layout:fragment="content">
 
 <div class="row">
-     <h3 class="col-md-4">Clientes</h3>
+     <h3 class="col-md-4">Cliente</h3>
     <div class="col-md-2 abrirModal">
-       <a href="/persona/cliente/crear"> <i  class="fa fa-plus-circle" style="font-size: 24px; color: black;margin-left: 9px; padding-top: 8px;" aria-hidden="true"></i></a>    
+     <i  class="fa fa-plus-circle" style="font-size: 24px; color: black;margin-left: 9px; padding-top: 8px;" aria-hidden="true"></i></a>    
     </div>
  </div>        
 <br/>
@@ -29,7 +29,10 @@
             <td><span th:text="${cliente.apellido}" /></td>
             <td><span th:text="${cliente.mail}" /></td>
             <td><span th:text="${cliente.fechaNacimiento}" /></td>
-            <td style="text-align:center"><a th:href="@{/persona/cliente/{id}(id=${cliente.id})}"><i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i></a></td>
+           <td style="text-align:center"><div class="actualizar" th:data-value="${cliente.id}">
+           <i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
+           </div>
+           </td>
             <td  style="text-align:center">
             <form action="#" th:action="@{/persona/cliente/eliminar/{id}(id=${cliente.id})}" method="post">
 	              <button class="fa fa-trash" type="submit" style="font-size: 24px; color: black;border: 0 !important;" aria-hidden="true"></button>
@@ -38,6 +41,54 @@
         </tr>        
     </tbody>
 </table>
+
+<div id="modal">
+
+</div>
+<div id="modalActualizar">
+
+</div>
 </div>
 </body>
 </html>
+<script>	
+$(document).ready(function () {
+		$(".abrirModal").click(function() {
+				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+					method: "GET",
+				 	url: "/persona/cliente/crear",
+				})
+				.done(function(result) {
+					$("#modal").html(result);
+					$("#modalCliente").modal("show");
+				})
+				.fail(function() {
+					alert("error");
+				});
+				
+		});	
+		
+		$(".actualizar").click(function() {
+			var id = $(this)[0].getAttribute("data-value");
+			id = parseInt(id);
+			if($.isNumeric(id)){
+				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+					method: "GET",
+				 	url: "/persona/cliente/" + id,
+				})
+				.done(function(result) {
+					$("#modalActualizar").html(result);
+					$("#modalClienteActualizar").modal("show");
+				})
+				.fail(function() {
+					alert("error");
+				});
+			}else $("#modalActualizar").html("");
+			
+			
+		});
+});
+
+
+	
+</script>
