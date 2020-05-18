@@ -1,6 +1,6 @@
 package com.unla.Grupo16OO22020.models;
 
-public class LocalModel {
+public class LocalModel implements Comparable<LocalModel>{
 
 private int id;
 	
@@ -9,6 +9,7 @@ private int id;
 	private int latitud;
 	private int longitud;
 	//private EmpleadoModel empleado;
+	private double distanciaDelOrigen;
 	
 	public LocalModel() {}
 
@@ -61,6 +62,27 @@ private int id;
 	public void setLongitud(int longitud) {
 		this.longitud = longitud;
 	}
+
+	public double getDistanciaDelOrigen() {
+		return distanciaDelOrigen;
+	}
+
+	public void setDistanciaDelOrigen(double distanciaDelOrigen) {
+		String valor = distanciaDelOrigen+"";
+		valor = valor.substring(0, valor.indexOf('.')+3); // recorto el string hasta el indice donde se encuentra el punto decimal más 3 (para tomar 2 decimales)
+		this.distanciaDelOrigen = Double.parseDouble(valor);
+	}
+
+	@Override
+	public int compareTo(LocalModel o) {
+		int result = 0;
+		if(this.distanciaDelOrigen > o.getDistanciaDelOrigen()) {
+			result = 1;
+		}else if(this.distanciaDelOrigen < o.getDistanciaDelOrigen()) {
+			result = -1;
+		}
+		return result;
+	}
 	
 //	public Empleado getEmpleado() {
 //		return Empleado;
@@ -69,5 +91,6 @@ private int id;
 //	public void setLongitud(Empleado empleado) {
 //		this.empleado = empleado;
 //	}
+	
 	
 }

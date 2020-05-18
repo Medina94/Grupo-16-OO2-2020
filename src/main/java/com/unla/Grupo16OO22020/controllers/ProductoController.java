@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.unla.Grupo16OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo16OO22020.models.ProductoModel;
 import com.unla.Grupo16OO22020.services.IProductoService;
 
@@ -24,14 +25,14 @@ public class ProductoController {
 	
 	@GetMapping("")
 	public ModelAndView index() {
-		ModelAndView mAV = new ModelAndView("producto/index");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_INDEX);
 		mAV.addObject("productos", productoService.getAll());
 		return mAV;
 	}
 	
 	@GetMapping("/crear")
 	public ModelAndView create() {
-		ModelAndView mAV = new ModelAndView("producto/crear");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_CREAR);
 		mAV.addObject("producto", new ProductoModel());
 		return mAV;
 	}
@@ -39,12 +40,12 @@ public class ProductoController {
 	@PostMapping("/crear")
 	public RedirectView create(@ModelAttribute("producto") ProductoModel ProductoModel) {
 		productoService.insertOrUpdate(ProductoModel);
-		return new RedirectView("/producto");
+		return new RedirectView(ViewRouteHelper.PRODUCTO_ROOT);
 	}
 	
 	@GetMapping("/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
-		ModelAndView mAV = new ModelAndView("/producto/actualizar");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_ACTUALIZAR);
 		mAV.addObject("producto", productoService.findById(id));
 		return mAV;
 	}
@@ -52,12 +53,12 @@ public class ProductoController {
 	@PostMapping("/actualizar")
 	public RedirectView update(@ModelAttribute("producto") ProductoModel ProductoModel) {
 		productoService.insertOrUpdate(ProductoModel);
-		return new RedirectView("/producto");
+		return new RedirectView(ViewRouteHelper.PRODUCTO_ROOT);
 	}
 	
 	@PostMapping("/eliminar/{id}")
 	public RedirectView delete(@PathVariable("id") int id) {
 		productoService.remove(id);
-		return new RedirectView("/producto");
+		return new RedirectView(ViewRouteHelper.PRODUCTO_ROOT);
 	}
 }

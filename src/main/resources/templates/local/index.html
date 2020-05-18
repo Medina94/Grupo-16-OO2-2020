@@ -20,8 +20,7 @@
         	<th>Telefono</th>
             <th>Direccion</th>
             <th>Longitud</th>
-            <th>Latitud</th>
-<!--             <th>Empleado</th> -->
+            <th>Latitud</th> 
             <th></th>
             <th></tr>
     </thead>
@@ -30,10 +29,15 @@
        	    <td><span th:text="${local.telefono}" /></td>           
             <td><span th:text="${local.direccion}" /></td>
             <td><span th:text="${local.longitud}" /></td>
-            <td><span th:text="${local.latitud}" /></td>
+            <td><span th:text="${local.latitud}" /></td>          
+            <td style="text-align:center">
+            	<div class="abrirCercanos" th:data-value="${local.id}">            	
+            		<p>Ver cercanos</p>
+            	</div>
+            </td>
 <!--             <td><span th:text="a"/></td> -->
 <!--             <td style="text-align:center"><a th:href="@{/local/{id}(id=${local.id})}"><i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i></a></td> -->
-                      <td style="text-align:center"><div class="actualizar" th:data-value="${local.id}">
+           <td style="text-align:center"><div class="actualizar" th:data-value="${local.id}">
            <i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
            </div>
            </td>
@@ -49,6 +53,9 @@
 
 </div>
 <div id="modalActualizar">
+
+</div>
+<div id="modalCercanos">
 
 </div>
 </div>
@@ -68,10 +75,8 @@ $(document).ready(function () {
 				})
 				.fail(function() {
 					alert("error");
-				});
-				
-		});	
-		
+				});				
+		});			
 		$(".actualizar").click(function() {
 			var id = $(this)[0].getAttribute("data-value");
 			id = parseInt(id);
@@ -90,6 +95,23 @@ $(document).ready(function () {
 			}else $("#modalActualizar").html("");
 			
 			
+		});
+		$(".abrirCercanos").click(function(){
+			var id = $(this)[0].getAttribute("data-value");
+			id = parseInt(id);
+			if($.isNumeric(id)){
+			$.ajax({
+				method: "GET",
+				url: "/local/consultarLocal/"+id,
+			})
+			.done(function(result){
+				$("#modalCercanos").html(result);
+				$("#modalLocalesCercanos").modal("show");
+			})
+			.fail(function(){
+				alert("error");
+			});
+			}else $("#modalCercanos").html("");
 		});
 });
 

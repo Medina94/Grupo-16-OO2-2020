@@ -15,4 +15,6 @@ public interface ILocalService {
 	public LocalModel insertOrUpdate(LocalModel localModel);
 	
 	public boolean remove(int id);
+	
+	public List<LocalModel> getLocalesCercanos(LocalModel localModel);
 }

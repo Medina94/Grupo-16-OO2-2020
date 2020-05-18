@@ -5,16 +5,32 @@ public class ViewRouteHelper {
 	//HOME
 	public final static String INDEX = "home/index";
 	
-	//DEGREE
-//	public final static String DEGREE_INDEX = "degree/index";
-//	public final static String DEGREE_FORM = "degree/form";
-//	public final static String DEGREE_NEW = "degree/new";
-//	
-//	//PERSON
-//	public final static String PERSON_INDEX = "person/index";
-//	public final static String PERSON_NEW = "person/new";
-//	public final static String PERSON_UPDATE = "person/update";
-//	
+	// EMPLEADO
+	public final static String EMPLEADO_INDEX = "empleado/mostrar";
+	public final static String EMPLEADO_CREAR = "empleado/crear";
+	public final static String EMPLEADO_ACTUALIZAR = "empleado/actualizar";
+	
+	// CLIENTE
+	public final static String CLIENTE_INDEX = "cliente/mostrar";
+	public final static String CLIENTE_CREAR = "cliente/crear";
+	public final static String CLIENTE_ACTUALIZAR = "cliente/actualizar";
+	
+	// LOCAL
+	public final static String LOCAL_INDEX = "local/index";
+	public final static String LOCAL_CREAR = "local/crear";
+	public final static String LOCAL_ACTUALIZAR = "local/actualizar";
+	public final static String LOCAL_VER_CERCANOS = "local/localesCercanos";
+	
+	// LOTE
+	public final static String LOTE_INDEX = "lote/index";
+	public final static String LOTE_CREAR = "lote/crear";
+	public final static String LOTE_ACTUALIZAR = "lote/actualizar";
+	
+	// PRODUCTO 
+	public final static String PRODUCTO_INDEX = "producto/index";
+	public final static String PRODUCTO_CREAR = "producto/crear";
+	public final static String PRODUCTO_ACTUALIZAR = "producto/actualizar";
+	
 	//USER
 	public final static String USER_LOGIN = "user/login";
 	public final static String USER_LOGOUT = "user/logout";
@@ -22,5 +38,9 @@ public class ViewRouteHelper {
 //	/**** Redirects ****/
 	public final static String ROUTE = "/index";
 	public final static String DEGREE_ROOT = "/degrees/";
-	public final static String PERSON_ROOT = "/person";
+	public final static String EMPLEADO_ROOT = "/persona/empleado/all";
+	public final static String CLIENTE_ROOT = "/persona/cliente/all";
+	public final static String LOCAL_ROOT = "/local";
+	public final static String LOTE_ROOT = "/lote";
+	public final static String PRODUCTO_ROOT = "/producto";
 }
