@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.unla.Grupo16OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo16OO22020.models.LoteModel;
 import com.unla.Grupo16OO22020.services.ILoteService;
 import com.unla.Grupo16OO22020.services.IProductoService;
@@ -28,14 +29,14 @@ public class LoteController {
 	
 	@GetMapping("")
 	public ModelAndView index() {
-		ModelAndView mAV = new ModelAndView("lote/index");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_INDEX);
 		mAV.addObject("lotes", loteService.getAll());		
 		return mAV;
 	}
 	
 	@GetMapping("/crear")
 	public ModelAndView create() {
-		ModelAndView mAV = new ModelAndView("lote/crear");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_CREAR);
 		mAV.addObject("productos", productoService.getAll());
 		mAV.addObject("lote", new LoteModel());
 		return mAV;
@@ -44,12 +45,12 @@ public class LoteController {
 	@PostMapping("/crear")
 	public RedirectView create(@ModelAttribute("lote") LoteModel LoteModel) {
 		loteService.insertOrUpdate(LoteModel);
-		return new RedirectView("/lote");
+		return new RedirectView(ViewRouteHelper.LOTE_ROOT);
 	}
 	
 	@GetMapping("/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
-		ModelAndView mAV = new ModelAndView("/lote/actualizar");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_ACTUALIZAR);
 		mAV.addObject("lote", loteService.findById(id));
 		mAV.addObject("productos", productoService.getAll());
 		return mAV;
@@ -58,12 +59,12 @@ public class LoteController {
 	@PostMapping("/actualizar")
 	public RedirectView update(@ModelAttribute("lote") LoteModel LoteModel) {
 		loteService.insertOrUpdate(LoteModel);		
-		return new RedirectView("/lote");
+		return new RedirectView(ViewRouteHelper.LOTE_ROOT);
 	}
 	
 	@PostMapping("/eliminar/{id}")
 	public RedirectView delete(@PathVariable("id") int id) {
 		loteService.remove(id);
-		return new RedirectView("/lote");
+		return new RedirectView(ViewRouteHelper.LOTE_ROOT);
 	}
 }
