@@ -1,0 +1,54 @@
+<div class="modal fade" id="modalLocalesCercanos" tabindex="-1" role="dialog"
+	aria-labelledby="modal" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="dialogo-editar-title" id="dialogo-editar-title">
+				Locales Cercanos
+				</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" id="dialogo-editar-body">
+				<form action="#">
+					<table id="tabla" class="table table-striped table-bordered table-hover" style="width:100%">
+						<thead>
+							<tr>
+								<th>Local</th>
+								<th>Telefono</th>
+								<th>Dsitancia (Km)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="local : ${locales}">
+								<td><span th:text="${local.direccion}" /></td>
+								<td><span th:text="${local.telefono}" /></td>
+								<td><span th:text="${local.distanciaDelOrigen}" /></td>
+							</tr>
+						</tbody>
+					</table>
+					<input type="button" id="actualizar" class="btn botonCancelar" value="Cerrar" />
+				</form>
+			</div>
+		 </div>
+	</div>
+</div>
+<script>
+$(document).ready(function () {
+	
+	$("#actualizar").click(function() {
+		$("#modalLocalesCercanos").modal("hide");		
+	});
+});
+</script>
+<style>
+.boton {
+    background: #b165ae;
+    width: 100%;
+}
+.botonCancelar{
+width: 100%;
+}
+</style>
