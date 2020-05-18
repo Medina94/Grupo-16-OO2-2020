@@ -60,7 +60,7 @@
 						<div class="form-group col">
 						<select  class="form-group selectpicker" placeholder="Seleccionar Empleado" th:field="*{solicitadorModel.id}">
 							<option th:each="empleado : ${empleados}" th:value="${empleado.id}"
-							 th:text="${empleado.empleado}"></option>
+							 th:text="${empleado.nombre}"></option>
 						</select>
 						</div>
 					</div>

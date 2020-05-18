@@ -19,17 +19,20 @@
         <tr>
             <th>Producto</th>
             <th>Cantidad Solicitada</th>
-            <th>Fecha</th>
+<!--        <th>Fecha</th> -->
             <th>Nombre Cliente</th>
             <th>Empleado</th>
+            <th></th>
+            <th></th>
+          </tr>
     </thead>
     <tbody>        
         <tr th:each="pedido : ${pedidos}">  
-           <td><span th:text="${producto.descripcion}" /></td>
-           <td><span th:text="${producto.cantidadSolicitada}" /></td>          
-           <td><span th:text="${producto.fecha}" /></td>
-           <td><span th:text="${cliente.nombre}" /></td>
-           <td><span th:text="${empleado.nombre}" /></td>
+           <td><span th:text="${pedido.producto.descripcion}" /></td>
+           <td><span th:text="${pedido.cantidadSolicitada}" /></td>          
+<!--            <td><span th:text="${pedido.producto.fecha}" /></td> -->
+           <td><span th:text="${pedido.cliente.nombre}" /></td>
+           <td><span th:text="${pedido.solicitador.nombre}" /></td>
            <td style="text-align:center"><div class="actualizar" th:data-value="${pedido.id}">
            <i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
            </div>

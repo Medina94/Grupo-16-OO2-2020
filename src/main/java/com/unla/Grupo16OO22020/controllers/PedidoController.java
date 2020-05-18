@@ -28,7 +28,10 @@ public class PedidoController {
 	private IProductoService productoService;
 	@Autowired
 	@Qualifier("personaService")
-	private IPersonaService personaService;
+	private IPersonaService clienteService;
+	@Autowired
+	@Qualifier("personaService")
+	private IPersonaService empleadoService;
 	
 	@GetMapping("")
 	public ModelAndView index() {
@@ -41,7 +44,8 @@ public class PedidoController {
 	public ModelAndView create() {
 		ModelAndView mAV = new ModelAndView("pedido/crear");
 		mAV.addObject("productos", productoService.getAll());
-		mAV.addObject("clientes", personaService.getAllCliente());	
+		mAV.addObject("clientes", clienteService.getAllCliente());	
+		mAV.addObject("empleados", empleadoService.getAllEmpleado());	
 		mAV.addObject("pedido", new PedidoModel());
 		return mAV;
 	}
@@ -57,8 +61,8 @@ public class PedidoController {
 		ModelAndView mAV = new ModelAndView("/pedido/actualizar");
 		mAV.addObject("pedido", pedidoService.findById(id));
 		mAV.addObject("productos", productoService.getAll());
-		mAV.addObject("clientes", personaService.getAllCliente());	
-		mAV.addObject("empleados", personaService.getAllEmpleado());
+		mAV.addObject("clientes", clienteService.getAllCliente());	
+		mAV.addObject("empleados", empleadoService.getAllEmpleado());
 		return mAV;
 	}
 	
