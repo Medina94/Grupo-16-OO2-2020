@@ -1,5 +1,7 @@
 package com.unla.Grupo16OO22020.services.implementation;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,4 +53,30 @@ public class LocalService implements ILocalService{
 	public LocalModel findById(int id) {
 		return localConverter.entityToModel(localRepository.findById(id));
 	}
+
+	@Override
+	public List<LocalModel> getLocalesCercanos(LocalModel localModel) {
+		List<LocalModel> lista = new ArrayList<LocalModel>();
+		for(Local local : getAll()) {
+			LocalModel modelo = localConverter.entityToModel(local);
+			if(modelo.getId() != localModel.getId()) {
+				modelo.setDistanciaDelOrigen(distanciaCoord(localModel.getLatitud(), localModel.getLongitud(), modelo.getLatitud(), modelo.getLongitud()));	
+				lista.add(modelo);
+			}
+		}
+		Collections.sort(lista);
+		return lista.subList(0, 2);
+	}
+	
+	public static double distanciaCoord(double lat1, double lng1, double lat2, double lng2) {
+		double radioTierra = 6371; //en kilómetros
+		double dLat = Math.toRadians(lat2 - lat1);
+		double dLng = Math.toRadians(lng2 - lng1);
+		double sindLat = Math.sin(dLat / 2);
+		double sindLng = Math.sin(dLng / 2);
+		double va1 = Math.pow(sindLat, 2)
+		+ Math.pow(sindLng, 2) * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
+		double va2 = 2 * Math.atan2(Math.sqrt(va1), Math.sqrt(1 - va1));
+		return radioTierra * va2;
+		}
 }
