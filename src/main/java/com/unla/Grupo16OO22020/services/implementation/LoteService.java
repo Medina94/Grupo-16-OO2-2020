@@ -28,6 +28,7 @@ public class LoteService implements ILoteService {
 	@Qualifier("productoService")
 	private ProductoService productoService;
 	@Override
+	
 	public List<Lote> getAll() {
 		return loteRepository.findAll();
 	}

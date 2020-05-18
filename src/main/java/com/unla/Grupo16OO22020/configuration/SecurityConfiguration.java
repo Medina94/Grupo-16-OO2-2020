@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.unla.Grupo16OO22020.services.implementation.PersonaService;
 import com.unla.Grupo16OO22020.services.implementation.UserService;
 
 @Configuration
@@ -24,8 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("admin").password("1234").roles("ADMIN");
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {		
 		auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
 		auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
 		
@@ -35,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/lote/**").hasRole("ADMIN")
+				
 				.antMatchers("/css/*", "/imgs/*", "/js/*", "/vendor/bootstrap/css/*", "/vendor/jquery/*", "/vendor/bootstrap/js/*")
 				.permitAll().anyRequest().authenticated()
 			.and()

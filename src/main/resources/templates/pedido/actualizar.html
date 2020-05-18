@@ -1,0 +1,88 @@
+<script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
+ <link href="/vendor/bootstrap/css/bootstrap-select.min.css" rel="stylesheet">
+ <style>
+ .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 100%;
+}
+ </style>
+<div class="modal fade" id="modalLoteActualizar" tabindex="-1" role="dialog"
+	aria-labelledby="modal" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="dialogo-editar-title" id="dialogo-editar-title">
+				Crear Pedido
+				</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" id="dialogo-editar-body">
+				<form action="#" th:action="@{/pedido/actualizar}" th:object="${pedido}"
+					method="post">
+					<input type="hidden" th:field="*{id}" />
+					<div id="form-crear-modificar">						
+				  <div class="form-row">
+						<div class="form-group col">
+						<select  class="form-group selectpicker" placeholder="Seleccionar Producto" th:field="*{productoModel.id}">
+							<option th:each="producto : ${productos}" th:value="${producto.id}"
+							 th:text="${producto.descripcion}"></option>
+						</select>
+						</div>
+					</div>					
+						<div class="form-row">
+							<div class="form-group col">
+								<p>
+									Cantidad: <input class="form-control"
+										 type="text"
+										th:field="*{cantidadSolicitada}" />
+								</p>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col">
+								<p>
+									Fecha Ingreso: <input class="form-control"
+										type="date" th:field="*{fecha}" />
+								</p>
+							</div>
+						</div>
+						<div class="form-row">
+						<div class="form-group col">
+						<select  class="form-group selectpicker" placeholder="Seleccionar Cliente" th:field="*{clienteModel.id}">
+							<option th:each="cliente : ${clientes}" th:value="${cliente.id}"
+							 th:text="${cliente.nombre}"></option>
+						</select>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col">
+						<select  class="form-group selectpicker" placeholder="Seleccionar Empleado" th:field="*{solicitadorModel.id}">
+							<option th:each="empleado : ${empleados}" th:value="${empleado.id}"
+							 th:text="${empleado.empleado}"></option>
+						</select>
+						</div>
+					</div>
+						
+					</div>
+					<input type="submit" value="Crear" class="boton btn btn-success"/>
+					<input
+					type="button" id="dialogo-editar" class="btn botonCancelar"
+					value="Cancelar"/>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$(document).ready(function () {
+	$('.selectpicker').selectpicker();
+	$("#dialogo-editar").click(function() {
+		$("#modalLoteActualizar").modal("hide");		
+	});
+});
+</script>
+
+
+
