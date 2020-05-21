@@ -1,5 +1,7 @@
 package com.unla.Grupo16OO22020.entities;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,17 +21,21 @@ public class Producto {
 	private String descripcion;
 	
 	@Column(name="precioUnitario")
-	private int precioUnitario ;	
+	private int precioUnitario ;
+	
+	@Column(name="FechaAlta")
+	private LocalDate fechaAlta ;
 	
 	public Producto() {
 		super();
 	}
 
-	public Producto(int id, String descripcion, int precioUnitario) {
+	public Producto(int id, String descripcion, int precioUnitario,LocalDate fechaAlta) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
 		this.precioUnitario = precioUnitario;
+		this.fechaAlta = fechaAlta;
 	}
 
 	public int getId() {
@@ -56,5 +62,12 @@ public class Producto {
 		this.precioUnitario = precioUnitario;
 	}
 	
+	public LocalDate getFechaAlta() {
+		return fechaAlta;
+	}
+
+	public void setFechaAlta(LocalDate fechaAlta) {
+		this.fechaAlta = fechaAlta;
+	}
 	
 }

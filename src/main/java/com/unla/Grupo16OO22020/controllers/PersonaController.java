@@ -26,6 +26,8 @@ public class PersonaController {
 	@Qualifier("localService")
 	private ILocalService localService;
 	
+
+	
 	@GetMapping("/empleado/all")
 	public ModelAndView mostrarEmpleados() {
 		ModelAndView mAV = new ModelAndView("empleado/mostrar");
