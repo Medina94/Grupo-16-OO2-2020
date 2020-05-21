@@ -9,11 +9,11 @@ import com.unla.Grupo16OO22020.models.ProductoModel;
 public class ProductoConverter {
 
 	public ProductoModel entityToModel(Producto producto) {
-		return new ProductoModel(producto.getId(), producto.getDescripcion(), producto.getPrecioUnitario());
+		return new ProductoModel(producto.getId(), producto.getDescripcion(), producto.getPrecioUnitario(),producto.getFechaAlta());
 	}
 
 	public Producto modelToEntity(ProductoModel productoModel) {
-		return new Producto(productoModel.getId(), productoModel.getDescripcion(), productoModel.getPrecioUnitario());
+		return new Producto(productoModel.getId(), productoModel.getDescripcion(), productoModel.getPrecioUnitario(),productoModel.getFechaAlta());
 	}
 }
 

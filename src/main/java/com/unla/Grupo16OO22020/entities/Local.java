@@ -27,17 +27,17 @@ public class Local {
 	private String direccion;
 	
 	@Column(name="latitud")
-	private int latitud;
+	private double latitud;
 	
 	@Column(name="longitud")
-	private int longitud;
+	private double longitud;
 	
 //	@OneToMany(fetch=FetchType.LAZY, mappedBy="empleado")
 //	private Set<Empleado> empleados = new HashSet<Empleado>();
 	
 	public Local() {}
 
-	public Local(int id, int telefono, String direccion, int latitud, int longitud) {
+	public Local(int id, int telefono, String direccion, double latitud, double longitud) {
 		super();
 		this.id = id;
 		this.telefono = telefono;
@@ -70,19 +70,19 @@ public class Local {
 		this.direccion = direccion;
 	}
 
-	public int getLatitud() {
+	public double getLatitud() {
 		return latitud;
 	}
 
-	public void setLatitud(int latitud) {
+	public void setLatitud(double latitud) {
 		this.latitud = latitud;
 	}
 
-	public int getLongitud() {
+	public double getLongitud() {
 		return longitud;
 	}
 
-	public void setLongitud(int longitud) {
+	public void setLongitud(double longitud) {
 		this.longitud = longitud;
 	}
 	

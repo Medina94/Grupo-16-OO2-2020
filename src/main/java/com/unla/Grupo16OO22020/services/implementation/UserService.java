@@ -37,6 +37,8 @@ public class UserService implements UserDetailsService {
 						grantedAuthorities);
 	}
 	
+	//private User traerUuario()
+	
 	private List<GrantedAuthority> buildGrantedAuthorities(Set<UserRole> userRoles) {
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
 		for(UserRole userRole: userRoles) {

@@ -1,6 +1,6 @@
 package com.unla.Grupo16OO22020.entities;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name="producto")
@@ -25,18 +23,19 @@ public class Producto {
 	@Column(name="precioUnitario")
 	private int precioUnitario ;
 	
-	@CreationTimestamp
-	private LocalDateTime fechaAlta;
+	@Column(name="FechaAlta")
+	private LocalDate fechaAlta ;
 	
 	public Producto() {
 		super();
 	}
 
-	public Producto(int id, String descripcion, int precioUnitario) {
+	public Producto(int id, String descripcion, int precioUnitario,LocalDate fechaAlta) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
 		this.precioUnitario = precioUnitario;
+		this.fechaAlta = fechaAlta;
 	}
 
 	public int getId() {
@@ -62,15 +61,13 @@ public class Producto {
 	public void setPrecioUnitario(int precioUnitario) {
 		this.precioUnitario = precioUnitario;
 	}
-
-	public LocalDateTime getFechaAlta() {
+	
+	public LocalDate getFechaAlta() {
 		return fechaAlta;
 	}
 
-	public void setFechaAlta(LocalDateTime fechaAlta) {
+	public void setFechaAlta(LocalDate fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
-	
-	
 	
 }

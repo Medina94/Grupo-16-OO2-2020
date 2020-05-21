@@ -18,14 +18,16 @@
     <thead>
         <tr>
             <th>Descripcion</th>
-            <th>Precio</th>
+			<th>Precio</th>
+			<th>Fecha Alta</th>
             <th></th>
-            <th></tr>
+            </tr>
     </thead>
     <tbody>        
         <tr th:each="p : ${productos}">  
            <td><span th:text="${p.descripcion}" /></td>
-           <td><span th:text="${p.precioUnitario}" /></td>
+		   <td><span th:text="${p.precioUnitario}" /></td>
+		   <td><span th:text="${p.fechaAlta}" /></td>
            <td style="text-align:center"><div class="actualizar" th:data-value="${p.id}">
            <i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
            </div>

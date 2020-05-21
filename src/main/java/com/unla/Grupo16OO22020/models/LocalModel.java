@@ -6,14 +6,14 @@ private int id;
 	
 	private int telefono;
 	private String direccion;
-	private int latitud;
-	private int longitud;
+	private double latitud;
+	private double longitud;
 	//private EmpleadoModel empleado;
 	private double distanciaDelOrigen;
 	
 	public LocalModel() {}
 
-	public LocalModel(int id, int telefono, String direccion, int latitud, int longitud) {
+	public LocalModel(int id, int telefono, String direccion, double latitud, double longitud) {
 		super();
 		this.setId(id);
 		this.telefono = telefono;
@@ -47,19 +47,19 @@ private int id;
 		this.direccion = direccion;
 	}
 
-	public int getLatitud() {
+	public double getLatitud() {
 		return latitud;
 	}
 
-	public void setLatitud(int latitud) {
+	public void setLatitud(double latitud) {
 		this.latitud = latitud;
 	}
 
-	public int getLongitud() {
+	public double getLongitud() {
 		return longitud;
 	}
 
-	public void setLongitud(int longitud) {
+	public void setLongitud(double longitud) {
 		this.longitud = longitud;
 	}
 

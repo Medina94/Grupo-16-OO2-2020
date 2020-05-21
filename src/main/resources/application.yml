@@ -1,8 +1,8 @@
-spring:
+ spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/grupo16-oo2-2020
+    url: jdbc:mysql://localhost:3306/grupo16-oo2-2020?serverTimezone=UTC
     username: root
-    password: root
+    password: Carpetas32
   jpa:
     show-sql: true
     hibernate:
@@ -11,3 +11,4 @@ spring:
       dialect: org.hibernate.dialect.MySQL5Dialect
   thymeleaf:
     cache: false
+    

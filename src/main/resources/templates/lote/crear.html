@@ -27,7 +27,7 @@
 							<div class="form-group col">
 								<p>
 									Fecha Ingreso: <input class="form-control"
-										type="date" th:field="*{fechaIngreso}" />
+										type="date" th:field="*{fechaIngreso}" required />
 								</p>
 							</div>
 						</div>
@@ -36,7 +36,7 @@
 								<p>
 									Cantidad: <input class="form-control"
 										 type="text"
-										th:field="*{cantidad}" />
+										th:field="*{cantidad}" min="1" />
 								</p>
 							</div>
 						</div>
@@ -55,9 +55,8 @@
 					value="Cancelar"/>
 				</form>
 			</div>
-		</div>
-	</div>
-</div>
+		
+
 <script>
 $(document).ready(function () {
 	$('.selectpicker').selectpicker();
