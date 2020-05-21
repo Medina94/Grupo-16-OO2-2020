@@ -2,11 +2,13 @@ package com.unla.Grupo16OO22020.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,17 +28,22 @@ public class Producto {
 	@Column(name="FechaAlta")
 	private LocalDate fechaAlta ;
 	
+	@OneToOne(cascade = CascadeType.MERGE)
+	private Local local;
+	
 	public Producto() {
 		super();
 	}
 
-	public Producto(int id, String descripcion, int precioUnitario,LocalDate fechaAlta) {
+	public Producto(int id, String descripcion, int precioUnitario, LocalDate fechaAlta, Local local) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
 		this.precioUnitario = precioUnitario;
 		this.fechaAlta = fechaAlta;
+		this.local = local;
 	}
+
 
 	public int getId() {
 		return id;
@@ -44,6 +51,15 @@ public class Producto {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Local getLocal() {
+		return local;
+	}
+
+
+	public void setLocal(Local local) {
+		this.local = local;
 	}
 
 	public String getDescripcion() {

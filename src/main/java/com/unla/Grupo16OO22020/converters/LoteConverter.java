@@ -14,6 +14,10 @@ public class LoteConverter {
 	@Qualifier("productoConverter")
 	private ProductoConverter productoConverter;
 	
+	@Autowired
+	@Qualifier("localConverter")
+	private LocalConverter localConverter;
+	
 	public LoteModel entityToModel(Lote lote) {
 		return new LoteModel(lote.getId(), lote.getCantidad(), lote.getFechaIngreso(), productoConverter.entityToModel(lote.getProducto()));
 	}

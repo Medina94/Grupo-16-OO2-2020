@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.unla.Grupo16OO22020.converters.PersonaCoverter;
+import com.unla.Grupo16OO22020.converters.PersonaConverter;
 import com.unla.Grupo16OO22020.entities.Cliente;
 import com.unla.Grupo16OO22020.entities.Empleado;
 import com.unla.Grupo16OO22020.models.ClienteModel;
@@ -29,7 +29,7 @@ public class PersonaService implements IPersonaService {
 	private IEmpleadoRepository empleadoRepository;
 	@Autowired
 	@Qualifier("personaConverter")
-	private PersonaCoverter personaConverter;
+	private PersonaConverter personaConverter;
 
 	@Override
 	public List<Cliente> getAllCliente() {

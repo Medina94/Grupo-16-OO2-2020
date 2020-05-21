@@ -2,7 +2,7 @@
   datasource:
     url: jdbc:mysql://localhost:3306/grupo16-oo2-2020?serverTimezone=UTC
     username: root
-    password: Carpetas32
+    password: root
   jpa:
     show-sql: true
     hibernate:

@@ -1,37 +1,51 @@
 package com.unla.Grupo16OO22020.models;
 
 import java.time.LocalDate;
-
 import org.springframework.format.annotation.DateTimeFormat;
+import com.unla.Grupo16OO22020.entities.Local;
 
 public class ProductoModel {
 
 	private int id;
+	
 	private String descripcion;	
+	
 	private int precioUnitario ;	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")//yyyy-MM-dd
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")//yyyy-MM-dd	
 	private LocalDate fechaAlta;
+	
+	private LocalModel localModel;
 	
 	public ProductoModel() {
 		super();
-	}
-
-	public ProductoModel(int id, String descripcion, int precioUnitario,LocalDate fechaAlta) {
+	}	
+	
+	public ProductoModel(int id, String descripcion, int precioUnitario, LocalModel localModel, 
+			LocalDate fechaAlta) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
 		this.precioUnitario = precioUnitario;
+		this.localModel = localModel;
 		this.fechaAlta = fechaAlta;
 	}
+	
+	public LocalModel getLocalModel() {
+		return localModel;
+	}
 
+	public void setLocalModel(LocalModel localModel) {
+		this.localModel = localModel;
+	}
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
+	}	
+	
 	public String getDescripcion() {
 		return descripcion;
 	}

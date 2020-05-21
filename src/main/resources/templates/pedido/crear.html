@@ -1,0 +1,138 @@
+
+<script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
+<link href="/vendor/bootstrap/css/bootstrap-select.min.css" rel="stylesheet">
+
+ <style>
+ .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 100%;
+
+}
+ </style>
+<div class="modal fade" id="modalLote" tabindex="-1" role="dialog"
+	aria-labelledby="modal" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="dialogo-editar-title" id="dialogo-editar-title">
+				Crear Pedido
+				</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" id="dialogo-editar-body">
+				<form action="#" th:action="@{/pedido/crear}" th:object="${pedido}"
+					method="post">
+					<div id="form-crear-modificar">						
+				  <div class="form-row">
+						<div class="form-group col">
+						<p>Seleccione Producto</p>
+						<select  class="form-group selectpicker" id="producto" th:field="*{productoModel.id}">
+							<option th:each="producto : ${productos}" th:value="${producto.id}"
+							 th:text="${producto.descripcion}"></option>
+						</select>
+						</div>
+					</div>					
+						<div class="form-row">
+							<div class="form-group col">
+								<p>
+									Cantidad: <input class="form-control cantidad" id="algo"
+										 type="number"
+										th:field="*{cantidadSolicitada}" min="1" />
+								</p>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col">
+								<p>
+									Fecha Ingreso: <input class="form-control"
+										type="date" th:field="*{fecha}" required/>
+								</p>
+							</div>
+						</div>
+						<div class="form-row">
+						<div class="form-group col">
+						<p>Seleccione Cliente</p>
+						<select class="form-group selectpicker" placeholder="Seleccionar Cliente" th:field="*{clienteModel.id}">
+							<option th:each="cliente : ${clientes}" th:value="${cliente.id}"
+							 th:text="${cliente.nombre}"></option>
+						</select>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col">
+						<p>Seleccione Empleado</p>
+						<select  class="form-group selectpicker" placeholder="Seleccionar Empleado" th:field="*{solicitadorModel.id}">
+							<option th:each="empleado : ${empleados}" th:value="${empleado.id}"
+							 th:text="${empleado.nombre}"></option>
+						</select>
+						</div>
+					</div>
+						
+					</div>
+					<input type="submit" value="Crear"  hidden class="boton crear btn btn-success"/>
+					<input type="button" value="Consultar Stock" id="consultar" class="boton btn btn-success"/>
+					<input
+					type="button" id="dialogo-editar" class="btn botonCancelar"
+					value="Cancelar"/>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$(document).ready(function () {
+
+	$('.selectpicker').selectpicker();
+	
+	$("#dialogo-editar").click(function() {
+		$("#modalLote").modal("hide");		
+	});
+	$(".cantidad").change(function(){
+		$(".crear").hide();
+		$("#consultar").show();
+	});
+	$("#consultar").click(function() {
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+		 	url: "/pedido/consultarStock",
+		 	data:{idProducto:parseInt($("#producto").val()),cantidadSolicitada:parseInt($(".cantidad").val())}
+		})
+		.done(function(result) {
+			if(result == "ok"){
+				MensInfo("Informacion", "Stock Disponible")
+				$(".crear").removeAttr('hidden');
+				$(".crear").show();
+				$("#consultar").hide();
+			}else{
+				MensError("Error", "Sin stock disponible")
+			}
+		})
+		.fail(function() {
+			alert("error");
+		});
+	});	
+});
+
+function MensInfo(title, mensaje){
+	 BootstrapDialog.show({
+         message: mensaje,
+         title: title,
+         type: BootstrapDialog.TYPE_SUCCESS 
+     });
+}
+
+function MensError(title, mensaje){
+	 BootstrapDialog.show({
+        message: mensaje,
+        title: title,
+        type: BootstrapDialog.TYPE_DANGER
+    });
+	 
+}
+
+</script>
+
+
+

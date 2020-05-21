@@ -11,7 +11,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="dialogo-editar-title" id="dialogo-editar-title">
-				Modificar Lote
+				Crear Pedido
 				</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">
@@ -19,38 +19,55 @@
 				</button>
 			</div>
 			<div class="modal-body" id="dialogo-editar-body">
-				<form action="#" th:action="@{/lote/actualizar}" th:object="${lote}"
+				<form action="#" th:action="@{/pedido/actualizar}" th:object="${pedido}"
 					method="post">
 					<input type="hidden" th:field="*{id}" />
-					<div id="form-crear-modificar">
-						<div class="form-row">
-							<div class="form-group col">
-								<p>
-									Fecha Ingreso: <input class="form-control"
-										type="date" th:field="*{fechaIngreso}" />
-								</p>
-							</div>
+					<div id="form-crear-modificar">						
+				  <div class="form-row">
+						<div class="form-group col">
+						<select  class="form-group selectpicker" placeholder="Seleccionar Producto" th:field="*{productoModel.id}">
+							<option th:each="producto : ${productos}" th:value="${producto.id}"
+							 th:text="${producto.descripcion}"></option>
+						</select>
 						</div>
+					</div>					
 						<div class="form-row">
 							<div class="form-group col">
 								<p>
 									Cantidad: <input class="form-control"
 										 type="text"
-										th:field="*{cantidad}" />
+										th:field="*{cantidadSolicitada}" />
+								</p>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col">
+								<p>
+									Fecha Ingreso: <input class="form-control"
+										type="date" th:field="*{fecha}" />
 								</p>
 							</div>
 						</div>
 						<div class="form-row">
 						<div class="form-group col">
-						<p>Seleccione Producto</p>
-						<select  class="form-group selectpicker" th:field="*{productoModel.id}">
-							<option th:each="producto : ${productos}" th:value="${producto.id}"
-							 th:text="${producto.descripcion}"></option>
+						<select  class="form-group selectpicker" placeholder="Seleccionar Cliente" th:field="*{clienteModel.id}">
+							<option th:each="cliente : ${clientes}" th:value="${cliente.id}"
+							 th:text="${cliente.nombre}"></option>
 						</select>
-						</div>						
-					</div>					
+						</div>
 					</div>
-					<input type="submit" value="Crear" class="boton btn btn-success"/>
+					<div class="form-row">
+						<div class="form-group col">
+						<select  class="form-group selectpicker" placeholder="Seleccionar Empleado" th:field="*{solicitadorModel.id}">
+							<option th:each="empleado : ${empleados}" th:value="${empleado.id}"
+							 th:text="${empleado.nombre}"></option>
+						</select>
+						</div>
+					</div>
+						
+					</div>
+					<input type="submit" value="Actualizar" class="boton btn btn-success"/>
+					<input type="button" value="Consultar Stock" id="consultar" class="boton btn btn-success"/>					
 					<input
 					type="button" id="dialogo-editar" class="btn botonCancelar"
 					value="Cancelar"/>

@@ -14,11 +14,11 @@ public class LoteModel {
 	private LocalDate fechaIngreso;
 	
 	private ProductoModel productoModel; 
-
 	
 	public LoteModel() {
 		super();
 	}
+
 
 	public LoteModel(int id, int cantidad, LocalDate fechaIngreso, ProductoModel productoModel) {
 		super();

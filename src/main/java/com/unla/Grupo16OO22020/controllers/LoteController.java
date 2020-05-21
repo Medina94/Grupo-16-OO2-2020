@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.Grupo16OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo16OO22020.models.LoteModel;
+import com.unla.Grupo16OO22020.services.ILocalService;
 import com.unla.Grupo16OO22020.services.ILoteService;
 import com.unla.Grupo16OO22020.services.IProductoService;
 
@@ -26,6 +27,8 @@ public class LoteController {
 	@Autowired
 	@Qualifier("productoService")
 	private IProductoService productoService;
+	
+	
 	
 	@GetMapping("")
 	public ModelAndView index() {

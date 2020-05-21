@@ -42,12 +42,14 @@
 						</div>
 						<div class="form-row">
 						<div class="form-group col">
+						<p>Seleccione Producto</p>
 						<select  class="form-group selectpicker" placeholder="Seleccionar Producto" th:field="*{productoModel.id}">
 							<option th:each="producto : ${productos}" th:value="${producto.id}"
 							 th:text="${producto.descripcion}"></option>
 						</select>
 						</div>
 					</div>
+					
 					</div>
 					<input type="submit" value="Crear" class="boton btn btn-success"/>
 					<input
