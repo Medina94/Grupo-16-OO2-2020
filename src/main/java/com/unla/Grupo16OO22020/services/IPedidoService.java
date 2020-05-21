@@ -15,5 +15,10 @@ public interface IPedidoService {
 	
 	public boolean remove(int id);
 	
+	public boolean consultarStock(int idProducto, int cantidadSolicitada);
+	
+	public void actualizarStock(PedidoModel pedidoModel);
+	
+	public void rechazarPedido(int pedidoId);
 }
 

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.Grupo16OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo16OO22020.models.ProductoModel;
+import com.unla.Grupo16OO22020.services.ILocalService;
 import com.unla.Grupo16OO22020.services.IProductoService;
 
 @Controller
@@ -22,6 +23,10 @@ public class ProductoController {
 	@Autowired
 	@Qualifier("productoService")
 	private IProductoService productoService;
+	
+	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
 	
 	@GetMapping("")
 	public ModelAndView index() {
@@ -34,6 +39,7 @@ public class ProductoController {
 	public ModelAndView create() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_CREAR);
 		mAV.addObject("producto", new ProductoModel());
+		mAV.addObject("locales", localService.getAll());
 		return mAV;
 	}
 	
@@ -47,6 +53,7 @@ public class ProductoController {
 	public ModelAndView get(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_ACTUALIZAR);
 		mAV.addObject("producto", productoService.findById(id));
+		mAV.addObject("locales", localService.getAll());
 		return mAV;
 	}
 	

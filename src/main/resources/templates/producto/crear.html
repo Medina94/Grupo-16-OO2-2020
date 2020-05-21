@@ -1,3 +1,5 @@
+<script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
+ <link href="/vendor/bootstrap/css/bootstrap-select.min.css" rel="stylesheet">
 <div class="modal fade" id="modalProducto" tabindex="-1" role="dialog"
 	aria-labelledby="modal" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
@@ -30,6 +32,15 @@
 										th:field="*{precioUnitario}" />
 								</p>
 							</div>
+										<div class="form-row">
+						<div class="form-group col">
+						<p>Seleccione Local</p>
+						<select  class="form-group selectpicker" th:field="*{localModel.id}">
+							<option th:each="l : ${locales}" th:value="${l.id}"
+							 th:text="${l.direccion}"></option>
+						</select>
+						</div>
+					</div>
 						</div>				
 					</div>
 					<input type="submit" value="crear" class="boton btn btn-success"/>
@@ -44,6 +55,10 @@
 
 <script>
 $(document).ready(function () {
+	$('.selectpicker').selectpicker();
+	$("#cancelar").click(function() {
+		$("#modalProducto").modal("hide");		
+	});
 	$("#cancelar").click(function() {
 		$("#modalProducto").modal("hide");		
 	});

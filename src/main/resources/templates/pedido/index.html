@@ -19,10 +19,9 @@
         <tr>
             <th>Producto</th>
             <th>Cantidad Solicitada</th>
-<!--        <th>Fecha</th> -->
+            <th>Fecha</th>
             <th>Nombre Cliente</th>
             <th>Empleado</th>
-            <th></th>
             <th></th>
           </tr>
     </thead>
@@ -30,13 +29,13 @@
         <tr th:each="pedido : ${pedidos}">  
            <td><span th:text="${pedido.producto.descripcion}" /></td>
            <td><span th:text="${pedido.cantidadSolicitada}" /></td>          
-<!--            <td><span th:text="${pedido.producto.fecha}" /></td> -->
+            <td><span th:text="${pedido.fecha}" /></td> 
            <td><span th:text="${pedido.cliente.nombre}" /></td>
            <td><span th:text="${pedido.solicitador.nombre}" /></td>
-           <td style="text-align:center"><div class="actualizar" th:data-value="${pedido.id}">
-           <i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
-           </div>
-           </td>
+<!--            <td style="text-align:center"><div class="actualizar" th:data-value="${pedido.id}"> -->
+<!--            <i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i> -->
+<!--            </div> -->
+<!--            </td> -->
             <td style="text-align:center">
             <form action="#" th:action="@{/pedido/eliminar/{id}(id=${pedido.id})}" method="post">
 	              <button class="fa fa-trash" type="submit" style="font-size: 24px; color: black;border: 0 !important;" aria-hidden="true"></button>

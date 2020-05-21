@@ -27,6 +27,9 @@ public class LoteService implements ILoteService {
 	@Autowired
 	@Qualifier("productoService")
 	private ProductoService productoService;
+	@Autowired
+	@Qualifier("localService")
+	private LocalService localService;
 	@Override
 	
 	public List<Lote> getAll() {
@@ -54,4 +57,11 @@ public class LoteService implements ILoteService {
 	public LoteModel findById(int id) {
 		return loteConverter.entityToModel(loteRepository.findById(id));
 	}
+
+	@Override
+	public List<Lote> findByProducto(int producto) {
+		return	loteRepository.findByProducto(producto);
+		
+	}
+
 }

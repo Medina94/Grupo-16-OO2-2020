@@ -1,8 +1,11 @@
+
 <script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
- <link href="/vendor/bootstrap/css/bootstrap-select.min.css" rel="stylesheet">
+<link href="/vendor/bootstrap/css/bootstrap-select.min.css" rel="stylesheet">
+
  <style>
  .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
     width: 100%;
+
 }
  </style>
 <div class="modal fade" id="modalLote" tabindex="-1" role="dialog"
@@ -25,7 +28,7 @@
 				  <div class="form-row">
 						<div class="form-group col">
 						<p>Seleccione Producto</p>
-						<select  class="form-group selectpicker" th:field="*{productoModel.id}">
+						<select  class="form-group selectpicker" id="producto" th:field="*{productoModel.id}">
 							<option th:each="producto : ${productos}" th:value="${producto.id}"
 							 th:text="${producto.descripcion}"></option>
 						</select>
@@ -34,9 +37,9 @@
 						<div class="form-row">
 							<div class="form-group col">
 								<p>
-									Cantidad: <input class="form-control"
-										 type="text"
-										th:field="*{cantidadSolicitada}" />
+									Cantidad: <input class="form-control cantidad" id="algo"
+										 type="number"
+										th:field="*{cantidadSolicitada}" min="1" />
 								</p>
 							</div>
 						</div>
@@ -44,14 +47,14 @@
 							<div class="form-group col">
 								<p>
 									Fecha Ingreso: <input class="form-control"
-										type="date" th:field="*{fecha}" />
+										type="date" th:field="*{fecha}" required/>
 								</p>
 							</div>
 						</div>
 						<div class="form-row">
 						<div class="form-group col">
 						<p>Seleccione Cliente</p>
-						<select  class="form-group selectpicker" placeholder="Seleccionar Cliente" th:field="*{clienteModel.id}">
+						<select class="form-group selectpicker" placeholder="Seleccionar Cliente" th:field="*{clienteModel.id}">
 							<option th:each="cliente : ${clientes}" th:value="${cliente.id}"
 							 th:text="${cliente.nombre}"></option>
 						</select>
@@ -68,7 +71,8 @@
 					</div>
 						
 					</div>
-					<input type="submit" value="Crear" class="boton btn btn-success"/>
+					<input type="submit" value="Crear"  hidden class="boton crear btn btn-success"/>
+					<input type="button" value="Consultar Stock" id="consultar" class="boton btn btn-success"/>
 					<input
 					type="button" id="dialogo-editar" class="btn botonCancelar"
 					value="Cancelar"/>
@@ -79,11 +83,55 @@
 </div>
 <script>
 $(document).ready(function () {
+
 	$('.selectpicker').selectpicker();
+	
 	$("#dialogo-editar").click(function() {
-		$("#modalLoteActualizar").modal("hide");		
+		$("#modalLote").modal("hide");		
 	});
+	$(".cantidad").change(function(){
+		$(".crear").hide();
+		$("#consultar").show();
+	});
+	$("#consultar").click(function() {
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+		 	url: "/pedido/consultarStock",
+		 	data:{idProducto:parseInt($("#producto").val()),cantidadSolicitada:parseInt($(".cantidad").val())}
+		})
+		.done(function(result) {
+			if(result == "ok"){
+				MensInfo("Informacion", "Stock Disponible")
+				$(".crear").removeAttr('hidden');
+				$(".crear").show();
+				$("#consultar").hide();
+			}else{
+				MensError("Error", "Sin stock disponible")
+			}
+		})
+		.fail(function() {
+			alert("error");
+		});
+	});	
 });
+
+function MensInfo(title, mensaje){
+	 BootstrapDialog.show({
+         message: mensaje,
+         title: title,
+         type: BootstrapDialog.TYPE_SUCCESS 
+     });
+}
+
+function MensError(title, mensaje){
+	 BootstrapDialog.show({
+        message: mensaje,
+        title: title,
+        type: BootstrapDialog.TYPE_DANGER
+    });
+	 
+}
+
 </script>
 
 

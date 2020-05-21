@@ -8,7 +8,6 @@ private int id;
 	private String direccion;
 	private int latitud;
 	private int longitud;
-	//private EmpleadoModel empleado;
 	private double distanciaDelOrigen;
 	
 	public LocalModel() {}
