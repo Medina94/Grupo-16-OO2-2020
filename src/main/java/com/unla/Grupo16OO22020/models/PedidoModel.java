@@ -20,6 +20,16 @@ public class PedidoModel {
 	
 	private EmpleadoModel solicitadorModel;
 	
+	private double Total;
+	
+	public double getTotal() {
+		return Total;
+	}
+
+	public void setTotal(double total) {
+		Total = total;
+	}
+
 	public PedidoModel() {
 		super();
 	}

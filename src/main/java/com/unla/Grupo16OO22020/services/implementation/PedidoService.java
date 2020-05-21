@@ -103,4 +103,11 @@ public class PedidoService implements IPedidoService {
 	    loteRepository.save(lote);
 	}
 
+	@Override
+	public PedidoModel calcularTotal(int pedidoId) {
+	PedidoModel pedido = pedidoConverter.entityToModel(pedidoRepository.findById(pedidoId));
+	pedido.setTotal(pedido.getCantidadSolicitada() * pedido.getProductoModel().getPrecioUnitario());
+	return pedido;
+	}
+
 }

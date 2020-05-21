@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.unla.Grupo16OO22020.entities.Pedido;
 import com.unla.Grupo16OO22020.models.PedidoModel;
 import com.unla.Grupo16OO22020.services.IPedidoService;
 import com.unla.Grupo16OO22020.services.IPersonaService;
@@ -91,4 +92,12 @@ public class PedidoController {
 	      }
 	      	return "error";
 	 }	
+	
+	@GetMapping("/visualizarPedido")
+	public ModelAndView visualizar(int pedidoId) {
+		ModelAndView mAV = new ModelAndView("pedido/visualizarPedido");	
+		PedidoModel pedido = pedidoService.calcularTotal(pedidoId);
+		mAV.addObject("pedido", pedido);
+		return mAV;
+	}
 }

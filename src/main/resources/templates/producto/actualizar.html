@@ -1,5 +1,10 @@
 <script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
  <link href="/vendor/bootstrap/css/bootstrap-select.min.css" rel="stylesheet">
+ 	 <style>
+ .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 100%;
+}
+ </style>
 <div class="modal fade" id="modalProductoActualizar" tabindex="-1" role="dialog"
 	aria-labelledby="modal" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
@@ -21,27 +26,38 @@
 						<div class="form-row">
 							<div class="form-group col">
 								<p>
-									Descripcion: <input class="form-control" required
-										 type="text"
+									Descripcion: <input class="form-control" required type="text"
 										th:field="*{descripcion}" />
 								</p>
 							</div>
+						</div>
+						<div class="form-row">
 							<div class="form-group col">
 								<p>
-									Precio: <input class="form-control" required min=1
-										 type="number"
-										th:field="*{precioUnitario}" />
+									Precio: <input class="form-control" required min="1"
+										type="number" th:field="*{precioUnitario}" />
 								</p>
 							</div>
+						</div>
+						<div class="form-row">
 							<div class="form-group col">
 								<p>
-									Fecha Alta: <input class="form-control"
-										 type="date"
+									Fecha: <input class="form-control" type="date"
 										th:field="*{fechaAlta}" />
 								</p>
-						</div>				
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col">
+								<p>Seleccione Local</p>
+								<select class="form-group selectpicker"
+									th:field="*{localModel.id}">
+									<option th:each="l : ${locales}" th:value="${l.id}"
+										th:text="${l.direccion}"></option>
+								</select>
+							</div>
+						</div>
 					</div>
-				</div>	
 					<input type="submit" value="Crear" class="boton btn btn-success"/>
 					<input
 					type="button" id="actualizar" class="btn botonCancelar"
@@ -53,7 +69,7 @@
 </div>
 <script>
 $(document).ready(function () {
-	
+	$('.selectpicker').selectpicker();
 	$("#actualizar").click(function() {
 		$("#modalProductoActualizar").modal("hide");		
 	});

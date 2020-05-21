@@ -1,61 +1,65 @@
-<script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
- <link href="/vendor/bootstrap/css/bootstrap-select.min.css" rel="stylesheet">
+<script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script>
+<link href="/vendor/bootstrap/css/bootstrap-select.min.css"
+	rel="stylesheet">
+	 <style>
+ .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 100%;
+}
+ </style>
 <div class="modal fade" id="modalProducto" tabindex="-1" role="dialog"
 	aria-labelledby="modal" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="dialogo-editar-title" id="dialogo-editar-title">
-				Crear Producto
-				</h5>
+					Crear Producto</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body" id="dialogo-editar-body">
-				<form action="#" th:action="@{/producto/crear}" th:object="${producto}"
-					method="post">
+				<form action="#" th:action="@{/producto/crear}"
+					th:object="${producto}" method="post">
 					<div id="form-crear-modificar">
 						<div class="form-row">
 							<div class="form-group col">
 								<p>
-									Descripcion: <input class="form-control" required
-										 type="text"
+									Descripcion: <input class="form-control" required type="text"
 										th:field="*{descripcion}" />
 								</p>
 							</div>
-							<div class="form-row"></div>
+						</div>
+						<div class="form-row">
 							<div class="form-group col">
 								<p>
 									Precio: <input class="form-control" required min="1"
-										 type="number"
-										th:field="*{precioUnitario}" />
+										type="number" th:field="*{precioUnitario}" />
 								</p>
 							</div>
-							<div class="form-row"></div>
+						</div>
+						<div class="form-row">
 							<div class="form-group col">
 								<p>
-									Fecha: <input class="form-control"
-										 type="date"
+									Fecha: <input class="form-control" type="date"
 										th:field="*{fechaAlta}" />
 								</p>
 							</div>
 						</div>
-										<div class="form-row">
-						<div class="form-group col">
-						<p>Seleccione Local</p>
-						<select  class="form-group selectpicker" th:field="*{localModel.id}">
-							<option th:each="l : ${locales}" th:value="${l.id}"
-							 th:text="${l.direccion}"></option>
-						</select>
+						<div class="form-row">
+							<div class="form-group col">
+								<p>Seleccione Local</p>
+								<select class="form-group selectpicker"
+									th:field="*{localModel.id}">
+									<option th:each="l : ${locales}" th:value="${l.id}"
+										th:text="${l.direccion}"></option>
+								</select>
+							</div>
 						</div>
-					</div>			
 					</div>
-					<input type="submit" value="crear" class="boton btn btn-success"/>
-					<input
-					type="button" id="cancelar" class="btn botonCancelar"
-					value="Cancelar"/>
+					<input type="submit" value="crear" class="boton btn btn-success" />
+					<input type="button" id="cancelar" class="btn botonCancelar"
+						value="Cancelar" />
 				</form>
 			</div>
 		</div>

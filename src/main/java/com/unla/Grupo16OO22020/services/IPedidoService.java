@@ -20,5 +20,8 @@ public interface IPedidoService {
 	public void actualizarStock(PedidoModel pedidoModel);
 	
 	public void rechazarPedido(int pedidoId);
+	
+	public PedidoModel calcularTotal(int pedidoId);
+	
 }
 

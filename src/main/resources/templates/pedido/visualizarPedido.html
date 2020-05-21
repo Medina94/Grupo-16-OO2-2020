@@ -1,0 +1,37 @@
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+<style>
+.modal-header{
+    background: #dc9696 !important;
+}
+</style>
+<link href="/vendor/bootstrap/css/bootstrap-dialog.min.css" rel="stylesheet">
+<div class="modal" id="modalVisualizar" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><strong>Detalle de Compra</strong></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="background: #F47983; color: white;"><div style="margin-left: 5px;">Datos Comprador</div></div>
+         <br/>
+         <p><strong>Nombre:   </strong><span th:text="${pedido.ClienteModel.Nombre}"></span></p>
+         <p><strong>Apellido: </strong><span th:text="${pedido.ClienteModel.Apellido}"></span></p>
+         <p><strong>Telefono: </strong><span th:text="${pedido.ClienteModel.telefono}"></span></p>
+         <p><strong>Usuario(email): </strong><span th:text="${pedido.ClienteModel.mail}"></span></p>
+         <div style="background: #F47983; color: white;"><div style="margin-left: 5px;">Detalle Pedido</div></div>
+         <br/>
+         <p><strong>Descripci&oacuten: </strong><span th:text="${pedido.productoModel.descripcion}"></span></p>
+         <p><strong>Cantidad Solicitada: </strong><span th:text="${pedido.cantidadSolicitada}"></span> </p>
+         <p><strong>Precio Unitario: </strong>$ <span th:text="${pedido.productoModel.precioUnitario}"></span> ARP</p>
+         <p><strong>Precio Total: </strong>$ <span th:text="${pedido.Total}"></span>ARP </p>
+      </div>      
+    </div>
+  </div>
+</div>
+
+
+
