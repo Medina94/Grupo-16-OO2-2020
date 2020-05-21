@@ -19,15 +19,15 @@
 						<div class="form-row">
 							<div class="form-group col">
 								<p>
-									Descripcion: <input class="form-control"
+									Descripcion: <input class="form-control" required
 										 type="text"
 										th:field="*{descripcion}" />
 								</p>
 							</div>
 							<div class="form-group col">
 								<p>
-									Precio: <input class="form-control"
-										 type="text"
+									Precio: <input class="form-control" required min=1
+										 type="number"
 										th:field="*{precioUnitario}" />
 								</p>
 							</div>

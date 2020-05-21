@@ -20,29 +20,29 @@
 							<div class="form-group col">
 								<p>
 									Telefono: <input class="form-control"
-										 type="text"
-										th:field="*{telefono}" />
+										 type="number"
+										th:field="*{telefono}" required min="1"/>
 								</p>
 							</div>
 							<div class="form-group col">
 								<p>
 									Direccion: <input class="form-control"
 										 type="text"
-										th:field="*{direccion}" />
+										th:field="*{direccion}" required/>
 								</p>
 							</div>
 							<div class="form-group col">
 								<p>
 									Latitud: <input class="form-control"
-										 type="text"
-										th:field="*{latitud}" />
+										 type="number"
+										th:field="*{latitud}" required/>
 								</p>
 							</div>
 							<div class="form-group col">
 								<p>
 									Longitud: <input class="form-control"
-										 type="text"
-										th:field="*{longitud}" />
+										 type="number"
+										th:field="*{longitud}" required/>
 								</p>
 							</div>
 						</div>				
