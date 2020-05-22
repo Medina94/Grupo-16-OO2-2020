@@ -27,7 +27,7 @@
 							<div class="form-group col">
 								<p>
 									Nombre: <input class="form-control"
-										type="text" th:field="*{nombre}" />
+										type="text" th:field="*{nombre}" required />
 								</p>
 							</div>
 						</div>
@@ -36,7 +36,7 @@
 								<p>
 									Apellido: <input class="form-control"
 										 type="text"
-										th:field="*{apellido}" />
+										th:field="*{apellido}" required />
 								</p>
 							</div>
 						</div>
@@ -45,7 +45,7 @@
 								<p>
 									Fecha de nacimiento: <input class="form-control"
 										 type="date"
-										th:field="*{fechaNacimiento}" />
+										th:field="*{fechaNacimiento}" required />
 								</p>
 							</div>
 						</div>
@@ -53,8 +53,8 @@
 							<div class="form-group col">
 								<p>
 									Email: <input class="form-control"
-										 type="text"
-										th:field="*{mail}" />
+										 type="mail"
+										th:field="*{mail}" required pattern="[a-z0-9._-]+@gmail.com" title="Debe ser un email del tipo @gmail.com"/>
 								</p>
 							</div>
 						</div>
@@ -63,7 +63,7 @@
 								<p>
 									Telefono: <input class="form-control"
 										 type="text"
-										th:field="*{telefono}" />
+										th:field="*{telefono}" required pattern="[1]{2}[0-9]{4}[0-9]{4}" title="El n&uacute;mero ingresado debe comenzar con 11, seguido de 8 n&uacute;meros"/>
 								</p>
 							</div>
 						</div>
