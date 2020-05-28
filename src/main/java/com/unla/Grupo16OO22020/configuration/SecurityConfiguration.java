@@ -8,7 +8,12 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.User.UserBuilder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import com.unla.Grupo16OO22020.services.implementation.PersonaService;
 import com.unla.Grupo16OO22020.services.implementation.UserService;
@@ -25,8 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		//auth.inMemoryAuthentication().withUser("admin").password("1").roles("ADMIN");
-		auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
+		
 		auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
 		
 		
@@ -34,8 +38,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				//.antMatchers("/lote/**").hasRole("ADMIN")
+		/*http
+			.authorizeRequests()
+			.antMatchers("/","/index/*","/css/*", "/imgs/*", "/js/*", "/vendor/bootstrap/css/*", "/vendor/jquery/*", "/vendor/bootstrap/js/*")
+			.permitAll()
+			.anyRequest()
+			.authenticated()
+			.and()
+			.httpBasic();*/
+		
+		
+			http.authorizeRequests() 
+				.antMatchers("/persona/empleado/**", "/local/**").hasAnyRole("ADMIN","GERENTE")
+				.antMatchers("/persona/empleado/**", "/local/**").hasRole("ADMIN")
 				.antMatchers("/css/*", "/imgs/*", "/js/*", "/vendor/bootstrap/css/*", "/vendor/jquery/*", "/vendor/bootstrap/js/*")
 				.permitAll().anyRequest().authenticated()
 			.and()
@@ -45,5 +60,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.and()
 				.logout().logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll();
 	}
+	
+	/*@Override
+	protected UserDetailsService userDetailsService() {
+		UserDetails adminUser = (UserDetails) User.builder()
+			.username("admin")
+			.password("admin")
+			.roles("ADMIN");//ROLE_ADMIN El spring lo guarad de esta manera
+			
+			
+		
+			return new InMemoryUserDetailsManager(adminUser);
+	}*/
 }
 
