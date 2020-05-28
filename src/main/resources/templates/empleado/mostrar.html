@@ -30,7 +30,8 @@
           	<td><span th:text="${empleado.id}" /></td>
             <td><span th:text="${empleado.nombre}" /></td>
             <td><span th:text="${empleado.apellido}" /></td>
-            <td><span th:text="${empleado.esGerente}" /></td>
+            
+            <td><span id="gerente" th:text="${empleado.esGerente}? 'si' : 'no'"/></td>
             <td><span th:text="${empleado.sueldo}" /></td>
             <td><span th:text="${empleado.local.direccion}" /></td>
            <td style="text-align:center"><div class="actualizar" th:data-value="${empleado.id}">
