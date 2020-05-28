@@ -19,13 +19,14 @@ public class Empleado extends Persona{
 		super();
 	}
 
-	public Empleado(int id, String nombre, String mail, String apellido, LocalDate fecha, int sueldo, boolean esGerente, Local local) {
+	public Empleado(int id, int dni,String nombre, String mail, String apellido, LocalDate fecha, int sueldo, boolean esGerente, Local local) {
 		super();
 		setId(id);
 		setNombre(nombre);
 		setMail(mail);
 		setApellido(apellido);
 		setFechaNacimiento(fecha);
+		setDni(dni);
 		this.sueldo = sueldo;
 		this.esGerente = esGerente;
 		this.local = local;

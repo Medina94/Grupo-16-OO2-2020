@@ -30,6 +30,7 @@ public class Cliente extends Persona{
 		this.setApellido(modelo.getApellido());
 		this.setFechaNacimiento(modelo.getFechaNacimiento());
 		this.setMail(modelo.getMail());
+		this.setDni(modelo.getDni());
 		this.telefono = modelo.getTelefono();
 		return this;
 	}

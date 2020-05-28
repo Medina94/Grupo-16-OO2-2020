@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.unla.Grupo16OO22020.entities.Cliente;
 import com.unla.Grupo16OO22020.entities.Empleado;
+import com.unla.Grupo16OO22020.entities.User;
 import com.unla.Grupo16OO22020.models.ClienteModel;
 import com.unla.Grupo16OO22020.models.EmpleadoModel;
 
@@ -20,4 +21,6 @@ public interface IPersonaService{
 	
 	public boolean clienteRemove(int id);
 	public boolean EmpleadoRemove(int id);
+	
+	public void crearUsuario (EmpleadoModel modelo);
 }

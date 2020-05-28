@@ -60,8 +60,9 @@ public class PersonaController {
 	}
 	
 	@PostMapping("empleado/crear")
-	public RedirectView createEmpleado(@ModelAttribute("empleado") EmpleadoModel modelo) {
+	public RedirectView createEmpleado(@ModelAttribute("empleado") EmpleadoModel modelo) {		
 		personaService.empleadoInsertOrUpdate(modelo); 
+		personaService.crearUsuario(modelo);
 		return new RedirectView(ViewRouteHelper.EMPLEADO_ROOT);
 	}
 	

@@ -9,8 +9,8 @@ public class ClienteModel extends PersonaModel{
 
 	public ClienteModel() {}
 	
-	public ClienteModel(int id, String nombre, String apellido, LocalDate fechaNacimiento, String mail, int telefono) {
-		super(id, nombre, apellido, fechaNacimiento, mail);
+	public ClienteModel(int id, int dni, String nombre, String apellido, LocalDate fechaNacimiento, String mail, int telefono) {
+		super(id, dni, nombre, apellido, fechaNacimiento, mail);
 		this.telefono = telefono;
 	}
 	public int getTelefono() {
@@ -27,6 +27,7 @@ public class ClienteModel extends PersonaModel{
 		this.setApellido(entidad.getApellido());
 		this.setFechaNacimiento(entidad.getFechaNacimiento());
 		this.setMail(entidad.getMail());
+		this.setDni(entidad.getDni());
 		this.telefono = entidad.getTelefono();
 		return this;
 	}

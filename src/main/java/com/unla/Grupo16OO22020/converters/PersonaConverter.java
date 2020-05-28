@@ -26,10 +26,10 @@ public class PersonaConverter {
 	}
 	
 	public Empleado EmpleadoModelToEntity(EmpleadoModel modelo) {
-		return new Empleado(modelo.getId(), modelo.getNombre(),  modelo.getMail(), modelo.getApellido(), modelo.getFechaNacimiento(), modelo.getSueldo(), modelo.isEsGerente(), localConverter.modelToEntity(modelo.getLocalModel()));
+		return new Empleado(modelo.getId(), modelo.getDni(), modelo.getNombre(),  modelo.getMail(), modelo.getApellido(), modelo.getFechaNacimiento(), modelo.getSueldo(), modelo.isEsGerente(), localConverter.modelToEntity(modelo.getLocalModel()));
 	}
 	
 	public EmpleadoModel EmpleadoEntitytoModel(Empleado entidad) {
-		return new EmpleadoModel(entidad.getId(), entidad.getNombre(),  entidad.getMail(), entidad.getApellido(), entidad.getFechaNacimiento(), entidad.getSueldo(), entidad.isEsGerente(), localConverter.entityToModel(entidad.getLocal()));
+		return new EmpleadoModel(entidad.getId(), entidad.getDni(),entidad.getNombre(),  entidad.getMail(), entidad.getApellido(), entidad.getFechaNacimiento(), entidad.getSueldo(), entidad.isEsGerente(), localConverter.entityToModel(entidad.getLocal()));
 	}
 }

@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.unla.Grupo16OO22020.services.implementation.PersonaService;
 import com.unla.Grupo16OO22020.services.implementation.UserService;
 
 @Configuration
