@@ -19,6 +19,7 @@
         <tr>
             <th>Nombre</th>
             <th>Apellido</th>
+            <th>Mail</th>
             <th>Gerente</th>
             <th>Sueldo</th>
             <th>Local</th>
@@ -30,6 +31,7 @@
         <tr th:each="empleado : ${empleados}">  
             <td><span th:text="${empleado.nombre}" /></td>
             <td><span th:text="${empleado.apellido}" /></td>
+            <td><span th:text="${empleado.mail}" /></td>
             <td><span th:text="${empleado.esGerente}" /></td>
             <td><span th:text="${empleado.sueldo}" /></td>
             <td><span th:text="${empleado.local.direccion}" /></td>

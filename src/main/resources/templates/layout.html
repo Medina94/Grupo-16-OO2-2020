@@ -17,9 +17,12 @@
 <style>
 
 .bg-gradient-primary {
-    background-color: #864483;
-    background-image: linear-gradient(180deg, #864483 10%, #864483 100%);
-    background-size: cover;
+   background: #092756;
+	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #c7039d 0%,#000000 100%);
+	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #c7039d 0%,#000000 100%);
+	background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #c7039d 0%,#000000c 100%);
+	background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #c7039d 0%,#000000 100%);
+	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #c7039d 0%,#000000  100%);
     
 }
 .boton {
@@ -228,7 +231,23 @@ cursor: pointer;
 
 
             </li>
+             <div class="topbar-divider d-none d-sm-block"></div>
 
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow show">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small" ><label class="usuario">aaa</label></span>
+                            <i class="fa fa-user-circle" style="font-size: 25px;"></i>
+                        </a>
+                        <!-- Dropdown - User Information -->
+<!--                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown"> -->
+<!--                             <h6 class="dropdown-header"><i class="fa fa-laptop"></i></h6> -->
+<!--                             <a class="dropdown-item" id="refrescarCookies" href="#"> -->
+<!--                                 <i class="fa fa-lock"></i> -->
+<!--                                 Restaurar Permisos -->
+<!--                             </a> -->
+<!--                         </div> -->
+                    </li>
 
             </ul>
 
@@ -251,6 +270,37 @@ cursor: pointer;
 <script src="/js/DataTables/media/js/dataTables.bootstrap4.min.js"></script> 
 <script src="/js/Tabla.js"></script> 
 <script src="/js/sb-admin-2.min.js"></script>
+<script>
+function MensInfo(title, mensaje){
+	 BootstrapDialog.show({
+        message: mensaje,
+        title: title,
+        type: BootstrapDialog.TYPE_SUCCESS 
+    });
+}
 
+function MensError(title, mensaje){
+	 BootstrapDialog.show({
+       message: mensaje,
+       title: title,
+       type: BootstrapDialog.TYPE_DANGER
+   });
+	 
+}
+
+$(document).ready(function () {	
+	$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+		method: "GET",
+	 	url: "/mostrarUsuario",	 	
+	})
+	.done(function(result) {
+		$(".usuario").text(result);
+	})
+	.fail(function() {
+		alert("error");
+	});	
+});
+
+</script>
 </body>
 </html>

@@ -75,6 +75,8 @@ public class PersonaService implements IPersonaService {
 	@Override
 	public EmpleadoModel empleadoInsertOrUpdate(EmpleadoModel modelo) {
 		modelo.setLocalModel(localService.findById(modelo.getLocalModel().getId()));
+		String email = modelo.getNombre().charAt(0) +  modelo.getApellido() +"@unla.com";
+		modelo.setMail(email.toLowerCase());
 		Empleado empleado = empleadoRepository.save(personaConverter.EmpleadoModelToEntity(modelo));
 		return personaConverter.EmpleadoEntitytoModel(empleado);
 	}
@@ -101,21 +103,32 @@ public class PersonaService implements IPersonaService {
 
 	@Override
 	public void crearUsuario(EmpleadoModel modelo) {
+		Empleado e = empleadoRepository.findByDni(modelo.getDni());
 		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
-		char inicial = modelo.getNombre().charAt(0);
-		String nombreDeUsuario = inicial + modelo.getApellido();
-		User usuario = new User(nombreDeUsuario, String.valueOf(modelo.getDni()), true, personaConverter.EmpleadoModelToEntity(modelo));
+		char inicial =  e.getNombre().charAt(0);
+		String nombreDeUsuario = inicial +  e.getApellido();
+		User usuario = new User(nombreDeUsuario.toLowerCase(), String.valueOf(e.getDni()), true, e);
 		usuario.setPassword(pe.encode(usuario.getPassword()));
-		List<UserRole> roles = new ArrayList<UserRole>();				
+		List<UserRole> roles = new ArrayList<UserRole>();	
 		userRepository.save(usuario);
-//		UserRole rol = roleRepository.findByrole("ROLE_GERENTE");
-//		if (modelo.isEsGerente()) {			
-//			roles.add(rol);			
-//		}
-//		rol = roleRepository.findByrole("ROLE_EMPLEADO");
-//		roles.add(rol);
-//		usuario.setUserRoles(new HashSet<>(roles));
-//		userRepository.save(usuario);
+		UserRole rol = new UserRole ();
+		if (modelo.isEsGerente()) {			
+			rol = new UserRole (0, usuario,"ROLE_GERENTE");			
+		}else {
+			rol = new UserRole (0, usuario,"ROLE_EMPLEADO");
+		}
+		
+		roleRepository.save(rol);
+	}
+
+	@Override
+	public String validarEmpleado(int dni) {
+		Empleado e = empleadoRepository.findByDni(dni);		
+		String mensaje = "El empleado se guardo con exito";
+		if (e != null && e.getDni() == dni) {
+			mensaje = "Error, el empleado ya está registrado"; 
+		}
+		return mensaje;
 	}
 
 }

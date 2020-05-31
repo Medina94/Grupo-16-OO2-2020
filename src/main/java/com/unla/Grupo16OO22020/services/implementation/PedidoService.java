@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.unla.Grupo16OO22020.converters.PedidoConverter;
+import com.unla.Grupo16OO22020.converters.PersonaConverter;
 import com.unla.Grupo16OO22020.entities.Lote;
 import com.unla.Grupo16OO22020.entities.Pedido;
 import com.unla.Grupo16OO22020.models.PedidoModel;
@@ -28,7 +29,10 @@ public class PedidoService implements IPedidoService {
 	private ILoteRepository loteRepository;	
 	@Autowired
 	@Qualifier("pedidoConverter")
-	private PedidoConverter pedidoConverter;		
+	private PedidoConverter pedidoConverter;
+	@Autowired
+	@Qualifier("personaConverter")
+	private PersonaConverter personaConverter;	
 	@Autowired
 	@Qualifier("personaService")
 	private PersonaService personaService;
@@ -38,8 +42,11 @@ public class PedidoService implements IPedidoService {
 	@Autowired
 	@Qualifier("loteService")
 	private LoteService loteService;
-	@Override
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 	
+	@Override	
 	public List<Pedido> getAll() {
 		return pedidoRepository.findAll();
 	}
@@ -48,7 +55,7 @@ public class PedidoService implements IPedidoService {
 	public PedidoModel insertOrUpdate(PedidoModel pedidoModel) {
 		pedidoModel.setProductoModel(productoService.findById(pedidoModel.getProductoModel().getId()));
 		pedidoModel.setClienteModel(personaService.clienteFindById(pedidoModel.getClienteModel().getId()));
-		pedidoModel.setSolicitadorModel(personaService.empleadoFindById(pedidoModel.getSolicitadorModel().getId()));
+		pedidoModel.setSolicitadorModel(personaConverter.EmpleadoEntitytoModel(userService.traerEmpleadoLogueado()));
 		Pedido pedido = pedidoRepository.save(pedidoConverter.modelToEntity(pedidoModel));
 		return pedidoConverter.entityToModel(pedido);
 	}

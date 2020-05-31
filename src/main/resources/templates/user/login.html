@@ -11,17 +11,17 @@
 	</head>
 	<body>
 	    <!-- Page Content -->
-	    <div class="container">
+	    <div class="login">
 	      <div class="jumbotron">
 	        
 			<form class="box" action="index.html" th:action="@{/loginprocess}" method="post">
-				 <h1>inicio</h1>
+				 <h1>Login</h1>
 		      	<input type="text" name="username" id="username" placeholder="Usuario" />
 		      	<input type="password" name="password" id="password" placeholder="Contraseña" />
-		      	<input type="submit" name="" value="Ingresar"/>
+		      	<input type="submit" class="btn btn-primary btn-block btn-large"name="" value="Ingresar"/>
 	      	</form>
 	      	<div th:if="${error != null}" class="alert alert-danger">
-		    	Invalid username or password.
+		    	La contraseña ingresada es incorrecta
 		    </div>
 	      </div>
 	    </div>
