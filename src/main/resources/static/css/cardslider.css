@@ -37,7 +37,7 @@
 }
 
 .pricing-card:hover .pricing-card-header{
-  box-shadow: 0 0 0 10em #864483;
+  box-shadow: 0 0 0 7em #864483;
   padding: 30px 30px;
 }
 
