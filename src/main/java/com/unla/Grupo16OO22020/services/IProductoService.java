@@ -14,5 +14,7 @@ public interface IProductoService {
 	
 	public boolean remove(int id);
 	
+	public ProductoModel findByCodigoAndLocal(String codigo, int localId);
+	
 }
 

@@ -1,6 +1,7 @@
 package com.unla.Grupo16OO22020.services.implementation;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,16 @@ import org.springframework.stereotype.Service;
 
 import com.unla.Grupo16OO22020.converters.PedidoConverter;
 import com.unla.Grupo16OO22020.converters.PersonaConverter;
+import com.unla.Grupo16OO22020.entities.Local;
 import com.unla.Grupo16OO22020.entities.Lote;
 import com.unla.Grupo16OO22020.entities.Pedido;
+import com.unla.Grupo16OO22020.entities.Producto;
+import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.models.PedidoModel;
 import com.unla.Grupo16OO22020.models.ProductoModel;
 import com.unla.Grupo16OO22020.repositories.ILoteRepository;
 import com.unla.Grupo16OO22020.repositories.IPedidoRepository;
+import com.unla.Grupo16OO22020.repositories.IProductoRepository;
 import com.unla.Grupo16OO22020.services.IPedidoService;
 
 
@@ -42,6 +47,9 @@ public class PedidoService implements IPedidoService {
 	@Autowired
 	@Qualifier("loteService")
 	private LoteService loteService;
+	@Autowired
+	@Qualifier("localService")
+	private LocalService localService;
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
@@ -84,6 +92,8 @@ public class PedidoService implements IPedidoService {
 		}		
 		return false;
 	}
+	
+
 
 	@Override
 	public void actualizarStock(PedidoModel pedidoModel) {
@@ -115,6 +125,21 @@ public class PedidoService implements IPedidoService {
 	PedidoModel pedido = pedidoConverter.entityToModel(pedidoRepository.findById(pedidoId));
 	pedido.setTotal(pedido.getCantidadSolicitada() * pedido.getProductoModel().getPrecioUnitario());
 	return pedido;
+	}
+
+	@Override
+	public List<LocalModel> obtenerLocalesCercanosConStockDisponible(String codigo, int cantidadSolicitada) {
+		List<LocalModel> locales = new ArrayList<LocalModel>();
+		
+		for(LocalModel local : localService.getLocalesCercanos(new LocalModel())) {	
+			
+			ProductoModel p = productoService.findByCodigoAndLocal(codigo, local.getId());
+			if(consultarStock(p.getId(), cantidadSolicitada)) {
+				locales.add(local);
+			}
+		}
+		
+		return locales;
 	}
 
 }

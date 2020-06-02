@@ -279,11 +279,11 @@ function MensInfo(title, mensaje){
     });
 }
 
-function MensError(title, mensaje){
+function MensError(title, mensaje, callback){
 	 BootstrapDialog.show({
        message: mensaje,
        title: title,
-       type: BootstrapDialog.TYPE_DANGER
+       type: BootstrapDialog.TYPE_DANGER      
    });
 	 
 }

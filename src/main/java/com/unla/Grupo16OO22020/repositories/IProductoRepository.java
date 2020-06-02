@@ -14,4 +14,6 @@ public interface IProductoRepository extends JpaRepository<Producto, Serializabl
 	
 	public abstract Producto findById(int id);	
 	
+	@Query("Select Producto from Producto p Join Fetch Local l where p.codigo = (:codigo) and l.id = (:local)")
+	public abstract Producto findByCodigoAndLocal(String codigo, int local);
 }

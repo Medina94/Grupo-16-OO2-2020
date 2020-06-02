@@ -1,7 +1,9 @@
 package com.unla.Grupo16OO22020.services;
 import java.util.List;
 
+import com.unla.Grupo16OO22020.entities.Local;
 import com.unla.Grupo16OO22020.entities.Pedido;
+import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.models.PedidoModel;
 
 
@@ -22,6 +24,8 @@ public interface IPedidoService {
 	public void rechazarPedido(int pedidoId);
 	
 	public PedidoModel calcularTotal(int pedidoId);
+	
+	public List<LocalModel> obtenerLocalesCercanosConStockDisponible(String codigo, int cantidadSolicitada);
 	
 }
 
