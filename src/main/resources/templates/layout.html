@@ -279,13 +279,20 @@ function MensInfo(title, mensaje){
     });
 }
 
-function MensError(title, mensaje){
-	 BootstrapDialog.show({
-       message: mensaje,
-       title: title,
-       type: BootstrapDialog.TYPE_DANGER
-   });
-	 
+
+function MensError(title, mensaje, callback){
+    if(callback == null){
+    	callback = function(){
+    		return true;
+    	};
+    }
+      BootstrapDialog.show({
+      message: mensaje,
+      title: title,
+      type: BootstrapDialog.TYPE_DANGER,
+      onhide: callback
+  });
+
 }
 
 $(document).ready(function () {	
