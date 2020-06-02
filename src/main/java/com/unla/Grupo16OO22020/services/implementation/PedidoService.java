@@ -77,7 +77,8 @@ public class PedidoService implements IPedidoService {
 
 	@Override
 	public boolean consultarStock(int idProducto, int cantidadSolicitada) {
-		List<Lote> lotes = loteService.findByProducto(idProducto);
+		ProductoModel producto = productoService.findById(idProducto);
+		List<Lote> lotes = loteService.findByProducto(producto.getCodigo(), producto.getLocalModel().getId());
 		int stock = lotes.stream().filter(x->x.getCantidad()>0).mapToInt(x->x.getCantidad()).sum();
 		if(stock >= cantidadSolicitada) {
 			return true;
@@ -87,7 +88,8 @@ public class PedidoService implements IPedidoService {
 
 	@Override
 	public void actualizarStock(PedidoModel pedidoModel) {
-		List<Lote> lotes = loteService.findByProducto(pedidoModel.getProductoModel().getId());
+		ProductoModel producto = productoService.findById(pedidoModel.getId());
+		List<Lote> lotes = loteService.findByProducto(producto.getCodigo(), producto.getLocalModel().getId());
 		int cantidadActualizada = pedidoModel.getCantidadSolicitada();
 		for(Lote l: lotes) {
 			 cantidadActualizada =  cantidadActualizada - l.getCantidad();

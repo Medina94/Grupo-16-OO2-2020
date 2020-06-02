@@ -1,7 +1,6 @@
 package com.unla.Grupo16OO22020.services.implementation;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import com.unla.Grupo16OO22020.entities.User;
 import com.unla.Grupo16OO22020.entities.UserRole;
 import com.unla.Grupo16OO22020.models.ClienteModel;
 import com.unla.Grupo16OO22020.models.EmpleadoModel;
+import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.repositories.IClienteRepository;
 import com.unla.Grupo16OO22020.repositories.IEmpleadoRepository;
 import com.unla.Grupo16OO22020.repositories.IRoleRepository;
@@ -42,7 +42,10 @@ public class PersonaService implements IPersonaService {
 	private PersonaConverter personaConverter;
 	@Autowired
 	@Qualifier("userRepository")
-    private IUserRepository userRepository;   
+    private IUserRepository userRepository;
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 
 	@Override
 	public List<Cliente> getAllCliente() {
@@ -129,6 +132,20 @@ public class PersonaService implements IPersonaService {
 			mensaje = "Error, el empleado ya está registrado"; 
 		}
 		return mensaje;
+	}
+
+	@Override
+	public List<EmpleadoModel> obtenerEmpleados(int id) {
+		Empleado empleadoLogueado = userService.traerEmpleadoLogueado();
+		//LocalModel local = localService.findById(id);
+		List<EmpleadoModel> listaEmpleados = new ArrayList<>();
+		
+		for(Empleado empleado : getAllEmpleado()) {
+			if(empleado.getId() != empleadoLogueado.getId() && empleado.getLocal().getId() == id) {
+				listaEmpleados.add(personaConverter.EmpleadoEntitytoModel(empleado));
+			}
+		}
+		return listaEmpleados;
 	}
 
 }

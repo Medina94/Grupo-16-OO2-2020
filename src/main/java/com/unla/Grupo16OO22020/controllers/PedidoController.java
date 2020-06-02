@@ -1,26 +1,29 @@
 package com.unla.Grupo16OO22020.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.unla.Grupo16OO22020.entities.Empleado;
+import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.models.PedidoModel;
 import com.unla.Grupo16OO22020.repositories.IUserRepository;
+import com.unla.Grupo16OO22020.services.ILocalService;
 import com.unla.Grupo16OO22020.services.IPedidoService;
 import com.unla.Grupo16OO22020.services.IPersonaService;
 import com.unla.Grupo16OO22020.services.IProductoService;
-import com.unla.Grupo16OO22020.services.implementation.UserService;
+import com.unla.Grupo16OO22020.services.implementation.PersonaService;
 
 @Controller
 @RequestMapping("/pedido")
@@ -40,7 +43,9 @@ public class PedidoController {
 	@Autowired
 	@Qualifier("userRepository")
 	private IUserRepository userRepository;
-	
+	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
 	
 	@GetMapping("")
 	public ModelAndView index() {
@@ -105,5 +110,21 @@ public class PedidoController {
 		PedidoModel pedido = pedidoService.calcularTotal(pedidoId);
 		mAV.addObject("pedido", pedido);
 		return mAV;
+	}
+	
+	@GetMapping("/solicitarStock")
+	public ModelAndView solicitarStockALocal(int idProducto, int cantidadSolicitada) {
+		List<LocalModel> localesConStock = new ArrayList<>();
+		ModelAndView mAV = new ModelAndView("pedido/solicitarStock");
+		//mAV.addObject("localesConStock", localService.localesConStock(idProducto, cantidadSolicitada));
+		//mAV.addObject("empleados", empleadoService.obtenerEmpleados());
+		return mAV;
+	}
+	
+	@PostMapping("/solicitar")
+	public RedirectView solicitar(@ModelAttribute ("pedido") PedidoModel pedido) {
+		
+		
+		return new RedirectView("/pedido");
 	}
 }
