@@ -31,17 +31,21 @@ public class Producto {
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Local local;
 	
+	@Column(name="codigo")
+	private String codigo;
+	
 	public Producto() {
 		super();
 	}
 
-	public Producto(int id, String descripcion, int precioUnitario, LocalDate fechaAlta, Local local) {
+	public Producto(int id, String descripcion, int precioUnitario, LocalDate fechaAlta, Local local, String codigo) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
 		this.precioUnitario = precioUnitario;
 		this.fechaAlta = fechaAlta;
 		this.local = local;
+		this.codigo = codigo;
 	}
 
 
@@ -85,5 +89,14 @@ public class Producto {
 	public void setFechaAlta(LocalDate fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	
 	
 }

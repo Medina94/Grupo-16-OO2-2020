@@ -17,18 +17,21 @@ public class ProductoModel {
 	
 	private LocalModel localModel;
 	
+	private String codigo;
+	
 	public ProductoModel() {
 		super();
 	}	
 	
 	public ProductoModel(int id, String descripcion, int precioUnitario, LocalModel localModel, 
-			LocalDate fechaAlta) {
+			LocalDate fechaAlta, String codigo) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
 		this.precioUnitario = precioUnitario;
 		this.localModel = localModel;
 		this.fechaAlta = fechaAlta;
+		this.codigo = codigo;
 	}
 	
 	public LocalModel getLocalModel() {
@@ -69,4 +72,12 @@ public class ProductoModel {
 	public void setFechaAlta(LocalDate fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}	
 }
