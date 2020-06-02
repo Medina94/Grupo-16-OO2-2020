@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.unla.Grupo16OO22020.entities.Empleado;
 import com.unla.Grupo16OO22020.entities.UserRole;
 import com.unla.Grupo16OO22020.repositories.IUserRepository;
 
@@ -23,7 +25,7 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	@Qualifier("userRepository")
-	private IUserRepository userRepository;
+	private IUserRepository userRepository;	
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -46,4 +48,17 @@ public class UserService implements UserDetailsService {
 		}
 		return new ArrayList<GrantedAuthority>(grantedAuthorities);
 	}
+	
+	public String mostrarUsuario() {
+		 org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		 org.springframework.security.core.userdetails.User a = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
+	     return a.getUsername();
+	}
+	
+	public Empleado traerEmpleadoLogueado() {
+		 org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		 org.springframework.security.core.userdetails.User a = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
+	     return userRepository.findByUsername(a.getUsername()).getEmpleado();
+	}	
+	
 }

@@ -59,17 +59,7 @@
 							 th:text="${cliente.nombre}"></option>
 						</select>
 						</div>
-					</div>
-					<div class="form-row">
-						<div class="form-group col">
-						<p>Seleccione Empleado</p>
-						<select  class="form-group selectpicker" placeholder="Seleccionar Empleado" th:field="*{solicitadorModel.id}">
-							<option th:each="empleado : ${empleados}" th:value="${empleado.id}"
-							 th:text="${empleado.nombre}"></option>
-						</select>
-						</div>
-					</div>
-						
+					</div>						
 					</div>
 					<input type="submit" value="Crear"  hidden class="boton crear btn btn-success"/>
 					<input type="button" value="Consultar Stock" id="consultar" class="boton btn btn-success"/>
@@ -115,22 +105,7 @@ $(document).ready(function () {
 	});	
 });
 
-function MensInfo(title, mensaje){
-	 BootstrapDialog.show({
-         message: mensaje,
-         title: title,
-         type: BootstrapDialog.TYPE_SUCCESS 
-     });
-}
 
-function MensError(title, mensaje){
-	 BootstrapDialog.show({
-        message: mensaje,
-        title: title,
-        type: BootstrapDialog.TYPE_DANGER
-    });
-	 
-}
 
 </script>
 

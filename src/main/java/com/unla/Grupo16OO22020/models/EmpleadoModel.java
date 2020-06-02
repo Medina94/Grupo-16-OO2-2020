@@ -12,13 +12,14 @@ public class EmpleadoModel extends PersonaModel{
 	public EmpleadoModel() {}
 	
 	
-	public EmpleadoModel(int id, String nombre, String mail, String apellido, LocalDate fecha, int sueldo, boolean esGerente, LocalModel localModel) {
+	public EmpleadoModel(int id, int dni,String nombre, String mail, String apellido, LocalDate fecha, int sueldo, boolean esGerente, LocalModel localModel) {
 		super();
 		setId(id);
 		setNombre(nombre);
 		setMail(mail);
 		setApellido(apellido);
 		setFechaNacimiento(fecha);
+		setDni(dni);
 		this.sueldo = sueldo;
 		this.esGerente = esGerente;
 		this.localModel = localModel;

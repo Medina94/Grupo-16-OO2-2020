@@ -1,6 +1,5 @@
 <script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
 <link href="/vendor/bootstrap/css/bootstrap-select.min.css" rel="stylesheet">
- 
  <style>
  .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
     width: 100%;
@@ -20,7 +19,7 @@
 				</button>
 			</div>
 			<div class="modal-body" id="dialogo-editar-body">
-				<form action="#" th:action="@{/persona/empleado/crear}" th:object="${empleado}"
+				<form action="#" th:action="@{/persona/empleado/crear}" id="crearEmpleado" th:object="${empleado}"
 					method="post">
 					<div id="form-crear-modificar">
 						<div class="form-row">
@@ -37,6 +36,15 @@
 									Apellido: <input class="form-control"
 										 type="text"
 										th:field="*{apellido}" required />
+								</p>
+							</div>
+						</div>						
+						<div class="form-row">
+							<div class="form-group col">
+								<p>
+									Dni: <input class="form-control"
+										 type="number"
+										th:field="*{dni}" required />
 								</p>
 							</div>
 						</div>
@@ -83,7 +91,7 @@
 						</div>
 					</div>
 					</div>
-					<input type="submit" value="Crear" class="boton btn btn-success"/>
+					<input id="crear" value="Crear" class="boton btn btn-success"/>
 					<input
 					type="button" id="dialogo-editar-cancelar" class="btn botonCancelar"
 					value="Cancelar"/>
@@ -96,6 +104,25 @@ $(document).ready(function () {
 	$('.selectpicker').selectpicker();
 	$("#dialogo-editar-cancelar").click(function() {
 		$("#modalEmpleado").modal("hide");		
+	});
+	
+	$("#crear").click(function() {
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+		 	url: "/persona/validarEmpleado",
+		 	data:{dni: parseInt($("#dni").val())}
+		})
+		.done(function(result) {
+			if(result == "El empleado se guardo con exito"){
+				MensInfo("Informacion", result)
+				$("#crearEmpleado").submit();
+			}else{
+				MensError("Error", result)
+			}
+		})
+		.fail(function() {
+			alert("error");
+		});
 	});
 });
 </script>

@@ -12,15 +12,23 @@ public class PersonaModel {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaNacimiento;
 	private String mail;
-	
+	private int dni;
 	public PersonaModel(){}
 	
-	public PersonaModel(int id, String nombre, String apellido, LocalDate fechaNacimiento, String mail) {
+	public PersonaModel(int id, int dni,String nombre, String apellido, LocalDate fechaNacimiento, String mail) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.fechaNacimiento = fechaNacimiento;
 		this.mail = mail;
+	}
+
+	public int getDni() {
+		return dni;
+	}
+
+	public void setDni(int dni) {
+		this.dni = dni;
 	}
 
 	public int getId() {

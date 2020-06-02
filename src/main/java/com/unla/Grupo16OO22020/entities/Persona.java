@@ -19,10 +19,19 @@ public class Persona {
 	private String apellido;
 	private LocalDate fechaNacimiento;
 	private String mail;
+	private int dni;
 	
+	public int getDni() {
+		return dni;
+	}
+
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+
 	public Persona() {}
 
-	public Persona(int id, String nombre, String apellido, LocalDate fechaNacimiento, String mail) {
+	public Persona(int id, int dni, String nombre, String apellido, LocalDate fechaNacimiento, String mail) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;

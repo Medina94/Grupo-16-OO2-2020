@@ -11,4 +11,6 @@ public interface IPedidoRepository extends JpaRepository<Pedido, Serializable> {
 	
 	public abstract Pedido findById(int id);	
 	
+	
+	
 }

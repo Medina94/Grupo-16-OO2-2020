@@ -41,7 +41,7 @@
 						<div class="form-row">
 							<div class="form-group col">
 								<p>
-									Fecha: <input class="form-control" type="date"
+									Fecha: <input class="form-control" id="fecha" type="date"
 										th:field="*{fechaAlta}" />
 								</p>
 							</div>
@@ -75,6 +75,8 @@ $(document).ready(function () {
 	$("#cancelar").click(function() {
 		$("#modalProducto").modal("hide");		
 	});
+	var d = new Date();
+	document.getElementById("fecha").min = d.toString();
 });
 </script>
 

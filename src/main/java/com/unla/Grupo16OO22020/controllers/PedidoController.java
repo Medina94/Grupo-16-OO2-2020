@@ -3,6 +3,7 @@ package com.unla.Grupo16OO22020.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.unla.Grupo16OO22020.entities.Pedido;
+import com.unla.Grupo16OO22020.entities.Empleado;
 import com.unla.Grupo16OO22020.models.PedidoModel;
+import com.unla.Grupo16OO22020.repositories.IUserRepository;
 import com.unla.Grupo16OO22020.services.IPedidoService;
 import com.unla.Grupo16OO22020.services.IPersonaService;
 import com.unla.Grupo16OO22020.services.IProductoService;
+import com.unla.Grupo16OO22020.services.implementation.UserService;
 
 @Controller
 @RequestMapping("/pedido")
@@ -34,6 +37,10 @@ public class PedidoController {
 	@Autowired
 	@Qualifier("personaService")
 	private IPersonaService empleadoService;
+	@Autowired
+	@Qualifier("userRepository")
+	private IUserRepository userRepository;
+	
 	
 	@GetMapping("")
 	public ModelAndView index() {
@@ -47,13 +54,12 @@ public class PedidoController {
 		ModelAndView mAV = new ModelAndView("pedido/crear");
 		mAV.addObject("productos", productoService.getAll());
 		mAV.addObject("clientes", clienteService.getAllCliente());	
-		mAV.addObject("empleados", empleadoService.getAllEmpleado());	
 		mAV.addObject("pedido", new PedidoModel());
 		return mAV;
 	}
 	
 	@PostMapping("/crear")
-	public RedirectView create(@ModelAttribute("pedido") PedidoModel pedidoModel) {
+	public RedirectView create(@ModelAttribute("pedido") PedidoModel pedidoModel) {		
 		pedidoService.insertOrUpdate(pedidoModel);
 		pedidoService.actualizarStock(pedidoModel);
 		return new RedirectView("/pedido");
@@ -85,8 +91,8 @@ public class PedidoController {
 	@GetMapping("/consultarStock")
 	@ResponseBody
 	 public String getConsultarStock(int idProducto, int cantidadSolicitada)
-	 {		 
-	      boolean res = pedidoService.consultarStock(idProducto, cantidadSolicitada);
+	 {	
+		boolean res = pedidoService.consultarStock(idProducto, cantidadSolicitada);
 	      if(res) {
 	    	return "ok";  
 	      }

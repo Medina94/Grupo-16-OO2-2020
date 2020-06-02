@@ -20,4 +20,8 @@ public interface IPersonaService{
 	
 	public boolean clienteRemove(int id);
 	public boolean EmpleadoRemove(int id);
+	
+	public void crearUsuario (EmpleadoModel modelo);
+	
+	public String validarEmpleado(int dni);
 }

@@ -12,5 +12,5 @@ import com.unla.Grupo16OO22020.entities.Empleado;
 public interface IEmpleadoRepository extends JpaRepository<Empleado, Serializable>{
 	public abstract Empleado findById(int id);
 
-	//public abstract Empleado findByName(String name);
+	public abstract Empleado findByDni(int dni);
 }

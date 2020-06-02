@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -43,24 +45,37 @@ public class User {
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="user")
 	private Set<UserRole> userRoles = new HashSet<UserRole>();
+	
+	@OneToOne(cascade = CascadeType.MERGE)
+	private Empleado empleado;
 
 	public User() {}
 	
-	public User(String username, String password, boolean enabled) {
+	public User(String username, String password, boolean enabled, Empleado empleado) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
+		this.empleado = empleado;
 	}
 	
-	public User(String username, String password, boolean enabled, Set<UserRole> userRoles) {
+	public User(String username, String password, boolean enabled, Set<UserRole> userRoles, Empleado empleado) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 		this.userRoles = userRoles;
+		this.empleado = empleado;
 	}
 
 	public int getId() {
 		return id;
+	}
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
 	}
 
 	public void setId(int id) {
