@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.unla.Grupo16OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo16OO22020.models.ClienteModel;
 import com.unla.Grupo16OO22020.models.EmpleadoModel;
+import com.unla.Grupo16OO22020.models.ProductoModel;
 import com.unla.Grupo16OO22020.services.ILocalService;
 import com.unla.Grupo16OO22020.services.IPersonaService;
 
@@ -69,7 +70,9 @@ public class PersonaController {
 	
 	@PostMapping("/empleado/eliminar/{id}")
 	public RedirectView deleteEmpleado(@PathVariable("id") int id) {
-		personaService.EmpleadoRemove(id);
+		EmpleadoModel e = personaService.empleadoFindById(id);
+        e.setEliminado(true);
+        personaService.empleadoInsertOrUpdate(e);
 		return new RedirectView(ViewRouteHelper.EMPLEADO_ROOT);
 	}
 	

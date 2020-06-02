@@ -43,6 +43,40 @@ cursor: pointer;
     color: white;
 }
 
+<<<<<<< Updated upstream
+=======
+.btn-outline-info {
+  color: #864483;
+  border-color: #864483;
+}
+
+.btn-outline-info:hover {
+  color: #fff;
+  background-color: #864483;
+  border-color: #864483;
+}
+
+.btn-outline-info:focus, .btn-outline-info.focus {
+  box-shadow: 0 0 0 0.2rem rgba(54, 185, 204, 0.5);
+}
+
+.btn-outline-info.disabled, .btn-outline-info:disabled {
+  color: #864483;
+  background-color: transparent;
+}
+
+.btn-outline-info:not(:disabled):not(.disabled):active, .btn-outline-info:not(:disabled):not(.disabled).active,
+.show > .btn-outline-info.dropdown-toggle {
+  color: #fff;
+  background-color: #864483;
+  border-color: #6b0e67;
+}
+
+.btn-outline-info:not(:disabled):not(.disabled):active:focus, .btn-outline-info:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-info.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(54, 185, 204, 0.5);
+}
+>>>>>>> Stashed changes
 </style>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -250,7 +284,9 @@ cursor: pointer;
                     </li>
 
             </ul>
-
+            <form action="#" th:action="@{/logout}" method="post">
+<button type="submit" class="btn btn-outline-info"><i class="fas fa-sign-out-alt"></i></button>
+</form>
             </nav>
             <!-- End of Topbar -->
 
