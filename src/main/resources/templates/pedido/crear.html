@@ -63,6 +63,7 @@
 					</div>
 					<input type="submit" value="Crear"  hidden class="boton crear btn btn-success"/>
 					<input type="button" value="Consultar Stock" id="consultar" class="boton btn btn-success"/>
+	
 					<input
 					type="button" id="dialogo-editar" class="btn botonCancelar"
 					value="Cancelar"/>
@@ -70,6 +71,41 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="modal" id="consultaStock" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Solicitud Stock</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="consultaSolicitar">¿Desea consultar stock en los locales cercanos?</p>
+        <p hidden id="verLocales">Seleccione la cantidad de locales que desea ver:</p>   
+      </div>
+      <div>
+      	<select  class="selectpicker" name="Locales" id="cantidadLocales" hidden >
+			<option value="0">Ver todos</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+		</select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="aceptarSolicitud" class="btn btn-primary">Aceptar</button>
+        <button type="button" id="enviarSolicitud" class="btn btn-primary" hidden>Solicitar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalSolicitar">
+
 </div>
 <script>
 $(document).ready(function () {
@@ -96,13 +132,68 @@ $(document).ready(function () {
 				$(".crear").show();
 				$("#consultar").hide();
 			}else{
-				MensError("Error", "Sin stock disponible")
+				MensError("Error", "Sin stock disponible", function(){
+					return $("#consultaStock").modal('show');
+				});
+				//$(".solicitar").removeAttr('hidden');
+				//$(".solicitar").show();
+// 				$("#consultar").hide();
+// 				$("#modalLote").hide();
+// 				$.ajax({
+// 					method: "GET",
+// 					url: "/pedido/solicitarStock",
+// 					data:{idProducto:parseInt($("#producto").val()), cantidadSolicitada:parseInt($(".cantidad").val())}
+// 				})
+// 				.done(function(result){
+// 					$("#modalSolicitar").html(result);
+// 					$("#modalLote").modal("hide")
+// 					$("#solicitarStock").modal("show");
+// 				})
+// 				.fail(function() {
+// 					alert("error");
+// 				});
 			}
 		})
 		.fail(function() {
 			alert("error");
 		});
 	});	
+	
+	$("#aceptarSolicitud").click(function(){
+// 		$.ajax({
+// 			method: "GET",
+// 			url: "/pedido/solicitarStock",
+// 			data:{idProducto:parseInt($("#producto").val()), cantidadSolicitada:parseInt($(".cantidad").val())}
+// 		})
+// 		.done(function(result){
+// 			$("#modalSolicitar").html(result);
+// 			$("#modalLote").modal("hide")
+// 			$("#solicitarStock").modal("show");
+// 		})
+// 		.fail(function() {
+// 			alert("error");
+// 		});
+		$("#consultaSolicitar").hide();
+		$("#verLocales").removeAttr('hidden');
+		$("#cantidadLocales").removeAttr('hidden');
+		$("#aceptarSolicitud").hide();
+		$("#enviarSolicitud").removeAttr('hidden');
+		});
+});
+$("#enviarSolicitud").click(function(){
+		$.ajax({
+			method: "GET",
+			url: "/pedido/solicitarStock",
+			data:{idProducto:parseInt($("#producto").val()), cantidadSolicitada:parseInt($(".cantidad").val()), cantidadLocales:parseInt($("#verLocales").val())}
+		})
+		.done(function(result){
+			$("#modalSolicitar").html(result);
+			$("#modalLote").modal("hide")
+			$("#solicitarStock").modal("show");
+		})
+		.fail(function() {
+			alert("error");
+		});
 });
 
 
