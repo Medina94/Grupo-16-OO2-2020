@@ -65,7 +65,9 @@ public class ProductoController {
 	
 	@PostMapping("/eliminar/{id}")
 	public RedirectView delete(@PathVariable("id") int id) {		
-		productoService.remove(id);		
+		ProductoModel p = productoService.findById(id);
+        p.setEliminado(true);
+        productoService.insertOrUpdate(p);
 		return new RedirectView(ViewRouteHelper.PRODUCTO_ROOT);
 	}
 }

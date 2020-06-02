@@ -8,11 +8,12 @@ public class EmpleadoModel extends PersonaModel{
 	private int sueldo;
 	private boolean esGerente;
 	private LocalModel localModel;
+	private boolean eliminado;
 	
 	public EmpleadoModel() {}
 	
 	
-	public EmpleadoModel(int id, int dni,String nombre, String mail, String apellido, LocalDate fecha, int sueldo, boolean esGerente, LocalModel localModel) {
+	public EmpleadoModel(int id, int dni,String nombre, String mail, String apellido, LocalDate fecha, int sueldo, boolean esGerente, LocalModel localModel, boolean eliminado) {
 		super();
 		setId(id);
 		setNombre(nombre);
@@ -23,6 +24,7 @@ public class EmpleadoModel extends PersonaModel{
 		this.sueldo = sueldo;
 		this.esGerente = esGerente;
 		this.localModel = localModel;
+		this.eliminado = eliminado;
 	}
 
 	public int getSueldo() {
@@ -46,5 +48,17 @@ public class EmpleadoModel extends PersonaModel{
 	public void setLocalModel(LocalModel localModel) {
 		this.localModel = localModel;
 	}
+
+
+	public boolean isEliminado() {
+		return eliminado;
+	}
+
+
+	public void setEliminado(boolean eliminado) {
+		this.eliminado = eliminado;
+	}
+	
+	
 
 }

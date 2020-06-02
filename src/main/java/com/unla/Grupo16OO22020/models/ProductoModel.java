@@ -17,6 +17,8 @@ public class ProductoModel {
 	
 	private LocalModel localModel;
 	
+	private boolean eliminado;
+	
 	private String codigo;
 	
 	public ProductoModel() {
@@ -24,13 +26,14 @@ public class ProductoModel {
 	}	
 	
 	public ProductoModel(int id, String descripcion, int precioUnitario, LocalModel localModel, 
-			LocalDate fechaAlta, String codigo) {
+			LocalDate fechaAlta,boolean eliminado, String codigo) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
 		this.precioUnitario = precioUnitario;
 		this.localModel = localModel;
 		this.fechaAlta = fechaAlta;
+		this.eliminado = eliminado;
 		this.codigo = codigo;
 	}
 	
@@ -73,6 +76,14 @@ public class ProductoModel {
 		this.fechaAlta = fechaAlta;
 	}
 
+	public boolean isEliminado() {
+		return eliminado;
+	}
+
+	public void setEliminado(boolean eliminado) {
+		this.eliminado = eliminado;
+	}
+	
 	public String getCodigo() {
 		return codigo;
 	}
@@ -80,4 +91,5 @@ public class ProductoModel {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}	
+	
 }
