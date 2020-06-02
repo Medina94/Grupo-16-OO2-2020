@@ -9,10 +9,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.unla.Grupo16OO22020.converters.LocalConverter;
+import com.unla.Grupo16OO22020.entities.Empleado;
 import com.unla.Grupo16OO22020.entities.Local;
 import com.unla.Grupo16OO22020.models.LocalModel;
+import com.unla.Grupo16OO22020.models.ProductoModel;
 import com.unla.Grupo16OO22020.repositories.ILocalRepository;
 import com.unla.Grupo16OO22020.services.ILocalService;
+import com.unla.Grupo16OO22020.services.ILoteService;
+import com.unla.Grupo16OO22020.services.IPedidoService;
+import com.unla.Grupo16OO22020.services.IProductoService;
 
 
 
@@ -27,6 +32,22 @@ public class LocalService implements ILocalService{
 	@Autowired
 	@Qualifier("localConverter")
 	private LocalConverter localConverter;
+	
+	@Autowired
+	@Qualifier("productoService")
+	private IProductoService productoService;
+	
+	@Autowired
+	@Qualifier("userService")
+	private  UserService userService; 
+	
+	@Autowired
+	@Qualifier("loteService")
+	private ILoteService loteService;
+	
+	@Autowired
+	@Qualifier("pedidoService")
+	private IPedidoService pedidoService;
 	
 	@Override
 	public List<Local> getAll() {
@@ -57,14 +78,7 @@ public class LocalService implements ILocalService{
 	@Override
 	public List<LocalModel> getLocalesCercanos(LocalModel localModel) {
 		List<LocalModel> lista = new ArrayList<LocalModel>();
-		for(Local local : getAll()) {
-			LocalModel modelo = localConverter.entityToModel(local);
-			if(modelo.getId() != localModel.getId()) {
-				modelo.setDistanciaDelOrigen(distanciaCoord(localModel.getLatitud(), localModel.getLongitud(), modelo.getLatitud(), modelo.getLongitud()));	
-				lista.add(modelo);
-			}
-		}
-		Collections.sort(lista);
+		lista = localesCercanos(localModel, getAll());
 		return lista.subList(0, 2);
 	}
 	
@@ -79,4 +93,45 @@ public class LocalService implements ILocalService{
 		double va2 = 2 * Math.atan2(Math.sqrt(va1), Math.sqrt(1 - va1));
 		return radioTierra * va2;
 		}
+
+	private List<LocalModel> localesCercanos(LocalModel localModel, List<Local> locales){
+		List<LocalModel> lista = new ArrayList<>();
+		for(Local local : locales) {
+			LocalModel modelo = localConverter.entityToModel(local);
+			if(modelo.getId() != localModel.getId()) {
+				modelo.setDistanciaDelOrigen(distanciaCoord(localModel.getLatitud(), localModel.getLongitud(), modelo.getLatitud(), modelo.getLongitud()));	
+				lista.add(modelo);
+			}
+		}
+		Collections.sort(lista);
+		return lista;
+	}
+	@Override
+	public List<Local> localesConProducto(int idProducto) {
+		Empleado empleado = userService.traerEmpleadoLogueado();
+		ProductoModel producto = productoService.findById(idProducto);
+		List<Local> locales = new ArrayList<>();
+		
+		for(Local local : localRepository.getByStock(producto.getCodigo())) {
+			if(local.getId() != empleado.getLocal().getId()) {
+				locales.add(local);
+			}
+		}
+		return locales;
+	}
+	
+	@Override
+	public List<LocalModel> getLocalesConStock(ProductoModel producto, int cantidadSolicitada, int cantidadLocales){
+		List<LocalModel> locales = localesCercanos(localConverter.entityToModel(userService.traerEmpleadoLogueado().getLocal()), localesConProducto(producto.getId()));//(localConverter.entityToModel(userService.traerEmpleadoLogueado().getLocal()));
+		List<LocalModel> localConStock = new ArrayList<>();
+		
+		for(LocalModel local : locales) {
+			ProductoModel prod = productoService.findByCodigoAndLocal(producto.getCodigo(), local.getId());
+			if(pedidoService.consultarStock(prod.getId(), cantidadSolicitada)) {
+				localConStock.add(local);
+			}
+		}
+		return localConStock;
+	}
+	
 }

@@ -12,7 +12,7 @@ import com.unla.Grupo16OO22020.entities.Lote;
 public interface ILoteRepository extends JpaRepository<Lote, Serializable> {
 	
 	public abstract Lote findById(int id);
-	@Query("SELECT l FROM Lote l JOIN FETCH l.producto p join fetch p.local lo WHERE p.id = (:producto) and lo.id = (:localId)")
-	public abstract List<Lote> findByProducto(int producto, int localId);
+	@Query("SELECT l FROM Lote l JOIN FETCH l.producto p join fetch p.local lo WHERE p.codigo = (:codigo) and lo.id = (:idLocal)")
+	public abstract List<Lote> findByProducto(String codigo, int idLocal);
 	
 }

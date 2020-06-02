@@ -123,4 +123,5 @@ public class PersonaController {
 		personaService.clienteRemove(id);
 		return new RedirectView(ViewRouteHelper.CLIENTE_ROOT);
 	}
+	
 }
