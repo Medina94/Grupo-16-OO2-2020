@@ -21,12 +21,14 @@ public class ProductoModel {
 	
 	private String codigo;
 	
+	private String imagenUrl;
+	
 	public ProductoModel() {
 		super();
 	}	
 	
 	public ProductoModel(int id, String descripcion, int precioUnitario, LocalModel localModel, 
-			LocalDate fechaAlta,boolean eliminado, String codigo) {
+			LocalDate fechaAlta,boolean eliminado, String codigo, String imagenUrl) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
@@ -35,6 +37,7 @@ public class ProductoModel {
 		this.fechaAlta = fechaAlta;
 		this.eliminado = eliminado;
 		this.codigo = codigo;
+		this.imagenUrl = imagenUrl;
 	}
 	
 	public LocalModel getLocalModel() {
@@ -90,6 +93,14 @@ public class ProductoModel {
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+
+	public String getImagenUrl() {
+		return imagenUrl;
+	}
+
+	public void setImagenUrl(String imagenUrl) {
+		this.imagenUrl = imagenUrl;
 	}	
 	
 }

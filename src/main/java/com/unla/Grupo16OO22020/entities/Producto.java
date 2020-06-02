@@ -37,11 +37,14 @@ public class Producto {
 	@Column(name="codigo")
 	private String codigo;
 	
+	@Column(name="imagenUrl")
+	private String imagenUrl;
+	
 	public Producto() {
 		super();
 	}
 
-	public Producto(int id, String descripcion, int precioUnitario, LocalDate fechaAlta, Local local, boolean eliminado, String codigo) {
+	public Producto(int id, String descripcion, int precioUnitario, LocalDate fechaAlta, Local local, boolean eliminado, String codigo,String imagenUrl) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
@@ -50,6 +53,7 @@ public class Producto {
 		this.local = local;
 		this.eliminado= eliminado; //duda si va aca o hay que poner el atributo false
 		this.codigo = codigo;
+		this.imagenUrl = imagenUrl;
 	}
 
 
@@ -108,5 +112,13 @@ public class Producto {
 
 	public void setEliminado(boolean eliminado) {
 		this.eliminado = eliminado;
+	}
+
+	public String getImagenUrl() {
+		return imagenUrl;
+	}
+
+	public void setImagenUrl(String imagenUrl) {
+		this.imagenUrl = imagenUrl;
 	}
 }
