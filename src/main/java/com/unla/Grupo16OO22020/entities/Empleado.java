@@ -11,7 +11,8 @@ import javax.persistence.OneToOne;
 public class Empleado extends Persona{
 	private int sueldo;
 	private boolean esGerente;
-	
+	private boolean eliminado;
+
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Local local;
 
@@ -19,7 +20,7 @@ public class Empleado extends Persona{
 		super();
 	}
 
-	public Empleado(int id, int dni,String nombre, String mail, String apellido, LocalDate fecha, int sueldo, boolean esGerente, Local local) {
+	public Empleado(int id, int dni,String nombre, String mail, String apellido, LocalDate fecha, int sueldo, boolean esGerente, Local local, boolean eliminado) {
 		super();
 		setId(id);
 		setNombre(nombre);
@@ -30,6 +31,7 @@ public class Empleado extends Persona{
 		this.sueldo = sueldo;
 		this.esGerente = esGerente;
 		this.local = local;
+		this.eliminado = eliminado;
 	}
 
 	public Local getLocal() {
@@ -55,4 +57,14 @@ public class Empleado extends Persona{
 	public void setEsGerente(boolean esGerente) {
 		this.esGerente = esGerente;
 	}
+
+	public boolean isEliminado() {
+		return eliminado;
+	}
+
+	public void setEliminado(boolean eliminado) {
+		this.eliminado = eliminado;
+	}
+	
+	
 }

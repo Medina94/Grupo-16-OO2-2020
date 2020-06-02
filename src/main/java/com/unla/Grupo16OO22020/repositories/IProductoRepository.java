@@ -13,7 +13,8 @@ import com.unla.Grupo16OO22020.entities.Producto;
 public interface IProductoRepository extends JpaRepository<Producto, Serializable> {
 	
 	public abstract Producto findById(int id);	
-	
+	@Query("SELECT p FROM Producto p WHERE p.eliminado=false")
+	public abstract List<Producto> getAll();
 	@Query("Select Producto from Producto p Join Fetch Local l where p.codigo = (:codigo) and l.id = (:local)")
 	public abstract Producto findByCodigoAndLocal(String codigo, int local);
 }

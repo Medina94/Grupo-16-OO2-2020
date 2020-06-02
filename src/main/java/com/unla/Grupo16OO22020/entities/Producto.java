@@ -31,17 +31,20 @@ public class Producto {
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Local local;
 	
+	private boolean eliminado;
+	
 	public Producto() {
 		super();
 	}
 
-	public Producto(int id, String descripcion, int precioUnitario, LocalDate fechaAlta, Local local) {
+	public Producto(int id, String descripcion, int precioUnitario, LocalDate fechaAlta, Local local, boolean eliminado) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
 		this.precioUnitario = precioUnitario;
 		this.fechaAlta = fechaAlta;
 		this.local = local;
+		this.eliminado= eliminado; //duda si va aca o hay que poner el atributo false
 	}
 
 
@@ -85,5 +88,15 @@ public class Producto {
 	public void setFechaAlta(LocalDate fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
+
+	public boolean isEliminado() {
+		return eliminado;
+	}
+
+	public void setEliminado(boolean eliminado) {
+		this.eliminado = eliminado;
+	}
+
+
 	
 }

@@ -1,13 +1,12 @@
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">      
 
-
 <body>
 
 <div layout:fragment="content">
 
 <div class="row">
-     <h3 class="col-md-2">Empleados</h3>
+     <h3 class="col-md-4">Empleados</h3>
     <div class="col-md-2 abrirModal">
     <i class="fa fa-plus-circle" style="font-size: 24px; color: black;margin-left: 9px; padding-top: 8px;" aria-hidden="true"></i>
     </div>
@@ -17,6 +16,7 @@
 <table id="tabla" class="table table-striped table-bordered table-hover" style="width:100%">
     <thead>
         <tr>
+            
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Mail</th>
@@ -24,15 +24,15 @@
             <th>Sueldo</th>
             <th>Local</th>
             <th></th>
-            <th></th>
 		</tr>
     </thead>
     <tbody>        
         <tr th:each="empleado : ${empleados}">  
+          	
             <td><span th:text="${empleado.nombre}" /></td>
             <td><span th:text="${empleado.apellido}" /></td>
             <td><span th:text="${empleado.mail}" /></td>
-            <td><span th:text="${empleado.esGerente}" /></td>
+            <td><span id="gerente" th:text="${empleado.esGerente}? 'SI' : 'NO'"/></td>
             <td><span th:text="${empleado.sueldo}" /></td>
             <td><span th:text="${empleado.local.direccion}" /></td>
            <td style="text-align:center"><div class="actualizar" th:data-value="${empleado.id}">
