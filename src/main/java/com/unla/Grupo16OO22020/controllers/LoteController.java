@@ -17,6 +17,7 @@ import com.unla.Grupo16OO22020.models.LoteModel;
 import com.unla.Grupo16OO22020.services.ILocalService;
 import com.unla.Grupo16OO22020.services.ILoteService;
 import com.unla.Grupo16OO22020.services.IProductoService;
+import com.unla.Grupo16OO22020.services.implementation.UserService;
 
 @Controller
 @RequestMapping("/lote")
@@ -27,20 +28,22 @@ public class LoteController {
 	@Autowired
 	@Qualifier("productoService")
 	private IProductoService productoService;
-	
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;	
 	
 	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_INDEX);
-		mAV.addObject("lotes", loteService.getAll());		
+		mAV.addObject("lotes", loteService.traerTodoLoteDelLocal(userService.traerEmpleadoLogueado().getLocal().getId()));		
 		return mAV;
 	}
 	
 	@GetMapping("/crear")
 	public ModelAndView create() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_CREAR);
-		mAV.addObject("productos", productoService.getAll());
+		mAV.addObject("productos", productoService.traerTodoProductoDeLocal(userService.traerEmpleadoLogueado().getLocal().getId()));
 		mAV.addObject("lote", new LoteModel());
 		return mAV;
 	}
@@ -55,7 +58,7 @@ public class LoteController {
 	public ModelAndView get(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_ACTUALIZAR);
 		mAV.addObject("lote", loteService.findById(id));
-		mAV.addObject("productos", productoService.getAll());
+		mAV.addObject("productos", productoService.traerTodoProductoDeLocal(userService.traerEmpleadoLogueado().getLocal().getId()));
 		return mAV;
 	}
 	

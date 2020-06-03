@@ -41,13 +41,13 @@ public class PedidoController {
 	private IPersonaService clienteService;
 	@Autowired
 	@Qualifier("personaService")
-	private IPersonaService empleadoService;
-	@Autowired
-	@Qualifier("userRepository")
-	private IUserRepository userRepository;
+	private IPersonaService empleadoService;	
 	@Autowired
 	@Qualifier("localService")
 	private ILocalService localService;
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 	
 	@GetMapping("")
 	public ModelAndView index() {
@@ -59,7 +59,7 @@ public class PedidoController {
 	@GetMapping("/crear")
 	public ModelAndView create() {
 		ModelAndView mAV = new ModelAndView("pedido/crear");
-		mAV.addObject("productos", productoService.getAll());
+		mAV.addObject("productos", productoService.traerTodoProductoDeLocal(userService.traerEmpleadoLogueado().getLocal().getId()));
 		mAV.addObject("clientes", clienteService.getAllCliente());	
 		mAV.addObject("pedido", new PedidoModel());
 		return mAV;
@@ -76,7 +76,7 @@ public class PedidoController {
 	public ModelAndView get(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView("/pedido/actualizar");
 		mAV.addObject("pedido", pedidoService.findById(id));
-		mAV.addObject("productos", productoService.getAll());
+		mAV.addObject("productos", productoService.traerTodoProductoDeLocal(userService.traerEmpleadoLogueado().getLocal().getId()));
 		mAV.addObject("clientes", clienteService.getAllCliente());	
 		mAV.addObject("empleados", empleadoService.getAllEmpleado());
 		return mAV;
@@ -125,8 +125,7 @@ public class PedidoController {
 	}
 	
 	@PostMapping("/solicitar")
-	public RedirectView solicitar(@ModelAttribute ("pedido") PedidoModel pedido) {
-		
+	public RedirectView solicitar(@ModelAttribute ("pedido") PedidoModel pedido) {	
 		
 		return new RedirectView("/pedido");
 	}

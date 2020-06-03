@@ -4,33 +4,54 @@ public class RankingModel {
 
 	private int id;
 	
-	private int total;
+	private long total;
 	
 	private String codigo;	
 	
 	private String descripcion;	
 	
+	private String url;	
+	
+	private int precioUnitario;
 	
 	public RankingModel() {
 		super();
 	}	
-	
 
-	public int getTotal() {
-		return total;
-	}
-
-
-	public void setTotal(int total) {
-		this.total = total;
-	}
-
-
-	public RankingModel(int total, String codigo, String descripcion) {
+	public RankingModel(long total, String codigo, String descripcion, String url, int precioUnitario) {
 		super();
 		this.total = total;
 		this.codigo = codigo;
 		this.descripcion = descripcion;
+		this.url = url;
+		this.precioUnitario = precioUnitario;
+	}
+
+	public int getPrecioUnitario() {
+		return precioUnitario;
+	}
+
+	public void setPrecioUnitario(int precioUnitario) {
+		this.precioUnitario = precioUnitario;
+	}
+
+	public long getTotal() {
+		return total;
+	}
+
+
+	public void setTotal(long total) {
+		this.total = total;
+	}
+
+
+	public String getUrl() {
+		return url;
+	}
+
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 

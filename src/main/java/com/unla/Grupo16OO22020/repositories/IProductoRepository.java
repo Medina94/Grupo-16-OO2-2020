@@ -18,4 +18,8 @@ public interface IProductoRepository extends JpaRepository<Producto, Serializabl
 	
 	@Query("SELECT p FROM Producto p WHERE p.eliminado=false")
 	public abstract List<Producto> getAll();
+	
+
+	@Query("SELECT p FROM Producto p JOIN FETCH p.local l where l.id = (:localId) and p.eliminado=false Group by p.codigo")
+	public abstract List<Producto> traerTodoProductoDeLocal(int localId);
 }
