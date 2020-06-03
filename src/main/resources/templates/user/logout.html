@@ -5,28 +5,24 @@
 		<title>UNLa</title>
 		<!-- Bootstrap core CSS -->
 		
-		<link href="/css/logout.css" rel="stylesheet" />
-		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="/css/prueba.css" rel="stylesheet" />
+		
 		
 	</head>
 	<body>
 	    <!-- Page Content -->
-	    <div class="container">
-	      <div class="jumbotron1">
+	    <div class="login">
+	      <div class="jumbotron">
 	      
-	      	<div class="alert alert-success alert-dismissible" role="alert">
-  <strong>Se cerro la sesion correctamente!</strong>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+
 		<form class="box" action="index.html" th:action="@{/loginprocess}" method="post">
-                <h1>inicio</h1>
+                <h1>Login</h1>
 		      	<input type="text" name="username" id="username" placeholder="Usuario" />
 		      	<input type="password" name="password" id="password" placeholder="Contraseña" />
-		      	<input type="submit" name="" value="Ingresar"/>
+		      	<input type="submit" class="btn btn-primary btn-block btn-large"name="" value="Ingresar"/>
 	      	
 	      	</form>
+	      	<div class="exito"><strong>Se cerro la sesion correctamente</strong></div>
 	      </div>
 	    </div>
 		<!-- Bootstrap core JavaScript -->
@@ -38,9 +34,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
     setTimeout(function() {
-        $(".alert").fadeOut(1000);
+        $(".exito").fadeOut(1000);
     },1000);
 });
 </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
