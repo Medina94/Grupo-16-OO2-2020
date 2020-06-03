@@ -125,4 +125,5 @@ public class PersonaController {
         personaService.clienteInsertOrUpdate(c);
 		return new RedirectView(ViewRouteHelper.CLIENTE_ROOT);
 	}
+	
 }

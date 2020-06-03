@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
@@ -7,9 +8,13 @@
     <title>:: UNLA ::</title>   
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link href="/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
 <link href="/vendor/bootstrap/css/bootstrap-dialog.min.css" rel="stylesheet">
 <link href="/css/DataTables/media/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">   
+<link href="/vendor/bootstrap/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<link href="/vendor/bootstrap/css/bootstrap-select.min.css" rel="stylesheet">
 
 
      
@@ -43,8 +48,6 @@ cursor: pointer;
     color: white;
 }
 
-<<<<<<< Updated upstream
-=======
 .btn-outline-info {
   color: #864483;
   border-color: #864483;
@@ -76,7 +79,7 @@ cursor: pointer;
 .show > .btn-outline-info.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(54, 185, 204, 0.5);
 }
->>>>>>> Stashed changes
+
 </style>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -284,7 +287,8 @@ cursor: pointer;
                     </li>
 
             </ul>
-            <form action="#" th:action="@{/logout}" method="post">
+
+			<form action="#" th:action="@{/logout}" method="post">
 <button type="submit" class="btn btn-outline-info"><i class="fas fa-sign-out-alt"></i></button>
 </form>
             </nav>
@@ -299,13 +303,17 @@ cursor: pointer;
     </div>
 
 <script src="/vendor/jquery/jquery.min.js"></script>
-<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+<script src="/vendor/bootstrap/js/bootstrap-datepicker.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>  
 <script src="/vendor/bootstrap/js/bootstrap-dialog.min.js"></script> 
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="/js/DataTables/media/js/jquery.dataTables.min.js"></script> 
 <script src="/js/DataTables/media/js/dataTables.bootstrap4.min.js"></script> 
+
 <script src="/js/Tabla.js"></script> 
+
 <script src="/js/sb-admin-2.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
 <script>
 function MensInfo(title, mensaje){
 	 BootstrapDialog.show({
@@ -315,13 +323,20 @@ function MensInfo(title, mensaje){
     });
 }
 
-function MensError(title, mensaje){
-	 BootstrapDialog.show({
-       message: mensaje,
-       title: title,
-       type: BootstrapDialog.TYPE_DANGER
-   });
-	 
+
+function MensError(title, mensaje, callback){
+    if(callback == null){
+    	callback = function(){
+    		return true;
+    	};
+    }
+      BootstrapDialog.show({
+      message: mensaje,
+      title: title,
+      type: BootstrapDialog.TYPE_DANGER,
+      onhide: callback
+  });
+
 }
 
 $(document).ready(function () {	

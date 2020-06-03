@@ -14,6 +14,10 @@ public interface ILoteService {
 	public LoteModel insertOrUpdate(LoteModel loteModel);
 	
 	public boolean remove(int id);
-	public List<Lote> findByProducto(int producto);
+	
+	public List<Lote> traerTodoLoteDelLocalPorProducto(String codigo, int idLocal);
+	
+	public List<Lote> traerTodoLoteDelLocal(int idLocal);
+	
 }
 

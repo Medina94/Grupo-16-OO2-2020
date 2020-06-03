@@ -10,6 +10,7 @@ import com.unla.Grupo16OO22020.converters.ProductoConverter;
 import com.unla.Grupo16OO22020.entities.Producto;
 import com.unla.Grupo16OO22020.models.ProductoModel;
 import com.unla.Grupo16OO22020.repositories.IProductoRepository;
+import com.unla.Grupo16OO22020.repositories.IUserRepository;
 import com.unla.Grupo16OO22020.services.IProductoService;
 
 
@@ -28,6 +29,9 @@ public class ProductoService implements IProductoService {
 	public List<Producto> getAll() {
 		return productoRepository.getAll();
 	}
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 
 	@Override
 	public ProductoModel insertOrUpdate(ProductoModel ProductoModel) {
@@ -48,5 +52,16 @@ public class ProductoService implements IProductoService {
 	@Override
 	public ProductoModel findById(int id) {
 		return productoConverter.entityToModel(productoRepository.findById(id));
+	}
+
+	@Override
+	public ProductoModel findByCodigoAndLocal(String codigo, int localId) {
+		return productoConverter.entityToModel(productoRepository.findByCodigoAndLocal(codigo, localId));
+	}
+
+	@Override
+	public List<Producto> traerTodoProductoDeLocal(int localId) {
+		return productoRepository.traerTodoProductoDeLocal(localId);
+		
 	}
 }

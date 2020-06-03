@@ -15,11 +15,11 @@ public class ProductoConverter {
 	private LocalConverter localConverter;
 	
 	public ProductoModel entityToModel(Producto producto) {
-		return new ProductoModel(producto.getId(), producto.getDescripcion(), producto.getPrecioUnitario(), localConverter.entityToModel(producto.getLocal()), producto.getFechaAlta(), producto.isEliminado());
+		return new ProductoModel(producto.getId(), producto.getDescripcion(), producto.getPrecioUnitario(), localConverter.entityToModel(producto.getLocal()), producto.getFechaAlta(), producto.isEliminado(), producto.getCodigo(),producto.getImagenUrl());
 	}
 
 	public Producto modelToEntity(ProductoModel productoModel) {
-		return new Producto(productoModel.getId(), productoModel.getDescripcion(), productoModel.getPrecioUnitario(), productoModel.getFechaAlta() ,localConverter.modelToEntity(productoModel.getLocalModel()), productoModel.isEliminado());
+		return new Producto(productoModel.getId(), productoModel.getDescripcion(), productoModel.getPrecioUnitario(), productoModel.getFechaAlta() ,localConverter.modelToEntity(productoModel.getLocalModel()), productoModel.isEliminado(), productoModel.getCodigo(),productoModel.getImagenUrl());
 	}
 }
 
