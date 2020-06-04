@@ -59,8 +59,8 @@ public class LoteService implements ILoteService {
 	}
 
 	@Override
-	public List<Lote> findByProducto(int producto) {
-		return	loteRepository.findByProducto(producto);
+	public List<Lote> findByProducto(String codigo, int idLocal) {
+		return	loteRepository.findByProducto(codigo, idLocal);
 		
 	}
 

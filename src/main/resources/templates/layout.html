@@ -43,8 +43,6 @@ cursor: pointer;
     color: white;
 }
 
-<<<<<<< Updated upstream
-=======
 .btn-outline-info {
   color: #864483;
   border-color: #864483;
@@ -76,7 +74,7 @@ cursor: pointer;
 .show > .btn-outline-info.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(54, 185, 204, 0.5);
 }
->>>>>>> Stashed changes
+
 </style>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -284,7 +282,8 @@ cursor: pointer;
                     </li>
 
             </ul>
-            <form action="#" th:action="@{/logout}" method="post">
+
+			<form action="#" th:action="@{/logout}" method="post">
 <button type="submit" class="btn btn-outline-info"><i class="fas fa-sign-out-alt"></i></button>
 </form>
             </nav>
@@ -315,13 +314,20 @@ function MensInfo(title, mensaje){
     });
 }
 
-function MensError(title, mensaje){
-	 BootstrapDialog.show({
-       message: mensaje,
-       title: title,
-       type: BootstrapDialog.TYPE_DANGER
-   });
-	 
+
+function MensError(title, mensaje, callback){
+    if(callback == null){
+    	callback = function(){
+    		return true;
+    	};
+    }
+      BootstrapDialog.show({
+      message: mensaje,
+      title: title,
+      type: BootstrapDialog.TYPE_DANGER,
+      onhide: callback
+  });
+
 }
 
 $(document).ready(function () {	
