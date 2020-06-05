@@ -36,9 +36,9 @@
             					<td><span th:text="${solicitud.pedido.producto.descripcion}" /></td>
             					<td>
             						<span th:switch="${solicitud.estado}">
-            							<p th:case="1" style="color: green"><strong>Aceptada</strong></p>
-            							<p th:case="2" style="color: #e0dd2f"><strong>Pendiente</strong></p>
-            							<p th:case="3" style="color: red"><strong>Rechazada</strong></p>
+            							<p th:case="1" style="color: green"><strong>Confirmado</strong></p>
+            							<p th:case="2" style="color: #d67d09"><strong>Pendiente</strong></p>
+            							<p th:case="3" style="color: red"><strong>Rechazado</strong></p>
             						</span>
             					</td>
             					<td></td>
@@ -83,9 +83,9 @@
             					<td><span th:text="${recibida.pedido.producto.descripcion}" /></td>
             					<td>
             						<span th:switch="${solicitud.estado}">
-            							<p th:case="1" style="color: green"><strong>Aceptada</strong></p>
-            							<p th:case="2" style="color: #e0dd2f"><strong>Pendiente</strong></p>
-            							<p th:case="3" style="color: red"><strong>Rechazada</strong></p>
+            							<p th:case="1" style="color: green"><strong>Confirmado</strong></p>
+            							<p th:case="2" style="color: #d67d09"><strong>Pendiente</strong></p>
+            							<p th:case="3" style="color: red"><strong>Rechazado</strong></p>
             						</span>
             					</td>
             					<td></td> 
