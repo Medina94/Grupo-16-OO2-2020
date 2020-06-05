@@ -32,9 +32,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/persona/empleado/**","/local/crear","/local/actualizar").hasRole("ADMIN")//LE DA SOLO AL ADMIN PERMISO PARA GENERAR EMPLEADOS
-				.antMatchers("/local/mostrar","/local/actualizar").hasAnyRole("ADMIN","EMPLEADO")//LE DA SOLO AL ADMIN PERMISO PARA GENERAR EMPLEADOS
-				.antMatchers("/persona/cliente/crear/**","/persona/cliente/actualizar/**","/producto/**","/lote/**").hasAnyRole("ADMIN","GERENTE")//SOLO GERENTE PUEDE CREAR CLIENTES , DAR DE ALTA PRODUCTO Y VER LOS LOTES
+				//.antMatchers("/persona/empleado/**","/local/crear","/local/actualizar").hasRole("ADMIN")//LE DA SOLO AL ADMIN PERMISO PARA GENERAR EMPLEADOS
+				//.antMatchers("/local/mostrar","/local/actualizar").hasAnyRole("ADMIN","EMPLEADO")//LE DA SOLO AL ADMIN PERMISO PARA GENERAR EMPLEADOS
+				//.antMatchers("/persona/cliente/crear/**","/persona/cliente/actualizar/**","/producto/**","/lote/**").hasAnyRole("ADMIN","GERENTE")//SOLO GERENTE PUEDE CREAR CLIENTES , DAR DE ALTA PRODUCTO Y VER LOS LOTES
 				.antMatchers("/css/*", "/imgs/*", "/js/*", "/vendor/bootstrap/css/*", "/vendor/jquery/*", "/vendor/bootstrap/js/*")
 				.permitAll().anyRequest().authenticated()
 			.and()
