@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html>
+<body>
+<link rel="stylesheet" href="/css/ProductoCard.css">
+<div id="filtroProductos">
+<div th:each="productos : ${productos}" >
+            <div class="pricing-table" style="float: left ">
+                <div class="pricing-card">
+                    <h3 class="pricing-card-header"><span th:text="${productos.descripcion}"></span></h3>
+                    <div class="price"><sup>$</sup><span th:text="${productos.precioUnitario}" ></span><span>/CU</span></div>
+                    <ul>
+                        <img th:src="@{/css/productos/{image}(image=${productos.url})}" style="max-height: 100px;">
+                    </ul>
+                    
+                </div>
+            </div>
+          </div>
+       </div>
+</body>
+</html>

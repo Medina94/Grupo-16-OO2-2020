@@ -1,5 +1,7 @@
 package com.unla.Grupo16OO22020.models;
 
+
+
 public class LocalModel implements Comparable<LocalModel>{
 
 private int id;
@@ -10,6 +12,7 @@ private int id;
 	private double longitud;
 	private double distanciaDelOrigen;
 	
+	
 	public LocalModel() {}
 
 	public LocalModel(int id, int telefono, String direccion, double latitud, double longitud) {
@@ -19,6 +22,7 @@ private int id;
 		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
+		
 	}
 
 
