@@ -34,7 +34,13 @@
        						 <tr th:each="solicitud : ${solicitudesRealizadas}">        	    					
        	    					<td><span th:text="${solicitud.colaborador}" /></td>                       					
             					<td><span th:text="${solicitud.pedido.producto.descripcion}" /></td>
-            					<td><span th:text="${solicitud.estado}" /></td>
+            					<td>
+            						<span th:switch="${solicitud.estado}">
+            							<p th:case="1">Aceptada</p>
+            							<p th:case="2">Pendiente</p>
+            							<p th:case="3">Rechazada</p>
+            						</span>
+            					</td>
             					<td></td>
             					<td></td>
             					<td></td>      
@@ -75,9 +81,14 @@
        						 <tr th:each="recibida : ${solicitudesRecibidas}">        	    					
        	    					<td><span th:text="${recibida.solicitador}" /></td>                       					
             					<td><span th:text="${recibida.pedido.producto.descripcion}" /></td>
-            					<td><span th:text="${recibida.estado}" /></td>
-            					<td style="text-align:center; cursor:pointer;">	            				     						            				
-            					</td> 
+            					<td>
+            						<span th:switch="${solicitud.estado}">
+            							<p th:case="1">Aceptada</p>
+            							<p th:case="2">Pendiente</p>
+            							<p th:case="3">Rechazada</p>
+            						</span>
+            					</td>
+            					<td></td> 
             					<td></td>
             					<td></td>                     			            				
         					</tr>        
