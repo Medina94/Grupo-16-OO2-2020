@@ -1,0 +1,90 @@
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">      
+
+	<body>
+
+		<div layout:fragment="content">
+			
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+  				
+  				<li class="nav-item">
+    				<a class="nav-link active" id="pedido-tab" data-toggle="tab" href="#solicitados" role="tab" aria-controls="home" aria-selected="true">Solicitudes realizadas</a>
+  				</li>
+  				
+  				<li class="nav-item">
+    				<a class="nav-link" id="recibido-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="profile" aria-selected="false">Solicitudes recibidas</a>
+  				</li>
+  				
+			</ul>
+			
+			<div class="tab-content" id="myTabContent">
+  				<div class="tab-pane fade show active" id="solicitados" role="tabpanel" aria-labelledby="home-tab">
+					<table id="tabla" class="table table-striped table-bordered table-hover" style="width:100%">
+   						 <thead>
+        					<tr>        					
+            				<th>Colaborador</th>
+            				<th>Producto solicitado</th>
+            				<th>Estado</th> 
+            				<th></th>
+            				<th></th>
+             				<th></th>
+    					</thead>
+    					<tbody>        
+       						 <tr th:each="solicitud : ${solicitudesRealizadas}">        	    					
+       	    					<td><span th:text="${solicitud.colaborador}" /></td>                       					
+            					<td><span th:text="${solicitud.pedido.producto.descripcion}" /></td>
+            					<td><span th:text="${solicitud.estado}" /></td>          
+            					<!--<td style="text-align:center; cursor:pointer;">
+            					 <div class="abrirCercanos" th:data-value="${local.id}">            	
+            						<p>Ver cercanos</p>
+            					</div>
+            					 
+            					</td>
+           						<td style="text-align:center">
+           							<div class="actualizar" th:data-value="${local.id}">
+           								<i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
+           							</div>
+           						</td>
+            					<td  style="text-align:center">
+            						<form action="#" th:action="@{/local/eliminar/{id}(id=${local.id})}" method="post">
+	              						<button class="fa fa-trash" type="submit" style="font-size: 24px; color: black;border: 0 !important;" aria-hidden="true"></button>
+            						</form>
+            					</td>-->
+        					</tr>        
+    				</tbody>
+				</table>
+<!--  **************************************************    RECIBIDOS ******************************************************************* -->				
+			</div>
+  				<div class="tab-pane fade" id="recibidos" role="tabpanel" aria-labelledby="profile-tab">
+  					<table id="tabla" class="table table-striped table-bordered table-hover" style="width:100%">
+   						 <thead>
+        					<tr>
+            				<th>Solicitante</th>
+            				<th>Producto solicitado</th>
+            				<th>Estado</th> 
+            				<th></th>
+            				<th></th>
+             				<th></th>
+    					</thead>
+    					<tbody>        
+       						 <tr th:each="recibida : ${solicitudesRecibidas}">        	    					
+       	    					<td><span th:text="${recibida.solicitador}" /></td>                       					
+            					<td><span th:text="${recibida.pedido.producto.descripcion}" /></td>
+            					<td><span th:text="${recibida.estado}" /></td>
+            					<td style="text-align:center; cursor:pointer;">
+	            					<div class="accion" th:data-value="recibida.id">
+	            						<p> Responder solicitud </p>
+	            					</div>	            						            					
+            					</td>                      			            				
+        					</tr>        
+    				</tbody>
+				</table>
+  				</div>
+  				
+			</div>
+			
+		</div>
+	
+	</body>
+
+</html>
