@@ -45,7 +45,7 @@ public class ProductoController {
 	
 	@PostMapping("/crear")
 	public RedirectView create(@ModelAttribute("producto") ProductoModel ProductoModel) {
-		productoService.insertOrUpdate(ProductoModel);
+		productoService.insertOrUpdate(productoService.codigoProducto(ProductoModel));
 		return new RedirectView(ViewRouteHelper.PRODUCTO_ROOT);
 	}
 	

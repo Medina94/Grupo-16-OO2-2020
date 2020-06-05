@@ -13,10 +13,17 @@
   				
   				<li class="nav-item">
     				<a class="nav-link" id="recibido-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="profile" aria-selected="false">Solicitudes recibidas</a>
-  				</li>
-  				
+				  </li>
+				 <div class="col-md-8" id="cambioEstado" style="text-align: end;">
+				  	<select  class="form-group selectpicker"   id="valorEstado">
+								 <option value ="1" >Confirmado</option>
+  								<option value ="2">Pendiente</option>
+  								<option value ="3">Rechazado</option>
+					</select>
+  				</div>
 			</ul>
-			
+		<br />
+			<div id="partialSolicitudes">
 			<div class="tab-content" id="myTabContent">
   				<div class="tab-pane fade show active" id="solicitados" role="tabpanel" aria-labelledby="home-tab">
 					<table id="tabla" class="table table-striped table-bordered table-hover" style="width:100%">
@@ -99,37 +106,51 @@
 			</div>
 			
 		</div>
-	
+	</div>
 	</body>
 
 </html>
 <script>
 $(document).ready(
-	    function () {
-	        $('#recibido').DataTable({
-	            language: {
-	                "decimal": "",
-	                "emptyTable": "Sin informacion",
-	                "info": "Mostrando START a END de TOTAL Entradas",
-	                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-	                "infoFiltered": "(Filtrado de MAX total entradas)",
-	                "infoPostFix": "",
-	                "thousands": ",",
-	                "lengthMenu": "Mostrar MENU Entradas",
-	                "loadingRecords": "Cargando...",
-	                "processing": "Procesando...",
-	                "search": "Buscar:",
-	                "zeroRecords": "Sin resultados encontrados",
-	                "paginate": {
-	                    "first": "Primero",
-	                    "last": "Último",
-	                    "next": "Siguiente",
-	                    "previous": "Anterior"
-	                }
-	            },
+	     function () {
+        $('#recibido').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "Sin informacion",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
 
-	        lengthMenu: [5, 10, 15],
-	        });
-
-	    });
+        lengthMenu: [5, 10, 15],
+        });
+});
+		
+			$("#cambioEstado").click(function() {
+				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+					method: "GET",
+					 url: "/solicitudStock/filtrarSolicitudes",
+					 data: {estado: parseInt($("#valorEstado").val())}
+				}).
+				done(function(result) {
+					$("#partialSolicitudes").html(result);
+				})
+				.fail(function() {
+					alert("error");
+				});			
+			
+		});
 </script>

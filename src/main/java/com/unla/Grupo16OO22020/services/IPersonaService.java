@@ -24,9 +24,11 @@ public interface IPersonaService{
 	public void crearUsuario (EmpleadoModel modelo);
 	
 	public String validarEmpleado(int dni);
+	String validarCliente(int dni);
 	
 	/**
 	 * Trae todos los empleados != al que se encuentra logueado
 	 */
 	public List<EmpleadoModel> obtenerEmpleados(int id);
+	
 }
