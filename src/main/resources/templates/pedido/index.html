@@ -22,6 +22,7 @@
             <th>Fecha</th>
             <th>Nombre Cliente</th>
             <th>Empleado</th>
+            <th>Direccion</th>
             <th></th>
             <th></th>
           </tr>
@@ -29,10 +30,11 @@
     <tbody>        
         <tr th:each="pedido : ${pedidos}">  
            <td><span th:text="${pedido.producto.descripcion}" /></td>
-           <td><span th:text="${pedido.cantidadSolicitada}" /></td>          
-            <td><span th:text="${pedido.fecha}" /></td> 
+           <td><span th:text="${pedido.cantidadSolicitada}" /></td>                   
+            <td><span th:text="${pedido.fecha}" /></td>          
            <td><span th:text="${pedido.cliente.nombre}" /></td>
            <td><span th:text="${pedido.solicitador.nombre}" /></td>
+            <td><span th:text="${pedido.producto.local.direccion}" /></td>
            <td style="text-align:center"><div class="visualizar" th:data-value="${pedido.id}">
            <i class="fa fa-eye" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
            </div>
@@ -62,6 +64,8 @@
 </html>
 <script>	
 $(document).ready(function () {
+	
+	
 		$(".abrirModal").click(function() {
 				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
 					method: "GET",
