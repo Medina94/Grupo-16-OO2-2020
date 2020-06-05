@@ -28,12 +28,16 @@
             				<th></th>
             				<th></th>
              				<th></th>
+             				</tr>
     					</thead>
     					<tbody>        
        						 <tr th:each="solicitud : ${solicitudesRealizadas}">        	    					
        	    					<td><span th:text="${solicitud.colaborador}" /></td>                       					
             					<td><span th:text="${solicitud.pedido.producto.descripcion}" /></td>
-            					<td><span th:text="${solicitud.estado}" /></td>          
+            					<td><span th:text="${solicitud.estado}" /></td>
+            					<td></td>
+            					<td></td>
+            					<td></td>      
             					<!--<td style="text-align:center; cursor:pointer;">
             					 <div class="abrirCercanos" th:data-value="${local.id}">            	
             						<p>Ver cercanos</p>
@@ -56,7 +60,7 @@
 <!--  **************************************************    RECIBIDOS ******************************************************************* -->				
 			</div>
   				<div class="tab-pane fade" id="recibidos" role="tabpanel" aria-labelledby="profile-tab">
-  					<table id="tabla" class="table table-striped table-bordered table-hover" style="width:100%">
+  					<table id="recibido" class="table table-striped table-bordered table-hover" style="width:100%">
    						 <thead>
         					<tr>
             				<th>Solicitante</th>
@@ -65,17 +69,17 @@
             				<th></th>
             				<th></th>
              				<th></th>
+             				</tr>
     					</thead>
     					<tbody>        
        						 <tr th:each="recibida : ${solicitudesRecibidas}">        	    					
        	    					<td><span th:text="${recibida.solicitador}" /></td>                       					
             					<td><span th:text="${recibida.pedido.producto.descripcion}" /></td>
             					<td><span th:text="${recibida.estado}" /></td>
-            					<td style="text-align:center; cursor:pointer;">
-	            					<div class="accion" th:data-value="recibida.id">
-	            						<p> Responder solicitud </p>
-	            					</div>	            						            					
-            					</td>                      			            				
+            					<td style="text-align:center; cursor:pointer;">	            				     						            				
+            					</td> 
+            					<td></td>
+            					<td></td>                     			            				
         					</tr>        
     				</tbody>
 				</table>
@@ -88,3 +92,33 @@
 	</body>
 
 </html>
+<script>
+$(document).ready(
+	    function () {
+	        $('#recibido').DataTable({
+	            language: {
+	                "decimal": "",
+	                "emptyTable": "Sin informacion",
+	                "info": "Mostrando START a END de TOTAL Entradas",
+	                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+	                "infoFiltered": "(Filtrado de MAX total entradas)",
+	                "infoPostFix": "",
+	                "thousands": ",",
+	                "lengthMenu": "Mostrar MENU Entradas",
+	                "loadingRecords": "Cargando...",
+	                "processing": "Procesando...",
+	                "search": "Buscar:",
+	                "zeroRecords": "Sin resultados encontrados",
+	                "paginate": {
+	                    "first": "Primero",
+	                    "last": "Último",
+	                    "next": "Siguiente",
+	                    "previous": "Anterior"
+	                }
+	            },
+
+	        lengthMenu: [5, 10, 15],
+	        });
+
+	    });
+</script>
