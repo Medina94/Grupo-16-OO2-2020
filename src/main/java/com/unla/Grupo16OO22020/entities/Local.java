@@ -2,9 +2,11 @@ package com.unla.Grupo16OO22020.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +29,7 @@ public class Local {
 	@Column(name="longitud")
 	private double longitud;
 	
+	
 //	@OneToMany(fetch=FetchType.LAZY, mappedBy="empleado")
 //	private Set<Empleado> empleados = new HashSet<Empleado>();
 	
@@ -39,6 +42,7 @@ public class Local {
 		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
+		
 	}
 
 	public int getId() {
@@ -80,6 +84,8 @@ public class Local {
 	public void setLongitud(double longitud) {
 		this.longitud = longitud;
 	}
+
+
 	
 	
 }

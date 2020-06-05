@@ -20,15 +20,18 @@
             <th>Apellido</th>
             <th>Mail</th>
             <th>Nacimiento</th>
-            <th></th>
-            <th></tr>
+			<th>Dni</th>
+			<th></th>
+			<th></th>
+        </tr>
     </thead>
     <tbody>        
         <tr th:each="cliente : ${clientes}">            
             <td><span th:text="${cliente.nombre}" /></td>
             <td><span th:text="${cliente.apellido}" /></td>
             <td><span th:text="${cliente.mail}" /></td>
-            <td><span th:text="${cliente.fechaNacimiento}" /></td>
+			<td><span th:text="${cliente.fechaNacimiento}" /></td>
+			 <td><span th:text="${cliente.dni}" /></td>
            <td style="text-align:center"><div class="actualizar" th:data-value="${cliente.id}">
            <i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
            </div>

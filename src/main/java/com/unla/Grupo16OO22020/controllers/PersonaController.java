@@ -126,4 +126,11 @@ public class PersonaController {
 		return new RedirectView(ViewRouteHelper.CLIENTE_ROOT);
 	}
 	
+	@GetMapping("/validarCliente")
+	@ResponseBody
+	 public String validarCliente(int dni)
+	 {		 
+	     return personaService.validarCliente(dni);	     
+	 }	
+	
 }

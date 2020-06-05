@@ -14,7 +14,7 @@ public interface ILocalRepository extends JpaRepository<Local, Serializable>{
 
 	public abstract Local findById(int id);	
 	
-	@Query(value="select l.* from local l inner join producto p on l.id = p.local_id where p.codigo = (:codigo)", nativeQuery = true)
+	@Query(value="select l.* from local l inner join producto p on l.id = p.local_id where p.codigo = (:codigo) group by l.id", nativeQuery = true)
 	public abstract List<Local> getByStock(String codigo);
 	
 }

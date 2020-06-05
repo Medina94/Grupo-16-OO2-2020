@@ -79,7 +79,7 @@ public class LocalService implements ILocalService{
 	public List<LocalModel> getLocalesCercanos(LocalModel localModel) {
 		List<LocalModel> lista = new ArrayList<LocalModel>();
 		lista = localesCercanos(localModel, getAll());
-		return lista.subList(0, 2);
+		return lista;
 	}
 	
 	public static double distanciaCoord(double lat1, double lng1, double lat2, double lng2) {
@@ -131,7 +131,11 @@ public class LocalService implements ILocalService{
 				localConStock.add(local);
 			}
 		}
-		return localConStock;
+		if(cantidadLocales == 0 || cantidadLocales >= localConStock.size()) {
+			return localConStock;
+		}else {
+			return localConStock.subList(0, cantidadLocales);
+		}
 	}
 	
 }
