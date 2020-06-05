@@ -59,7 +59,7 @@ public class LeerTxt {
 		int sueldo = Integer.parseInt((String) map.get("telefono"));
 		int dni = Integer.parseInt((String) map.get("dni"));
 		
-		return new ClienteModel(0,dni,nombre, apellido, fecha, mail, sueldo);
+		return new ClienteModel(0,dni,nombre, apellido, fecha, mail, sueldo, false); // seteo por default eliminado = false
 	}
 	
 	/**
