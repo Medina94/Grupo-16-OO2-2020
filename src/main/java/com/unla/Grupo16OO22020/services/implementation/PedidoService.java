@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.unla.Grupo16OO22020.converters.PedidoConverter;
 import com.unla.Grupo16OO22020.converters.PersonaConverter;
+import com.unla.Grupo16OO22020.entities.Empleado;
 import com.unla.Grupo16OO22020.entities.Local;
 import com.unla.Grupo16OO22020.entities.Lote;
 import com.unla.Grupo16OO22020.entities.Pedido;
@@ -150,7 +151,19 @@ public class PedidoService implements IPedidoService {
 	public ArrayList<RankingModel> obtenerRanking(LocalDate fechaDesde, LocalDate fechaHasta, int localId) {
 		
 		return pedidoRepository.obtenerRanking(fechaDesde, fechaHasta, localId);
-		 
+		
 	}
+	
+/*	@Override
+	public ArrayList<PedidoModel> mostrarPedidoPorLocalUsuario(PedidoModel pedidoModel){
+		Empleado e = userService.traerEmpleadoLogueado();
+		List<PedidoModel> pedidos = pedidoConverter.entityToModel(pedidoRepository.findAll());
+		for(PedidoModel pedido : pedidos) {
+			if(pedidoModel.getSolicitadorModel().getLocalModel() == e.getLocal()) {
+				
+				
+			}
+		}
+	}*/
 
 }

@@ -20,9 +20,18 @@ public class SolicitudStockController {
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView("solicitudStock/index");
-		mAV.addObject("solicitudesRealizadas", solicitudStockService.obtenerSolicitudesRealizadas());
-		mAV.addObject("solicitudesRecibidas", solicitudStockService.obtenerSolicitudesRecibidas());
+		mAV.addObject("solicitudesRealizadas", solicitudStockService.obtenerSolicitudesRealizadas(1));
+		mAV.addObject("solicitudesRecibidas", solicitudStockService.obtenerSolicitudesRecibidas(1));
 		return mAV;
 	}
+	
+	@GetMapping("/filtrarSolicitudes")
+	public ModelAndView filtrarSolicitudes(int estado) {
+		ModelAndView mAV = new ModelAndView("solicitudStock/solicitudPartial");
+		mAV.addObject("solicitudesRealizadas", solicitudStockService.obtenerSolicitudesRealizadas(estado));
+		mAV.addObject("solicitudesRecibidas", solicitudStockService.obtenerSolicitudesRecibidas(estado));
+		return mAV;
+	}
+	
 	
 }
