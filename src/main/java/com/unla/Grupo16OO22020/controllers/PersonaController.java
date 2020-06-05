@@ -120,7 +120,9 @@ public class PersonaController {
 	
 	@PostMapping("/cliente/eliminar/{id}")
 	public RedirectView deleteCliente(@PathVariable("id") int id) {
-		personaService.clienteRemove(id);
+		ClienteModel c = personaService.clienteFindById(id);
+        c.setEliminado(true);
+        personaService.clienteInsertOrUpdate(c);
 		return new RedirectView(ViewRouteHelper.CLIENTE_ROOT);
 	}
 	

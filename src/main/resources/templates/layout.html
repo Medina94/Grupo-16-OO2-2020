@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
@@ -7,9 +8,13 @@
     <title>:: UNLA ::</title>   
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link href="/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
 <link href="/vendor/bootstrap/css/bootstrap-dialog.min.css" rel="stylesheet">
 <link href="/css/DataTables/media/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">   
+<link href="/vendor/bootstrap/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<link href="/vendor/bootstrap/css/bootstrap-select.min.css" rel="stylesheet">
 
 
      
@@ -180,7 +185,20 @@ cursor: pointer;
                         <a class="collapse-item" href="/persona/cliente/all">Configuración</a>
                     </div>
                 </div>
-            </li>   
+            </li>
+<!--             aca termina    -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseComision" aria-expanded="true" aria-controls="collapseProducto">
+                    <i class="fa fa-user"></i>
+                    <span>Comision</span>
+                </a>
+                <div id="collapseComision" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Sectores:</h6>
+                        <a class="collapse-item" href="/comision">Configuración</a>
+                    </div>
+                </div>
+            </li> 
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -298,13 +316,17 @@ cursor: pointer;
     </div>
 
 <script src="/vendor/jquery/jquery.min.js"></script>
-<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+<script src="/vendor/bootstrap/js/bootstrap-datepicker.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>  
 <script src="/vendor/bootstrap/js/bootstrap-dialog.min.js"></script> 
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="/js/DataTables/media/js/jquery.dataTables.min.js"></script> 
 <script src="/js/DataTables/media/js/dataTables.bootstrap4.min.js"></script> 
+
 <script src="/js/Tabla.js"></script> 
+
 <script src="/js/sb-admin-2.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
 <script>
 function MensInfo(title, mensaje){
 	 BootstrapDialog.show({

@@ -7,13 +7,15 @@ import com.unla.Grupo16OO22020.models.ClienteModel;
 @Entity
 public class Cliente extends Persona{
 	private int telefono;
+	private boolean eliminado;
 	
 	public Cliente() {
 		super();
 	}
 
-	public Cliente(int telefono) {
+	public Cliente(int telefono, boolean eliminado) {
 		this.telefono = telefono;
+		this.eliminado = eliminado;
 	}
 
 	public int getTelefono() {
@@ -24,6 +26,14 @@ public class Cliente extends Persona{
 		this.telefono = telefono;
 	}
 	
+	public boolean isEliminado() {
+		return eliminado;
+	}
+
+	public void setEliminado(boolean eliminado) {
+		this.eliminado = eliminado;
+	}
+
 	public Cliente build(ClienteModel modelo) {
 		this.setId(modelo.getId());
 		this.setNombre(modelo.getNombre());
@@ -32,6 +42,7 @@ public class Cliente extends Persona{
 		this.setMail(modelo.getMail());
 		this.setDni(modelo.getDni());
 		this.telefono = modelo.getTelefono();
+		this.eliminado = modelo.isEliminado();
 		return this;
 	}
 }

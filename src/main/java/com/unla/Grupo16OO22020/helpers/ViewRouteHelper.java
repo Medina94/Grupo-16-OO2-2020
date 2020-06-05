@@ -34,6 +34,9 @@ public class ViewRouteHelper {
 	//USER
 	public final static String USER_LOGIN = "user/login";
 	public final static String USER_LOGOUT = "user/logout";
+	
+	// COMISION
+	public final static String COMISION_INDEX = "comision/index";
 //	
 //	/**** Redirects ****/
 	public final static String ROUTE = "/index";
@@ -43,4 +46,5 @@ public class ViewRouteHelper {
 	public final static String LOCAL_ROOT = "/local";
 	public final static String LOTE_ROOT = "/lote";
 	public final static String PRODUCTO_ROOT = "/producto";
+	public final static String COMISION_ROOT ="/comision";
 }

@@ -133,9 +133,4 @@ public class PedidoController {
 		return mAV;
 	}
 	
-//	@PostMapping("/solicitar")
-//	public RedirectView solicitar(int idProducto, int cantidadSolicitada, int idLocal) {
-//		solicitudStockService.crearSolicitud(idProducto, cantidadSolicitada,idLocal);
-//		return new RedirectView("/pedido");
-//	}
 }
