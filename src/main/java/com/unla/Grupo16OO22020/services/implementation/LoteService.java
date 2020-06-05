@@ -30,8 +30,11 @@ public class LoteService implements ILoteService {
 	@Autowired
 	@Qualifier("localService")
 	private LocalService localService;
-	@Override
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 	
+	@Override	
 	public List<Lote> getAll() {
 		return loteRepository.findAll();
 	}
@@ -59,9 +62,14 @@ public class LoteService implements ILoteService {
 	}
 
 	@Override
-	public List<Lote> findByProducto(String codigo, int idLocal) {
-		return	loteRepository.findByProducto(codigo, idLocal);
+	public List<Lote> traerTodoLoteDelLocalPorProducto(String codigo, int idLocal) {
+		return	loteRepository.traerTodoLoteDelLocalPorProducto(codigo, idLocal);
 		
+	}
+
+	@Override
+	public List<Lote> traerTodoLoteDelLocal(int localId) {
+		return loteRepository.traerTodoLoteDelLocal(localId);
 	}
 
 }

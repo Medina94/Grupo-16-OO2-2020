@@ -1,0 +1,98 @@
+<div class="modal fade" id="modalComision" tabindex="-1" role="dialog"
+	aria-labelledby="modal" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="dialogo-editar-title" id="dialogo-editar-title">
+				Crear Comision
+				</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" id="dialogo-editar-body">
+				<form name="myForm" action="#" th:action="@{/comision/crear}" th:object="${comision}"
+					method="post">
+					<div id="form-crear-modificar">
+						<div class="form-row">
+							<div class="form-group col">
+								<p>
+									Venta: <input class="form-control"
+										type="number" th:field="*{plusVenta}"/>
+								</p>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col">
+								<p>
+									Ceder: <input class="form-control"
+										 type="number"
+										th:field="*{plusCeder}"  />
+								</p>
+							</div>
+						</div>						
+						<div class="form-row">
+							<div class="form-group col">
+								<p>
+									Pedido: <input class="form-control"
+										 type="number"
+										th:field="*{plusPedido}"  />
+								</p>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col">
+								<p>
+									Fecha Ingreso: <input class="form-control"
+										type="date" th:field="*{fecha}"/>
+								</p>
+							</div>
+						</div>
+					</div>
+					<input type="submit" value="Crear" class="boton btn btn-success"/>
+					<input
+					type="button" id="dialogo-editar-cancelar" class="btn botonCancelar"
+					value="Cancelar"/>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+		
+
+<script>
+$(document).ready(function () {
+	$("#cancelar").click(function() {
+		$("#modalComision").modal("hide");		
+	});
+});
+</script>
+
+<script>
+// $(document).ready(function () {
+// 	$('.selectpicker').selectpicker();
+// 	$("#dialogo-editar-cancelar").click(function() {
+// 		$("#modalEmpleado").modal("hide");		
+// 	});
+	
+// 	$("#crear").click(function() {
+// 		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+// 			method: "GET",
+// 		 	url: "/persona/validarEmpleado",
+// 		 	data:{dni: parseInt($("#dni").val())}
+// 		})
+// 		.done(function(result) {
+// 			if(result == "El empleado se guardo con exito"){
+// 				MensInfo("Informacion", result)
+// 				$("#crearEmpleado").submit();
+// 			}else{
+// 				MensError("Error", result)
+// 			}
+// 		})
+// 		.fail(function() {
+// 			alert("error");
+// 		});
+// 	});
+// });
+</script>

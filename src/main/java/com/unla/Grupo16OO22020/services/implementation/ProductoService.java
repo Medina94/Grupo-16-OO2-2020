@@ -29,6 +29,9 @@ public class ProductoService implements IProductoService {
 	public List<Producto> getAll() {
 		return productoRepository.getAll();
 	}
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 
 	@Override
 	public ProductoModel insertOrUpdate(ProductoModel ProductoModel) {
@@ -56,6 +59,12 @@ public class ProductoService implements IProductoService {
 		return productoConverter.entityToModel(productoRepository.findByCodigoAndLocal(codigo, localId));
 	}
 	
+	@Override
+	public List<Producto> traerTodoProductoDeLocal(int localId) {
+		return productoRepository.traerTodoProductoDeLocal(localId);
+		
+	}
+	
 	public ProductoModel codigoProducto(ProductoModel producto) {
 		StringTokenizer palabras = new StringTokenizer(producto.getDescripcion());
 		String codigo = null;
@@ -68,5 +77,7 @@ public class ProductoService implements IProductoService {
 	}producto.setCodigo(codigo3);
 		return producto;
 }
+	
+	
 	
 }
