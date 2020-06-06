@@ -2,6 +2,7 @@ package com.unla.Grupo16OO22020.services.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -64,26 +65,30 @@ public class SolicitudStockService implements ISolicitudStockService{
 	}
 
 	@Override
-	public List<SolicitudStockModel> obtenerSolicitudesRecibidas() {
+	public List<SolicitudStockModel> obtenerSolicitudesRecibidas(int estado) {
 		Empleado empleado = userService.traerEmpleadoLogueado();
 		List<SolicitudStockModel> lista = new ArrayList<SolicitudStockModel>();
 		for(SolicitudStock solicitud : solicitudStockRepository.obtenerSolicitudesRecibidas(empleado.getLocal().getId())) {
 			SolicitudStockModel model = solicitudStockConverter.entityToModel(solicitud);
 			lista.add(model);
 		}
-		
+		lista = lista.stream()
+			    .filter(x -> x.getEstado() == estado)
+			    .collect(Collectors.toList());
 		return lista;
 	}
 
 	@Override
-	public List<SolicitudStockModel> obtenerSolicitudesRealizadas() {
+	public List<SolicitudStockModel> obtenerSolicitudesRealizadas(int estado) {
 		Empleado empleado = userService.traerEmpleadoLogueado();
 		List<SolicitudStockModel> lista = new ArrayList<SolicitudStockModel>();
 		for(SolicitudStock solicitud : solicitudStockRepository.obtenerSolicitudesRealizadas(empleado.getLocal().getId())) {
 			SolicitudStockModel model = solicitudStockConverter.entityToModel(solicitud);
 			lista.add(model);
 		}
-		
+		lista = lista.stream()
+			    .filter(x -> x.getEstado() == estado)
+			    .collect(Collectors.toList());		
 		return lista;
 	}
 	
