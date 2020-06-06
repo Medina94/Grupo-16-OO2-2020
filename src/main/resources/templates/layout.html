@@ -341,11 +341,17 @@ cursor: pointer;
 <script src="/js/sb-admin-2.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
 <script>
-function MensInfo(title, mensaje){
-	 BootstrapDialog.show({
+function MensInfo(title, mensaje, callback){
+	if(callback == null){
+    	callback = function(){
+    		return true;
+    	};
+    }
+	BootstrapDialog.show({
         message: mensaje,
         title: title,
-        type: BootstrapDialog.TYPE_SUCCESS 
+        type: BootstrapDialog.TYPE_SUCCESS,
+        onhide: callback 
     });
 }
 

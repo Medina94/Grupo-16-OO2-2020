@@ -11,7 +11,13 @@ public interface ISolicitudStockService {
 	
 	public SolicitudStock crearSolicitud(PedidoModel pedido, int idLocal);
 	
-	public List<SolicitudStockModel> obtenerSolicitudesRecibidas(int estado);
+	public List<SolicitudStock> obtenerSolicitudesRecibidas(int estado);
 	
-	public List<SolicitudStockModel> obtenerSolicitudesRealizadas(int estado);
+	public List<SolicitudStock> obtenerSolicitudesRealizadas(int estado);
+	
+	public SolicitudStockModel traerSolicitudStock(int solicitud);
+	
+	public boolean aceptarSolicitudStock(int soli);
+	
+	public boolean rechazarSolicitudStock(int soli);
 }

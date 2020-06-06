@@ -16,7 +16,7 @@ public class SolicitudStockConverter {
 	public SolicitudStockModel entityToModel(SolicitudStock entity) {
 		return new SolicitudStockModel(entity.getColaborador(), entity.getSolicitador(), entity.getEstado(), entity.getPedido(), localConverter.entityToModel(entity.getLocal()));
 	}
-	public SolicitudStock ModelToEntity(SolicitudStock model) {
-		return new SolicitudStock(model.getSolicitador(), model.getEstado(), model.getPedido(), model.getLocal());
+	public SolicitudStock ModelToEntity(SolicitudStockModel model) {
+		return new SolicitudStock(model.getSolicitador(), model.getEstado(), model.getPedido(), localConverter.modelToEntity(model.getLocal()));
 	}
 }

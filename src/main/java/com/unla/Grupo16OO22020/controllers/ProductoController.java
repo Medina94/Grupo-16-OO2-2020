@@ -15,6 +15,7 @@ import com.unla.Grupo16OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo16OO22020.models.ProductoModel;
 import com.unla.Grupo16OO22020.services.ILocalService;
 import com.unla.Grupo16OO22020.services.IProductoService;
+import com.unla.Grupo16OO22020.services.implementation.UserService;
 
 @Controller
 @RequestMapping("/producto")
@@ -27,11 +28,14 @@ public class ProductoController {
 	@Autowired
 	@Qualifier("localService")
 	private ILocalService localService;
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 	
 	@GetMapping("")
 	public ModelAndView index() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_INDEX);
-		mAV.addObject("productos", productoService.getAll());
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_INDEX);		
+		mAV.addObject("productos", productoService.traerTodoProductoDeLocal(userService.traerEmpleadoLogueado().getLocal().getId()));
 		return mAV;
 	}
 	

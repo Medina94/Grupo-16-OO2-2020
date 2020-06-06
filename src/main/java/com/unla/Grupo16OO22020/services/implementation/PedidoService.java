@@ -155,18 +155,6 @@ public class PedidoService implements IPedidoService {
 		
 	}
 	
-/*	@Override
-	public ArrayList<PedidoModel> mostrarPedidoPorLocalUsuario(PedidoModel pedidoModel){
-		Empleado e = userService.traerEmpleadoLogueado();
-		List<PedidoModel> pedidos = pedidoConverter.entityToModel(pedidoRepository.findAll());
-		for(PedidoModel pedido : pedidos) {
-			if(pedidoModel.getSolicitadorModel().getLocalModel() == e.getLocal()) {
-				
-				
-			}
-		}
-	}*/
-
 	@Override
 	public List<Pedido> obtenerPedidosPropios(int localId, int estado) {
 		List<Pedido> pedidos = pedidoRepository.obtenerPedidosPropios(localId);

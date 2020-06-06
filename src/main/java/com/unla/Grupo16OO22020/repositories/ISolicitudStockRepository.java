@@ -18,4 +18,6 @@ public interface ISolicitudStockRepository extends JpaRepository<SolicitudStock,
 	
 	@Query("Select s from SolicitudStock s join s.local l where (:localId) = 0 OR l.id = (:localId)")
 	public abstract List<SolicitudStock> obtenerSolicitudesRecibidas(int localId);
+	
+	
 }

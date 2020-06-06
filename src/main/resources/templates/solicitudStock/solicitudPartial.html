@@ -10,14 +10,11 @@
             				<th>Colaborador</th>
             				<th>Producto solicitado</th>
             				<th>Estado</th> 
-            				<th></th>
-            				<th></th>
-             				<th></th>
              				</tr>
     					</thead>
     					<tbody>        
        						 <tr th:each="solicitud : ${solicitudesRealizadas}">        	    					
-       	    					<td><span th:text="${solicitud.colaborador}" /></td>                       					
+       	    				       	    					<td><span th:if="${solicitud.colaborador != null}" th:text="${solicitud.colaborador.nombre}" /></td>                       					
             					<td><span th:text="${solicitud.pedido.producto.descripcion}" /></td>
             					<td>
             						<span th:switch="${solicitud.estado}">
@@ -26,25 +23,6 @@
             							<p th:case="3" style="color: red"><strong>Rechazado</strong></p>
             						</span>
             					</td>
-            					<td></td>
-            					<td></td>
-            					<td></td>      
-            					<!--<td style="text-align:center; cursor:pointer;">
-            					 <div class="abrirCercanos" th:data-value="${local.id}">            	
-            						<p>Ver cercanos</p>
-            					</div>
-            					 
-            					</td>
-           						<td style="text-align:center">
-           							<div class="actualizar" th:data-value="${local.id}">
-           								<i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
-           							</div>
-           						</td>
-            					<td  style="text-align:center">
-            						<form action="#" th:action="@{/local/eliminar/{id}(id=${local.id})}" method="post">
-	              						<button class="fa fa-trash" type="submit" style="font-size: 24px; color: black;border: 0 !important;" aria-hidden="true"></button>
-            						</form>
-            					</td>-->
         					</tr>        
     				</tbody>
 				</table>
@@ -57,14 +35,13 @@
             				<th>Solicitante</th>
             				<th>Producto solicitado</th>
             				<th>Estado</th> 
-            				<th></th>
-            				<th></th>
-             				<th></th>
+              				<th></th>  
+              			    <th></th> 
              				</tr>
     					</thead>
     					<tbody>        
        						 <tr th:each="recibida : ${solicitudesRecibidas}">        	    					
-       	    					<td><span th:text="${recibida.solicitador}" /></td>                       					
+       	    					<td><span th:if="${recibida.solicitador != null}" th:text="${recibida.solicitador.nombre}" /></td>                       					
             					<td><span th:text="${recibida.pedido.producto.descripcion}" /></td>
             					<td>
             						<span th:switch="${recibida.estado}">
@@ -72,16 +49,13 @@
             							<p th:case="2" style="color: #d67d09"><strong>Pendiente</strong></p>
             							<p th:case="3" style="color: red"><strong>Rechazado</strong></p>
             						</span>
-            					</td>
-            					<td style="text-align:center; cursor:pointer;">	            				     						            				
-            					</td> 
-            					<td></td>
-            					<td></td>                     			            				
-        					</tr>        
+            					</td>            					
+            					<td><span th:if="${recibida.estado == 2}"><div th:data-value="${recibida.id}" style="text-align: center;font-size: 23px;" id="aceptarSoli"><i class="fa fa-check" aria-hidden="true"></i></div></span></td>  
+								<td><span th:if="${recibida.estado == 2}"><div th:data-value="${recibida.id}" style="text-align: center;font-size: 20px;" id="rechazarSoli"><i class="fa fa-trash" aria-hidden="true"></i></div></span></td>  
+        					</tr>       
     				</tbody>
 				</table>
-  				</div>
-  				
+  				</div>  				
 			</div>			
 		</div>
 </body>
@@ -122,7 +96,41 @@ $(document).ready(
 		$("#recibidos").removeClass("active show");
 
 	}
+	
+	
 });
+$("#aceptarSoli").click(function() {
+	var id = $(this)[0].getAttribute("data-value");
+	$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+		method: "GET",
+		 url: "/solicitudStock/aceptarSolicitud",
+		 data: {solicitud: parseInt(id)}
+	})
+	.done(function(result) {
+		if(result){
+			MensInfo("", "La solicitud se confirmo exitosamente", function(){location.reload();})
+		}
+	})
+	.fail(function() {
+		alert("error");
+	});
+});
+	$("#rechazarSoli").click(function() {
+		var id = $(this)[0].getAttribute("data-value");
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+			 url: "/solicitudStock/rechazarSolicitud",
+			 data: {solicitud: parseInt(id)}
+		})
+		.done(function(result) {
+			if(result){
+				MensError("", "La solicitud se rechazo exitosamente", function(){location.reload();})
+			}
+		})
+		.fail(function() {
+			alert("error");
+		});
 
+	});
 </script>
 </html>

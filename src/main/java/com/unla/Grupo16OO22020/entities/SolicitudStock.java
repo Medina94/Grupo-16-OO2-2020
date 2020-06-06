@@ -73,8 +73,6 @@ public class SolicitudStock {
 	public SolicitudStock() {}
 	
 	public SolicitudStock(Empleado solicitador, int estado, Pedido pedido, Local local) {
-		/*this.id = id;*/
-		//this.colaborador = colaborador;
 		this.solicitador = solicitador;
 		this.estado = estado;
 		this.pedido = pedido;

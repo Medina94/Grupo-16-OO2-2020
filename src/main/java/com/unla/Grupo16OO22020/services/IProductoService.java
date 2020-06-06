@@ -20,5 +20,6 @@ public interface IProductoService {
 
 	public ProductoModel codigoProducto(ProductoModel productoModel);
 	
+	
 }
 

@@ -28,7 +28,13 @@
            <td><span th:text="${pedido.cliente.nombre}" /></td>
            <td><span th:text="${pedido.solicitador.nombre}" /></td>
             <td><span th:text="${pedido.producto.local.direccion}" /></td>
-           <td><span th:text="${pedido.estado}" /></td>
+             <td>
+            	<span th:switch="${pedido.estado}">
+            		<p th:case="1" style="color: green"><strong>Confirmado</strong></p>
+            		<p th:case="2" style="color: #d67d09"><strong>Pendiente</strong></p>
+            		<p th:case="3" style="color: red"><strong>Rechazado</strong></p>
+            	</span>
+            </td>
            <td style="text-align:center"><div class="visualizar" th:data-value="${pedido.id}">
            <i class="fa fa-eye" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
            </div>

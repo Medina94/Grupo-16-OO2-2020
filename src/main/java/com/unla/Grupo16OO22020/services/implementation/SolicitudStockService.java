@@ -14,12 +14,14 @@ import com.unla.Grupo16OO22020.converters.ProductoConverter;
 import com.unla.Grupo16OO22020.converters.SolicitudStockConverter;
 import com.unla.Grupo16OO22020.entities.Empleado;
 import com.unla.Grupo16OO22020.entities.Local;
+import com.unla.Grupo16OO22020.entities.Pedido;
 import com.unla.Grupo16OO22020.entities.SolicitudStock;
 import com.unla.Grupo16OO22020.enums.EstadoEnum;
 import com.unla.Grupo16OO22020.models.PedidoModel;
 import com.unla.Grupo16OO22020.models.SolicitudStockModel;
 import com.unla.Grupo16OO22020.repositories.ISolicitudStockRepository;
 import com.unla.Grupo16OO22020.services.ILocalService;
+import com.unla.Grupo16OO22020.services.IPedidoService;
 import com.unla.Grupo16OO22020.services.IProductoService;
 import com.unla.Grupo16OO22020.services.ISolicitudStockService;
 
@@ -47,6 +49,9 @@ public class SolicitudStockService implements ISolicitudStockService{
 	@Qualifier("pedidoConverter")
 	private PedidoConverter pedidoConverter;
 	@Autowired
+	@Qualifier("pedidoService")
+	private IPedidoService pedidoService;
+	@Autowired
 	@Qualifier("solicitudStockConverter")
 	private SolicitudStockConverter solicitudStockConverter;
 	
@@ -65,13 +70,9 @@ public class SolicitudStockService implements ISolicitudStockService{
 	}
 
 	@Override
-	public List<SolicitudStockModel> obtenerSolicitudesRecibidas(int estado) {
+	public List<SolicitudStock> obtenerSolicitudesRecibidas(int estado) {
 		Empleado empleado = userService.traerEmpleadoLogueado();
-		List<SolicitudStockModel> lista = new ArrayList<SolicitudStockModel>();
-		for(SolicitudStock solicitud : solicitudStockRepository.obtenerSolicitudesRecibidas(empleado.getLocal().getId())) {
-			SolicitudStockModel model = solicitudStockConverter.entityToModel(solicitud);
-			lista.add(model);
-		}
+		List<SolicitudStock> lista = solicitudStockRepository.obtenerSolicitudesRecibidas(empleado.getLocal().getId());		
 		lista = lista.stream()
 			    .filter(x -> x.getEstado() == estado)
 			    .collect(Collectors.toList());
@@ -79,17 +80,43 @@ public class SolicitudStockService implements ISolicitudStockService{
 	}
 
 	@Override
-	public List<SolicitudStockModel> obtenerSolicitudesRealizadas(int estado) {
+	public List<SolicitudStock> obtenerSolicitudesRealizadas(int estado) {
 		Empleado empleado = userService.traerEmpleadoLogueado();
-		List<SolicitudStockModel> lista = new ArrayList<SolicitudStockModel>();
-		for(SolicitudStock solicitud : solicitudStockRepository.obtenerSolicitudesRealizadas(empleado.getLocal().getId())) {
-			SolicitudStockModel model = solicitudStockConverter.entityToModel(solicitud);
-			lista.add(model);
-		}
+		List<SolicitudStock> lista =  solicitudStockRepository.obtenerSolicitudesRealizadas(empleado.getLocal().getId());		
 		lista = lista.stream()
 			    .filter(x -> x.getEstado() == estado)
 			    .collect(Collectors.toList());		
 		return lista;
+	}
+
+	@Override
+	public SolicitudStockModel traerSolicitudStock(int solicitud) {
+		return solicitudStockConverter.entityToModel(solicitudStockRepository.findById(solicitud));		 
+	}
+
+	@Override
+	public boolean aceptarSolicitudStock(int solicitud) {
+		SolicitudStock soli = solicitudStockRepository.findById(solicitud);
+		PedidoModel p = pedidoService.findById(soli.getPedido().getId());		
+		p.setEstado(EstadoEnum.ESTADO_ACEPTADO.getCodigo());
+		soli.setEstado(EstadoEnum.ESTADO_ACEPTADO.getCodigo());
+		soli.setColaborador(userService.traerEmpleadoLogueado());
+		pedidoService.actualizarStock(p);
+		pedidoService.insertOrUpdate(p);
+		solicitudStockRepository.save(soli);
+	    return true;
+	}
+
+	@Override
+	public boolean rechazarSolicitudStock(int solicitud) {
+		SolicitudStock soli = solicitudStockRepository.findById(solicitud);
+		PedidoModel p = pedidoService.findById(soli.getPedido().getId());
+		p.setEstado(EstadoEnum.ESTADO_RECHAZADO.getCodigo());
+		soli.setEstado(EstadoEnum.ESTADO_RECHAZADO.getCodigo());
+		soli.setColaborador(userService.traerEmpleadoLogueado());
+		pedidoService.insertOrUpdate(p);
+		solicitudStockRepository.save(soli);
+	    return true;
 	}
 	
 	
