@@ -84,7 +84,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p id="consultaSolicitar">¿Desea consultar stock en los locales cercanos?</p>
+        <p id="consultaSolicitar">&iquest;Desea consultar stock en los locales cercanos?</p>
         <p id="verLocales" hidden>Seleccione la cantidad de locales que desea ver:</p>   
       </div>
       <div hidden id="contieneLocal" >
@@ -97,8 +97,8 @@
 		</select>
       </div>
       <div class="modal-footer">
-        <button type="button" id="aceptarSolicitud" class="btn btn-primary">Aceptar</button>
-        <button type="button" id="enviarSolicitud" class="btn btn-primary" hidden>Solicitar</button>
+        <button type="button" id="aceptarSolicitud" class="btn boton btn-primary">Aceptar</button>
+        <button type="button" id="enviarSolicitud" class="btn boton btn-primary" hidden>Solicitar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -153,7 +153,7 @@ $(document).ready(function () {
 		});
 });
 $("#enviarSolicitud").click(function(){
-	$("#consultaStock").hide();
+	$("#consultaStock").modal("hide");
 		$.ajax({
 			method: "GET",
 			url: "/pedido/solicitarStock",
@@ -162,8 +162,7 @@ $("#enviarSolicitud").click(function(){
 		.done(function(result){
 			//alert(""+cantidadLocales:parseInt($("#verLocales").val()));
 			$("#modalSolicitar").html(result);
-			$("#modalLote").modal("hide")
-			$("#solicitarStock").modal("show");
+			
 			
 		})
 		.fail(function() {
