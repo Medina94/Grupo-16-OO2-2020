@@ -1,10 +1,8 @@
 package com.unla.Grupo16OO22020.services;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.unla.Grupo16OO22020.entities.Local;
 import com.unla.Grupo16OO22020.entities.Pedido;
 import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.models.PedidoModel;
@@ -32,6 +30,7 @@ public interface IPedidoService {
 	public List<LocalModel> obtenerLocalesCercanosConStockDisponible(String codigo, int cantidadSolicitada);
 	
 	public ArrayList<RankingModel> obtenerRanking(LocalDate fechaDesde, LocalDate fechaHasta, int localId);
-	
+
+	public List<Pedido> obtenerPedidosPropios(int localId, int estado);
 }
 

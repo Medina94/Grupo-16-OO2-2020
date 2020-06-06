@@ -22,6 +22,7 @@ import com.unla.Grupo16OO22020.services.IPedidoService;
 import com.unla.Grupo16OO22020.services.IPersonaService;
 import com.unla.Grupo16OO22020.services.IProductoService;
 import com.unla.Grupo16OO22020.services.ISolicitudStockService;
+import com.unla.Grupo16OO22020.services.implementation.UserService;
 
 @Controller
 @RequestMapping("/pedido")
@@ -50,11 +51,14 @@ public class PedidoController {
 	@Autowired
 	@Qualifier("solicitudStockService")
 	private ISolicitudStockService solicitudStockService;
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView("pedido/index");
-		mAV.addObject("pedidos", pedidoService.getAll());			
+		mAV.addObject("pedidos", pedidoService.obtenerPedidosPropios(userService.traerEmpleadoLogueado().getLocal().getId(), 1));			
 		return mAV;
 	}
 	
@@ -132,5 +136,13 @@ public class PedidoController {
 		mAV.addObject("localesConStock", localService.getLocalesConStock(producto, cantidadSolicitada, cantidadLocales));
 		return mAV;
 	}
+	@GetMapping("/filtrarEstados")
+	public ModelAndView filtrarEstados(int estado) {
+		ModelAndView mAV = new ModelAndView("pedido/pedidosEstado");
+		mAV.addObject("pedidos", pedidoService.obtenerPedidosPropios(userService.traerEmpleadoLogueado().getLocal().getId(), estado));			
+		return mAV;
+	}
+	
+	
 	
 }

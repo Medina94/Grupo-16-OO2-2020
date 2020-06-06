@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -151,6 +152,15 @@ public class PedidoService implements IPedidoService {
 		
 		return pedidoRepository.obtenerRanking(fechaDesde, fechaHasta, localId);
 		 
+	}
+
+	@Override
+	public List<Pedido> obtenerPedidosPropios(int localId, int estado) {
+		List<Pedido> pedidos = pedidoRepository.obtenerPedidosPropios(localId);
+		pedidos = pedidos.stream()
+			    .filter(x -> x.getEstado() == estado)
+			    .collect(Collectors.toList());
+		return pedidos;
 	}
 
 }

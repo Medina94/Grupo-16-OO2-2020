@@ -25,6 +25,9 @@ public interface IPedidoRepository extends JpaRepository<Pedido, Serializable> {
 	public abstract ArrayList<RankingModel> obtenerRanking(LocalDate fechaDesde, LocalDate fechaHasta, int localId);
 	
 	
+	@Query("SELECT p FROM Pedido p JOIN p.producto pro JOIN pro.local l"
+			+ " WHERE l.id = (:localId)")	
+	public abstract List<Pedido> obtenerPedidosPropios(int localId);
 	
 	
 	
