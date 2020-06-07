@@ -1,4 +1,4 @@
-<script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
+ <script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
  <link href="/vendor/bootstrap/css/bootstrap-select.min.css" rel="stylesheet">
  <style>
  .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
@@ -37,6 +37,15 @@
 									Apellido: <input class="form-control"
 										 type="text"
 										th:field="*{apellido}" required />
+								</p>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col">
+								<p>
+									Dni: <input class="form-control"
+										 type="number"
+										th:field="*{dni}" required />
 								</p>
 							</div>
 						</div>

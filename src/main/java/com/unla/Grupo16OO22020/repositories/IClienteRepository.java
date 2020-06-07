@@ -8,11 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.unla.Grupo16OO22020.entities.Cliente;
+import com.unla.Grupo16OO22020.entities.Empleado;
 
 @Repository("clienteRepository")
 public interface IClienteRepository extends JpaRepository<Cliente, Serializable> {
 	public abstract Cliente findById(int id);
-
+	
+	public abstract Cliente findByDni(int dni);
 	//public abstract Cliente findByName(String name);
 
 	// Todas las personas que tengan un título con ese nombre (parámetro name)

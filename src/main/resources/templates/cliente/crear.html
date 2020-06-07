@@ -1,3 +1,10 @@
+<script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
+<link href="/vendor/bootstrap/css/bootstrap-select.min.css" rel="stylesheet">
+<style>
+ .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 100%;
+}
+ </style>
 <div class="modal fade" id="modalCliente" tabindex="-1" role="dialog"
 	aria-labelledby="modal" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
@@ -12,7 +19,7 @@
 				</button>
 			</div>
 			<div class="modal-body" id="dialogo-editar-body">
-				<form action="#" th:action="@{/persona/cliente/crear}" th:object="${cliente}"
+				<form action="#" th:action="@{/persona/cliente/crear}"  id="crearCliente" th:object="${cliente}"
 					method="post">
 					<div id="form-crear-modificar">
 						<div class="form-row">
@@ -29,6 +36,15 @@
 									Apellido: <input class="form-control"
 										 type="text"
 										th:field="*{apellido}" required />
+								</p>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col">
+								<p>
+									Dni: <input class="form-control"
+										 type="number"
+										th:field="*{dni}" id="dni" required />
 								</p>
 							</div>
 						</div>
@@ -54,20 +70,37 @@
 					</div>
 				</div>
 				</div>
-					<input type="submit" value="Crear" class="boton btn btn-success"/>
+					<input  id="crear" value="Crear" class="boton btn btn-success"/>
 					<input
 					type="button" id="dialogo-editar-cancelar" class="btn botonCancelar"
 					value="Cancelar"/>
 				</form>
 			</div>
-		</div>
-	</div>
-</div>
+
 <script>
 $(document).ready(function () {
 	$('.selectpicker').selectpicker();
 	$("#dialogo-editar-cancelar").click(function() {
 		$("#modalCliente").modal("hide");		
+	});
+
+	$("#crear").click(function() {
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+		 	url: "/persona/validarCliente",
+		 	data:{dni: parseInt($("#dni").val())}
+		})
+		.done(function(result) {
+			if(result == "El cliente se guardo con exito"){
+				MensInfo("Informacion", result)
+				$("#crearCliente").submit();
+			}else{
+				MensError("Error", result)
+			}
+		})
+		.fail(function() {
+			alert("error");
+		});
 	});
 });
 </script>

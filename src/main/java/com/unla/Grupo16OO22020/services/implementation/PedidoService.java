@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.unla.Grupo16OO22020.converters.PedidoConverter;
 import com.unla.Grupo16OO22020.converters.PersonaConverter;
+import com.unla.Grupo16OO22020.entities.Empleado;
 import com.unla.Grupo16OO22020.entities.Local;
 import com.unla.Grupo16OO22020.entities.Lote;
 import com.unla.Grupo16OO22020.entities.Pedido;
@@ -150,7 +152,16 @@ public class PedidoService implements IPedidoService {
 	public ArrayList<RankingModel> obtenerRanking(LocalDate fechaDesde, LocalDate fechaHasta, int localId) {
 		
 		return pedidoRepository.obtenerRanking(fechaDesde, fechaHasta, localId);
-		 
+		
+	}
+	
+	@Override
+	public List<Pedido> obtenerPedidosPropios(int localId, int estado) {
+		List<Pedido> pedidos = pedidoRepository.obtenerPedidosPropios(localId);
+		pedidos = pedidos.stream()
+			    .filter(x -> x.getEstado() == estado)
+			    .collect(Collectors.toList());
+		return pedidos;
 	}
 
 }

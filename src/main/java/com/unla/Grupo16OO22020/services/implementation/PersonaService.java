@@ -133,6 +133,16 @@ public class PersonaService implements IPersonaService {
 		}
 		return mensaje;
 	}
+	
+	@Override
+	public String validarCliente(int dni) {
+		Cliente c = clienteRepository.findByDni(dni);
+		String mensaje = "El cliente se guardo con exito";
+		if (c != null && c.getDni() == dni) {
+			mensaje = "Error, el cliente ya está registrado"; 
+		}
+		return mensaje;
+	}
 
 	@Override
 	public List<EmpleadoModel> obtenerEmpleados(int id) {

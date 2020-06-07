@@ -3,7 +3,7 @@
 
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <meta charset="utf-8" />
+     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>:: UNLA ::</title>   
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -25,7 +25,7 @@
    background: #092756;
 	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #c7039d 0%,#000000 100%);
 	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #c7039d 0%,#000000 100%);
-	background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #c7039d 0%,#000000c 100%);
+	background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #c7039d 0%,#000000 100%);
 	background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #c7039d 0%,#000000 100%);
 	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #c7039d 0%,#000000  100%);
     
@@ -199,6 +199,19 @@ cursor: pointer;
                     </div>
                 </div>
             </li> 
+            
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSolicitud" aria-expanded="true" aria-controls="collapseProducto">
+                    <i class="fa fa-user"></i>
+                    <span>Solicitud Stock</span>
+                </a>
+                <div id="collapseSolicitud" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Sectores:</h6>
+                        <a class="collapse-item" href="/solicitudStock">Configuración</a>
+                    </div>
+                </div>
+            </li> 
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -328,11 +341,17 @@ cursor: pointer;
 <script src="/js/sb-admin-2.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap-select.min.js"></script> 
 <script>
-function MensInfo(title, mensaje){
-	 BootstrapDialog.show({
+function MensInfo(title, mensaje, callback){
+	if(callback == null){
+    	callback = function(){
+    		return true;
+    	};
+    }
+	BootstrapDialog.show({
         message: mensaje,
         title: title,
-        type: BootstrapDialog.TYPE_SUCCESS 
+        type: BootstrapDialog.TYPE_SUCCESS,
+        onhide: callback 
     });
 }
 

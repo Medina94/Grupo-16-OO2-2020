@@ -22,6 +22,10 @@ public class PedidoModel {
 	
 	private double Total;
 	
+	private int idLocalSolicitado;
+	
+	private int estado;
+	
 	public double getTotal() {
 		return Total;
 	}
@@ -35,7 +39,7 @@ public class PedidoModel {
 	}
 
 	public PedidoModel(int id, int cantidadSolicitada, LocalDate fecha, ProductoModel productoModel,
-			ClienteModel clienteModel, EmpleadoModel solicitadorModel) {
+			ClienteModel clienteModel, EmpleadoModel solicitadorModel, int estado) {
 		super();
 		this.id = id;
 		this.cantidadSolicitada = cantidadSolicitada;
@@ -43,6 +47,7 @@ public class PedidoModel {
 		this.productoModel = productoModel;
 		this.clienteModel = clienteModel;
 		this.solicitadorModel = solicitadorModel;
+		this.estado = estado;
 	}
 
 	public int getId() {
@@ -93,4 +98,21 @@ public class PedidoModel {
 		this.solicitadorModel = solicitadorModel;
 	}
 
+	public int getIdLocalSolicitado() {
+		return idLocalSolicitado;
+	}
+
+	public void setIdLocalSolicitado(int idLocalSolicitado) {
+		this.idLocalSolicitado = idLocalSolicitado;
+	}
+
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
+	
 }

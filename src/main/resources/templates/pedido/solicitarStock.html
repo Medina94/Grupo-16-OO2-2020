@@ -8,60 +8,51 @@
 }
  </style>
 
-<div  class="modal fade" id="solicitarStock" tabindex="-1" role="dialog"
+<div class="modal fade" id="solicitarStock" tabindex="-1" role="dialog"
 	aria-labelledby="modal" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered" role="document">
-	<div class="modal-content">
-		<div class="modal-header">
-			<h5 class="dialogo-editar-title" id="dialogo-editar-title">
-				Solicitar Stock
-			</h5>
-			<button type="button" class="close" data-dismiss="modal"
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="dialogo-editar-title" id="dialogo-editar-title">
+					Solicitar Stock</h5>
+				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-<div  class="modal-body" id="dialogo-editar-body">
-	<form action="#" th:action="@{/pedido/solicitar}" th:object="${pedido}" method="post">
-		<div id="form-crear-modificar">						
-		   <div class="form-row">
-				<div class="form-group col">
-					<p>Seleccione Local</p>
-					<!-- Seleccion del local a solicitar -->
-					<select  class="form-group selectpicker" id="locales" placeholder="Seleccionar Local" >
-						<option th:each="local : ${localesConStock}" th:value="${local.id}" th:text="${local.direccion}"></option>
-					</select>
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" id="dialogo-editar-body">
+				<div class="form-row">
+					<div class="form-group col">
+						<p>Seleccione Local</p>
+						<select class="form-group selectpicker" id="locales"
+							placeholder="Seleccionar Local">
+							<option th:each="local : ${localesConStock}"
+								th:value="${local.id}" th:text="${local.direccion}"></option>
+						</select>
+					</div>
 				</div>
+				<input type="button" class="boton" value="Solicitar" id="pedir" /> 
+				<input type="button" id="dialogo-editar" class="btn botonCancelar" value="Cancelar" />
 			</div>
 		</div>
-		<!-- 
-		<div id="form-crear-modificar">						
-		   <div class="form-row">
-				<div class="form-group col">
-					<p>Seleccione Local</p>
-					
-					<select  class="form-group selectpicker" placeholder="Seleccionar colaborador"  th:field="*{empleadoModel.id}">
-						<option th:each="empleado : ${empleados}" th:value="${empleado.id}" th:text="${empleado.apellido}"></option>
-					</select>
-				</div>
-			</div>
-		</div>
-		 -->
-		<input type="submit" value="Solicitar">
-		<input type="button" id="dialogo-editar" class="btn botonCancelar" value="Cancelar"/>
-	</form>
-</div>
-</div>
-</div>
+	</div>
 </div>
 <script>
 $(document).ready(function () {
+$('.selectpicker').selectpicker();
 
-	$('.selectpicker').selectpicker();
+if($("#locales option").length > 0){
+	$("#solicitarStock").modal('show');
 	
-	$("#dialogo-editar").click(function() {
-		$("#modalSolicitar").modal("hide");		
-	});
+}else{
+	MensError("", "Por el momento no contamos con el stock de este producto");
+}		
+
+$("#pedir").click(function(){
+	$("#idLocalSolicitado").val($("#locales").val());
+	$("#crearPedido").submit();
+});
+
 });
 
 </script>

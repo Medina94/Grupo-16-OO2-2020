@@ -22,7 +22,7 @@
 				</button>
 			</div>
 			<div class="modal-body" id="dialogo-editar-body">
-				<form action="#" th:action="@{/pedido/crear}" th:object="${pedido}"
+				<form id="crearPedido" action="#" th:action="@{/pedido/crear}" th:object="${pedido}"
 					method="post">
 					<div id="form-crear-modificar">						
 				  <div class="form-row">
@@ -59,6 +59,7 @@
 							 th:text="${cliente.nombre}"></option>
 						</select>
 						</div>
+						 <input hidden id="idLocalSolicitado" th:field="*{idLocalSolicitado}"></input>
 					</div>						
 					</div>
 					<input type="submit" value="Crear"  hidden class="boton crear btn btn-success"/>
@@ -83,11 +84,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <p id="consultaSolicitar">¿Desea consultar stock en los locales cercanos?</p>
-        <p hidden id="verLocales">Seleccione la cantidad de locales que desea ver:</p>   
+        <p id="consultaSolicitar">&iquest;Desea consultar stock en los locales cercanos?</p>
+        <p id="verLocales" hidden>Seleccione la cantidad de locales que desea ver:</p>   
       </div>
-      <div>
-      	<select  class="selectpicker" name="Locales" id="cantidadLocales" hidden >
+      <div hidden id="contieneLocal" >
+      	<select  class="selectpicker" name="Locales"  id="cantidadLocales">
 			<option value="0">Ver todos</option>
 			<option value="1">1</option>
 			<option value="2">2</option>
@@ -96,8 +97,8 @@
 		</select>
       </div>
       <div class="modal-footer">
-        <button type="button" id="aceptarSolicitud" class="btn btn-primary">Aceptar</button>
-        <button type="button" id="enviarSolicitud" class="btn btn-primary" hidden>Solicitar</button>
+        <button type="button" id="aceptarSolicitud" class="btn boton btn-primary">Aceptar</button>
+        <button type="button" id="enviarSolicitud" class="btn boton btn-primary" hidden>Solicitar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -135,23 +136,6 @@ $(document).ready(function () {
 				MensError("Error", "Sin stock disponible", function(){
 					return $("#consultaStock").modal('show');
 				});
-				//$(".solicitar").removeAttr('hidden');
-				//$(".solicitar").show();
-// 				$("#consultar").hide();
-// 				$("#modalLote").hide();
-// 				$.ajax({
-// 					method: "GET",
-// 					url: "/pedido/solicitarStock",
-// 					data:{idProducto:parseInt($("#producto").val()), cantidadSolicitada:parseInt($(".cantidad").val())}
-// 				})
-// 				.done(function(result){
-// 					$("#modalSolicitar").html(result);
-// 					$("#modalLote").modal("hide")
-// 					$("#solicitarStock").modal("show");
-// 				})
-// 				.fail(function() {
-// 					alert("error");
-// 				});
 			}
 		})
 		.fail(function() {
@@ -160,36 +144,26 @@ $(document).ready(function () {
 	});	
 	
 	$("#aceptarSolicitud").click(function(){
-// 		$.ajax({
-// 			method: "GET",
-// 			url: "/pedido/solicitarStock",
-// 			data:{idProducto:parseInt($("#producto").val()), cantidadSolicitada:parseInt($(".cantidad").val())}
-// 		})
-// 		.done(function(result){
-// 			$("#modalSolicitar").html(result);
-// 			$("#modalLote").modal("hide")
-// 			$("#solicitarStock").modal("show");
-// 		})
-// 		.fail(function() {
-// 			alert("error");
-// 		});
+
 		$("#consultaSolicitar").hide();
 		$("#verLocales").removeAttr('hidden');
-		$("#cantidadLocales").removeAttr('hidden');
+		$("#contieneLocal").removeAttr('hidden');
 		$("#aceptarSolicitud").hide();
 		$("#enviarSolicitud").removeAttr('hidden');
 		});
 });
 $("#enviarSolicitud").click(function(){
+	$("#consultaStock").modal("hide");
 		$.ajax({
 			method: "GET",
 			url: "/pedido/solicitarStock",
-			data:{idProducto:parseInt($("#producto").val()), cantidadSolicitada:parseInt($(".cantidad").val()), cantidadLocales:parseInt($("#verLocales").val())}
+			data:{idProducto:parseInt($("#producto").val()), cantidadSolicitada:parseInt($(".cantidad").val()), cantidadLocales:parseInt($("#cantidadLocales").val())}
 		})
 		.done(function(result){
+			//alert(""+cantidadLocales:parseInt($("#verLocales").val()));
 			$("#modalSolicitar").html(result);
-			$("#modalLote").modal("hide")
-			$("#solicitarStock").modal("show");
+			
+			
 		})
 		.fail(function() {
 			alert("error");

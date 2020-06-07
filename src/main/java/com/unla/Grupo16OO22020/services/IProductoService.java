@@ -1,8 +1,6 @@
 package com.unla.Grupo16OO22020.services;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
-
 import com.unla.Grupo16OO22020.entities.Producto;
 import com.unla.Grupo16OO22020.models.ProductoModel;
 
@@ -19,6 +17,9 @@ public interface IProductoService {
 	public boolean remove(int id);
 	
 	public ProductoModel findByCodigoAndLocal(String codigo, int localId);
+
+	public ProductoModel codigoProducto(ProductoModel productoModel);
+	
 	
 }
 

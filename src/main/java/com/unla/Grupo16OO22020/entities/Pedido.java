@@ -34,9 +34,10 @@ public class Pedido {
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Empleado solicitador;
 	
+	private int estado;
 	
 	public Pedido(int id, int cantidadSolicitada, LocalDate fecha, Producto producto, Cliente cliente,
-			Empleado solicitador) {
+			Empleado solicitador, int estado) {
 		super();
 		this.id = id;
 		this.cantidadSolicitada = cantidadSolicitada;
@@ -44,6 +45,7 @@ public class Pedido {
 		this.producto = producto;
 		this.cliente = cliente;
 		this.solicitador = solicitador;
+		this.estado = estado;
 	}
 
 
@@ -103,5 +105,11 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 	
+	public int getEstado() {
+		return estado;
+	}
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
 
 }

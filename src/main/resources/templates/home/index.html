@@ -55,7 +55,7 @@
 			</div>
 			<div class="form-group  col-md-3" >
 				<select class="form-group selectpicker" id="localId">
-					<option value="0">VER TODOS LOCAL</option>
+					<option value="0">VER TODOS LOCALES</option>
 					<option th:each="local : ${locales}" th:value="${local.id}"
 						th:text="${local.direccion}"></option>
 				</select>
@@ -70,9 +70,9 @@
 			<input id="filtro" value="Filtrar" class="boton btn btn-success"/>
 			</div>
 		</div>
-<div id="filtroProductos">
+<div id="filtroProductos" style="overflow: scroll; width: flex;height: 400px;background-color: #eee;margin-bottom: 50px;">
 		<div  th:each="productos : ${productos}" >
-            <div class="pricing-table" style="float: left ">
+            <div class="pricing-table" style="float: left; " >
                 <div class="pricing-card">
                     <h3 class="pricing-card-header"><span th:text="${productos.descripcion}"></span></h3>
                     <div class="price"><sup>$</sup><span th:text="${productos.precioUnitario}" ></span><span>/CU</span></div>
