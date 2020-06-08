@@ -1,0 +1,100 @@
+/*INSERT TABLA PERSONAS*/
+INSERT INTO `grupo16-oo2-2020`.`persona` (`id`,`nombre`, `apellido`, `fecha_nacimiento`, `mail`,`dni`) VALUES (1,'Carol', 'Miller', '1994-08-12', 'CarolJMiller@gustr.com',11111111);
+INSERT INTO `grupo16-oo2-2020`.`persona` (`id`,`nombre`, `apellido`, `fecha_nacimiento`, `mail`,`dni`) VALUES (2,'Jeffrey', 'Allen', '1985-05-07', 'JeffreyDAllen@superrito.com',22222222);
+INSERT INTO `grupo16-oo2-2020`.`persona` (`id`,`nombre`, `apellido`, `fecha_nacimiento`, `mail`,`dni`) VALUES (3,'Gregory', 'Couch', '1999-03-03', 'GregoryBCouch@superrito.com',33333333);
+
+/*INSERT TABLA LOCALES*/
+INSERT INTO `grupo16-oo2-2020`.`local` (`id`,`telefono`, `direccion`, `longitud`, `latitud`) VALUES (1,4292-4289, 'Laprida 333', -34.6037345, -58.3837591);
+INSERT INTO `grupo16-oo2-2020`.`local` (`id`,`telefono`, `direccion`, `longitud`, `latitud`) VALUES (2,4243-3578, 'Av. Pres. Hipólito Yrigoyen 9369', -34.6032265, -58.3808863);
+
+/*INSERT TABLA EMPLEADO*/
+INSERT INTO `grupo16-oo2-2020`.`empleado` (`id`, `sueldo`, `es_gerente`,`local_id`,`eliminado`) VALUES (1, 25000, 1,1,0);
+INSERT INTO `grupo16-oo2-2020`.`empleado` (`id`, `sueldo`, `es_gerente`,`local_id`,`eliminado`) VALUES (2, 21556, 0,2,0);
+
+
+/*INSERT TABLA CLIENTE*/
+INSERT INTO `grupo16-oo2-2020`.`cliente` (`id`, `telefono`,`eliminado`) VALUES (3, 699697750,0);
+
+
+
+/*INSERT TABLA PRODUCTOS*/
+INSERT INTO `grupo16-oo2-2020`.`producto` (`descripcion`, `fecha_alta`, `precio_unitario`, `local_id`, `codigo`, `eliminado`, `imagen_url`,`id`)
+       VALUES ('Funko Pop Jhon Wick', '2020-05-16', 2100, 1, 'FPJW', 0, 'jhon.jpg',1);
+
+INSERT INTO `grupo16-oo2-2020`.`producto ` (`descripcion`, `fecha_alta`, `precio_unitario`, `local_id`, `codigo`, `eliminado`, `imagen_url`,`id`)
+       VALUES ('Funko Pop Rei Ayanami Evangelion', '2020-05-16', 2500, 1, 'FPRA', 0, 'rei.jpg',2);
+
+INSERT INTO `grupo16-oo2-2020`.`producto ` (`descripcion`, `fecha_alta`, `precio_unitario`, `local_id`, `codigo`, `eliminado`, `imagen_url`,`id`)
+       VALUES ('Funko Pop Khaleesi GOT', '2020-05-16', 3000, 2, 'FPKG', 0, 'kalesi.jpg',3);
+
+INSERT INTO `grupo16-oo2-2020`.`producto`  (`descripcion`, `fecha_alta`, `precio_unitario`, `local_id`, `codigo`, `eliminado`, `imagen_url`,`id`)
+       VALUES ('Funko Pop Negan The Walking Dead', '2020-05-16', 1200, 2, 'FPNTWD', 0, 'negan.jpg',4);
+
+INSERT INTO `grupo16-oo2-2020`.`producto` (`descripcion`, `fecha_alta`, `precio_unitario`, `local_id`, `codigo`, `eliminado`, `imagen_url`,`id`)
+       VALUES ('Funko Pop Jhon Wick', '2020-05-16', 2100, 2, 'FPJW', 0, 'jhon.jpg',5);
+
+
+
+
+INSERT INTO `grupo16-oo2-2020`.`producto` (`descripcion`, `fecha_alta`, `precio_unitario`, `local_id`, `codigo`, `eliminado`, `imagen_url`, `id`)
+       VALUES ('Funko Pop Jhon Wick', '2020-05-16', 2100, 1, 'FPJW', 0, 'jhon.jpg', 6);
+
+INSERT INTO `grupo16-oo2-2020`.`producto` (`descripcion`, `fecha_alta`, `precio_unitario`, `local_id`, `codigo`, `eliminado`, `imagen_url`, `id`)
+       VALUES ('Funko Pop Rei Ayanami Evangelion', '2020-05-16', 2500, 1, 'FPRA', 0, 'rei.jpg', 7);
+
+INSERT INTO `grupo16-oo2-2020`.`producto` (`descripcion`, `fecha_alta`, `precio_unitario`, `local_id`, `codigo`, `eliminado`, `imagen_url`, `id`)
+       VALUES ('Funko Pop Khaleesi GOT', '2020-05-16', 3000, 1, 'FPKG', 0, 'kalesi.jpg', 8);
+
+INSERT INTO `grupo16-oo2-2020`.`producto` (`descripcion`, `fecha_alta`, `precio_unitario`, `local_id`, `codigo`, `eliminado`, `imagen_url`, `id`)
+       VALUES ('Funko Pop Negan The Walking Dead', '2020-05-16', 1200, 1, 'FPNTWD', 0, 'negan.jpg', 9);
+
+
+
+INSERT INTO `grupo16-oo2-2020`.`producto` (`descripcion`, `fecha_alta`, `precio_unitario`, `local_id`, `codigo`, `eliminado`, `imagen_url`, `id`)
+       VALUES ('Funko Pop Hulk', '2020-05-16', 1250, 2, 'FPH', 0, 'hulk.jpg', 10);
+
+INSERT INTO `grupo16-oo2-2020`.`producto` (`descripcion`, `fecha_alta`, `precio_unitario`, `local_id`, `codigo`, `eliminado`, `imagen_url`, `id`)
+       VALUES ('Funko Pop Mercy Overwacht', '2020-05-16', 2300, 2, 'FPMO', 0, 'mercy.jpg', 11);
+
+INSERT INTO `grupo16-oo2-2020`.`producto` (`descripcion`, `fecha_alta`, `precio_unitario`, `local_id`, `codigo`, `eliminado`, `imagen_url`, `id`)
+       VALUES ('Funko Michonne The Walking Dead', '2020-05-16', 1500, 2, 'FPMTWD', 0, 'michone.jpg', 12);
+
+INSERT INTO `grupo16-oo2-2020`.`producto` (`descripcion`, `fecha_alta`, `precio_unitario`, `local_id`, `codigo`, `eliminado`, `imagen_url`, `id`)
+       VALUES ('Funko Pop Tsunade Naruto', '2020-05-16', 1750, 2, 'FPTN', 0, 'tsunade.jpg', 13);
+
+
+
+/*INSERT TABLA LOTE*/
+INSERT INTO `grupo16-oo2-2020`.`lote` (`cantidad`, `fecha_ingreso`, `producto_id`) VALUES (10, '2020-05-16', 1);
+INSERT INTO `grupo16-oo2-2020`.`lote` (`cantidad`, `fecha_ingreso`, `producto_id`) VALUES (40, '2020-05-16', 5);
+INSERT INTO `grupo16-oo2-2020`.`lote` (`cantidad`, `fecha_ingreso`, `producto_id`) VALUES (65, '2020-05-16', 6);
+INSERT INTO `grupo16-oo2-2020`.`lote` (`cantidad`, `fecha_ingreso`, `producto_id`) VALUES (100, '2020-05-16', 12);
+INSERT INTO `grupo16-oo2-2020`.`lote` (`cantidad`, `fecha_ingreso`, `producto_id`) VALUES (88, '2020-05-16', 9);
+INSERT INTO `grupo16-oo2-2020`.`lote` (`cantidad`, `fecha_ingreso`, `producto_id`) VALUES (120, '2020-05-16', 4);
+INSERT INTO `grupo16-oo2-2020`.`lote` (`cantidad`, `fecha_ingreso`, `producto_id`) VALUES (120, '2020-05-16', 10);
+INSERT INTO `grupo16-oo2-2020`.`lote` (`cantidad`, `fecha_ingreso`, `producto_id`) VALUES (120, '2020-05-16', 11);
+INSERT INTO `grupo16-oo2-2020`.`lote` (`cantidad`, `fecha_ingreso`, `producto_id`) VALUES (120, '2020-05-16', 13);
+
+/*INSERTAR TABLA PEDIDO*/
+
+INSERT INTO pedido(cantidad_solicitada,producto_id,fecha,cliente_id,solicitador_id,estado) values(3,1,'2020-05-19',3,1,1);
+INSERT INTO pedido(cantidad_solicitada,producto_id,fecha,cliente_id,solicitador_id,estado) values(5,2,'2020-05-22',3,2,1);
+INSERT INTO pedido(cantidad_solicitada,producto_id,fecha,cliente_id,solicitador_id,estado) values(1,3,'2020-05-17',3,1,2);
+INSERT INTO pedido(cantidad_solicitada,producto_id,fecha,cliente_id,solicitador_id,estado) values(4,4,'2020-05-22',3,2,3);
+INSERT INTO pedido(cantidad_solicitada,producto_id,fecha,cliente_id,solicitador_id,estado) values(3,1,'2020-05-19',3,1,1);
+INSERT INTO pedido(cantidad_solicitada,producto_id,fecha,cliente_id,solicitador_id,estado) values(5,2,'2020-05-22',3,2,2);
+INSERT INTO pedido(cantidad_solicitada,producto_id,fecha,cliente_id,solicitador_id,estado) values(5,3,'2020-05-17',3,1,3);
+INSERT INTO pedido(cantidad_solicitada,producto_id,fecha,cliente_id,solicitador_id,estado) values(4,4,'2020-05-22',3,2,1);
+
+INSERT INTO pedido(cantidad_solicitada,producto_id,fecha,cliente_id,solicitador_id,estado) values(4,10,'2020-05-22',3,2,1);
+INSERT INTO pedido(cantidad_solicitada,producto_id,fecha,cliente_id,solicitador_id,estado) values(5,11,'2020-05-22',3,2,1);
+INSERT INTO pedido(cantidad_solicitada,producto_id,fecha,cliente_id,solicitador_id,estado) values(8,13,'2020-05-22',3,2,1);
+
+/*INSERTAR TABLA USER*/
+INSERT INTO `grupo16-oo2-2020`.`user` (`enabled`, `password`, `username`, `empleado_id`,`id`) VALUES (1, '$2a$10$Mt/CRO57u.MJayVtpYVuRObany8sAWhGrGxgLb0vItC7JSIwb.g4O', 'jallen', 2,1);
+INSERT INTO `grupo16-oo2-2020`.`user` (`enabled`, `password`, `username`, `empleado_id`,`id`) VALUES (1, '$2a$10$fJsRAQvc232ieYYuyWBJlezYtSVfh33SrkxaiWIBSU53k2xCKr9AO', 'cmiller', 1,2);
+
+/*TABLA USER ROLE*/
+INSERT INTO `grupo16-oo2-2020`.`user_role` (`role`, `user_id`) VALUES ('ROLE_ADMIN', 1);
+INSERT INTO `grupo16-oo2-2020`.`user_role` (`role`, `user_id`) VALUES ('ROLE_ADMIN', 2);
+
