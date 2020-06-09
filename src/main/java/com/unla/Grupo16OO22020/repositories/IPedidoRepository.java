@@ -28,8 +28,8 @@ public interface IPedidoRepository extends JpaRepository<Pedido, Serializable> {
 	@Query("SELECT p FROM Pedido p where p=(:solicitador_id)")
 	public abstract List<PedidoModel> findBySolicitador_id(int solicitador_id);
 	@Query("SELECT p FROM Pedido p JOIN p.producto pro JOIN pro.local l"
-			+ " WHERE l.id = (:localId)")	
-	public abstract List<Pedido> obtenerPedidosPropios(int localId);
+			+ " WHERE ((:rol) = 'ROL_ADMIN' OR l.id = (:localId))")	
+	public abstract List<Pedido> obtenerPedidosPropios(int localId, String rol);
 	
 	@Query("SELECT new com.unla.Grupo16OO22020.models.PlusSueldoModel(e.id, e.nombre,e.sueldo,"
 			+ "Sum(p.cantidadSolicitada * pro.precioUnitario))"

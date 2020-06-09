@@ -54,7 +54,7 @@ public class PersonaService implements IPersonaService {
 
 	@Override
 	public List<Empleado> getAllEmpleado() {
-		return empleadoRepository.getAllEmpleado();
+		return empleadoRepository.getAllEmpleado(userService.traerEmpleadoLogueado().getLocal().getId(), userService.traerRol());
 	}
 
 	@Override

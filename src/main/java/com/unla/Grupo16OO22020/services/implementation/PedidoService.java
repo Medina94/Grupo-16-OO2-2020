@@ -170,7 +170,7 @@ public class PedidoService implements IPedidoService {
 	
 	@Override
 	public List<Pedido> obtenerPedidosPropios(int localId, int estado) {
-		List<Pedido> pedidos = pedidoRepository.obtenerPedidosPropios(localId);
+		List<Pedido> pedidos = pedidoRepository.obtenerPedidosPropios(localId, userService.traerRol());
 		pedidos = pedidos.stream()
 			    .filter(x -> x.getEstado() == estado)
 			    .collect(Collectors.toList());

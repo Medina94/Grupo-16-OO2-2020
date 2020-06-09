@@ -44,7 +44,7 @@ public class PersonaController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_ACTUALIZAR);
 		EmpleadoModel empleado = personaService.empleadoFindById(id);
 		mAV.addObject("empleado", empleado);
-		mAV.addObject("locales", localService.getAll());
+		mAV.addObject("locales", localService.traerLocalPorRol());
 		return mAV;
 	}
 	@PostMapping("empleado/actualizar")
@@ -57,7 +57,7 @@ public class PersonaController {
 	public ModelAndView createEmpleado() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.EMPLEADO_CREAR); 
 		mAV.addObject("empleado", new EmpleadoModel());
-		mAV.addObject("locales", localService.getAll());
+		mAV.addObject("locales", localService.traerLocalPorRol());
 		return mAV;
 	}
 	

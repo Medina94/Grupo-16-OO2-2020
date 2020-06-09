@@ -55,15 +55,16 @@
 			</div>
 			<div class="form-group  col-md-3" >
 				<select class="form-group selectpicker" id="localId">
-					<option value="0">VER TODOS LOCALES</option>
+					<option value="0">VER TODO LOCAL</option>
 					<option th:each="local : ${locales}" th:value="${local.id}"
 						th:text="${local.direccion}"></option>
 				</select>
 			</div>
 			<div class="form-group  col-md-3">
 				<select class="form-group selectpicker"  id="ordenId">
-					<option value="0">Mas vendidos</option>
-					<option value="1">Menos vendidos</option>
+				    <option value="0">VER TODO PRODUCTO</option>
+					<option value="1">Mas vendidos</option>
+					<option value="2">Menos vendidos</option>
 				</select>
 			</div>
 			<div class="col-md-2">

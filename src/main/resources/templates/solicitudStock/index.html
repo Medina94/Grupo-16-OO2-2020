@@ -36,7 +36,7 @@
     					</thead>
     					<tbody>        
        						 <tr th:each="solicitud : ${solicitudesRealizadas}">        	    					
-       	    					<td><span th:text="${solicitud.colaborador.nombre != null} ? ${solicitud.colaborador.nombre} : 'Sin asignar'"></span></td>
+       	    					<td><span th:text="${solicitud.colaborador != null && solicitud.colaborador.nombre !=null} ? ${solicitud.colaborador.nombre} : 'Sin asignar'"></span></td>
        	    					<!-- <td><span th:if="${solicitud.colaborador != null && solicitud.colaborador != null}" th:text="${recibida.solicitador.nombre}" /></td>-->                         					
             					<td><span th:text="${solicitud.pedido.producto.descripcion}" /></td>
             					<td>
@@ -58,13 +58,13 @@
             				<th>Solicitante</th>
             				<th>Producto solicitado</th>
             				<th>Estado</th> 
-           				    <th></th>  
-		           		    <th></th> 
+           				    <th class="aceptar"></th>  
+		           		    <th class="rechazar"></th> 
              				</tr>
     					</thead>
     					<tbody>        
        						 <tr th:each="recibida : ${solicitudesRecibidas}">       
-       						 <td><span th:text="${recibida.solicitador.nombre != null} ? ${recibida.solicitador.nombre} : 'Sin asignar'"></span></td> 	    					
+       						 <td><span th:text="${recibida.solicitador != null && recibida.solicitador.nombre != null} ? ${recibida.solicitador.nombre} : 'Sin asignar'"></span></td> 	    					
 <!--        	    					<td><span th:if="${recibida.solicitador != null && recibida.solicitador.nombre != null}" th:text="${recibida.solicitador.nombre}" /></td>                       					 -->
             					<td><span th:text="${recibida.pedido.producto.descripcion}" /></td>
             					<td>
@@ -74,8 +74,8 @@
             							<p th:case="3" style="color: red"><strong>Rechazado</strong></p>
             						</span>
             					</td>
-            					<td><span th:if="${recibida.estado == 2}"><div th:data-value="${recibida.id}" style="text-align: center;font-size: 23px;" id="aceptarSoli"><i class="fa fa-check" aria-hidden="true"></i></div></span></td>  
-								<td><span th:if="${recibida.estado == 2}"><div th:data-value="${recibida.id}" style="text-align: center;font-size: 20px;" id="rechazarSoli"><i class="fa fa-trash" aria-hidden="true"></i></div></span></td>  
+            					<td class="aceptar"><span th:if="${recibida.estado == 2}"><div th:data-value="${recibida.id}" style="text-align: center;font-size: 23px;" id="aceptarSoli"><i class="fa fa-check" aria-hidden="true"></i></div></span></td>  
+								<td class="rechazar"><span th:if="${recibida.estado == 2}"><div th:data-value="${recibida.id}" style="text-align: center;font-size: 20px;" id="rechazarSoli"><i class="fa fa-trash" aria-hidden="true"></i></div></span></td>  
         					</tr>            
     				</tbody>
 				</table>
@@ -166,4 +166,18 @@ $(document).ready(
 			});
 
 		});
+		
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+		 	url: "/consultarRol"		 	
+		})
+		.done(function(result) {
+			if(result == "ROL_ADMIN"){
+				$(".aceptar").hide();
+				$(".rechazar").hide();
+			}
+		})
+		.fail(function() {
+			alert("error");
+		});	
 </script>
