@@ -1,5 +1,7 @@
 package com.unla.Grupo16OO22020.controllers;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -73,6 +75,7 @@ public class PedidoController {
 	
 	@PostMapping("/crear")
 	public RedirectView create(@ModelAttribute("pedido") PedidoModel pedidoModel) {		
+		pedidoModel.setFecha(LocalDate.now());
 		if(pedidoService.consultarStock(pedidoModel.getProductoModel().getId(), pedidoModel.getCantidadSolicitada())) {
 			pedidoModel.setEstado(EstadoEnum.ESTADO_ACEPTADO.getCodigo());
 			pedidoService.insertOrUpdate(pedidoModel);
