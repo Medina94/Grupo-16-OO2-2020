@@ -26,8 +26,8 @@ public interface IPedidoRepository extends JpaRepository<Pedido, Serializable> {
 	
 	
 	@Query("SELECT p FROM Pedido p JOIN p.producto pro JOIN pro.local l"
-			+ " WHERE l.id = (:localId)")	
-	public abstract List<Pedido> obtenerPedidosPropios(int localId);
+			+ " WHERE ((:rol) = 'ROL_ADMIN' OR l.id = (:localId))")	
+	public abstract List<Pedido> obtenerPedidosPropios(int localId, String rol);
 	
 	
 	

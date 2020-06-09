@@ -49,11 +49,7 @@ public class LocalService implements ILocalService{
 	@Qualifier("pedidoService")
 	private IPedidoService pedidoService;
 	
-	@Override
-	public List<Local> getAll() {
-		return localRepository.findAll();
-	}
-
+	
 	@Override
 	public LocalModel insertOrUpdate(LocalModel LocalModel) {
 		Local Local = localRepository.save(localConverter.modelToEntity(LocalModel));
@@ -136,6 +132,18 @@ public class LocalService implements ILocalService{
 		}else {
 			return localConStock.subList(0, cantidadLocales);
 		}
+	}
+
+	@Override
+	public List<Local> getAll() {
+		return localRepository.findAll();
+		
+	}
+
+	@Override
+	public List<Local> traerLocalPorRol() {
+		return localRepository.traerTodo(userService.traerEmpleadoLogueado().getLocal().getId(), userService.traerRol());
+	
 	}
 	
 }

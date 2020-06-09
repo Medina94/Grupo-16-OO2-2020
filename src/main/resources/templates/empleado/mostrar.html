@@ -24,9 +24,8 @@
             <th>Sueldo</th>
             <th>Local</th>
             <th>Dni</th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th class="act"></th>
+            <th class="eliminado"></th>
 		</tr>
     </thead>
     <tbody>        
@@ -39,11 +38,11 @@
             <td><span th:text="${empleado.sueldo}" /></td>
             <td><span th:text="${empleado.local.direccion}" /></td>
             <td><span th:text="${empleado.dni}" /></td>
-           <td style="text-align:center"><div class="actualizar" th:data-value="${empleado.id}">
+           <td style="text-align:center" class="act"><div class="actualizar" th:data-value="${empleado.id}">
            <i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
            </div>
            </td>
-            <td style="text-align:center">
+            <td style="text-align:center" class="eliminado">
             <form action="#" th:action="@{/persona/empleado/eliminar/{id}(id=${empleado.id})}" method="post">
 	              <button class="fa fa-trash" type="submit" style="font-size: 24px; color: black;border: 0 !important;" aria-hidden="true"></button>
             </form>
@@ -56,6 +55,9 @@
 
 </div>
 <div id="modalActualizar">
+
+</div>
+<div hidden id="rol">
 
 </div>
 </div>
@@ -71,6 +73,9 @@ $(document).ready(function () {
 				.done(function(result) {
 					$("#modal").html(result);
 					$("#modalEmpleado").modal("show");
+					if($("#rol").text() == "ROL_GERENTE"){						
+						$(".gerente").hide()
+					}
 				})
 				.fail(function() {
 					alert("error");
@@ -94,9 +99,23 @@ $(document).ready(function () {
 					alert("error");
 				});
 			}else $("#modalActualizar").html("");
-			
-			
 		});
+		
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+		 	url: "/consultarRol"		 	
+		})
+		.done(function(result) {
+			if(result == "ROL_EMPLEADO"){
+				$(".abrirModal").hide();
+				$(".eliminado").hide();
+				$(".act").hide();
+			}
+			$("#rol").html(result);
+		})
+		.fail(function() {
+			alert("error");
+		});	
 });
 
 

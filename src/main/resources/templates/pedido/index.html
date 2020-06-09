@@ -34,7 +34,7 @@
             <th>Direccion</th>
             <th>Estado</th>
             <th></th>
-            <th></th>
+            <th class="eliminar"></th>
           </tr>
     </thead>
     <tbody>        
@@ -56,7 +56,7 @@
            <i class="fa fa-eye" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
            </div>
            </td>
-            <td style="text-align:center">
+            <td style="text-align:center" class="eliminar">
             <form action="#" th:action="@{/pedido/eliminar/{id}(id=${pedido.id})}" method="post">
 	              <button class="fa fa-trash" type="submit" style="font-size: 24px; color: black;border: 0 !important;" aria-hidden="true"></button>
             </form>
@@ -151,6 +151,20 @@ $(document).ready(function () {
 				});	
 			
 		});
+		
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+		 	url: "/consultarRol"		 	
+		})
+		.done(function(result) {
+			if(result == "ROL_ADMIN"){
+				$(".abrirModal").hide();
+				$(".eliminar").hide();
+			}
+		})
+		.fail(function() {
+			alert("error");
+		});	
 });
 
 

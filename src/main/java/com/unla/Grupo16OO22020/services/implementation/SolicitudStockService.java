@@ -65,7 +65,7 @@ public class SolicitudStockService implements ISolicitudStockService{
 		Empleado empleado = userService.traerEmpleadoLogueado();
 		Local local = localConverter.modelToEntity(localService.findById(idLocal));
 		int estado = EstadoEnum.ESTADO_PENDIENTE.getCodigo();		
-		SolicitudStock solicitud = new SolicitudStock(empleado, estado, pedidoConverter.modelToEntity(pedidoModel), local);
+		SolicitudStock solicitud = new SolicitudStock(empleado, estado, pedidoConverter.modelToEntity(pedidoModel), local);		
 		return solicitudStockRepository.save(solicitud);
 	}
 

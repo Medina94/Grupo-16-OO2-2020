@@ -19,7 +19,7 @@
 				</button>
 			</div>
 			<div class="modal-body" id="dialogo-editar-body">
-				<form action="#" th:action="@{/persona/empleado/crear}" th:object="${empleado}"
+				<form action="#" th:action="@{/persona/empleado/crear}" th:object="${empleado}" id="crearEmpleado"
 					method="post">
 					<div id="form-crear-modificar">
 						<div class="form-row">
@@ -66,8 +66,8 @@
 								</p>
 							</div>
 						</div>
-						<div class="form-row">
-							<div class="form-group col"  >
+						<div class="form-row ">
+							<div class="form-group col gerente"  >
 								<p>
 									Gerente
 									<input  style="margin-left: 20px;" type="radio" id="Gerente" value="1" th:field="*{esGerente}" />
@@ -91,7 +91,7 @@
 						</div>
 					</div>
 					</div>
-					<input type="submit" value="Crear" class="boton btn btn-success"/>
+					<input id="crear" value="Crear" class="boton btn btn-success"/>
 					<input
 					type="button" id="dialogo-editar-cancelar" class="btn botonCancelar"
 					value="Cancelar"/>
@@ -99,44 +99,36 @@
 			</div>
 		</div>
 	</div>
-</div>
-		
+</div>	
+
 
 <script>
-	$(document).ready(function() {
-		$('.selectpicker').selectpicker();
-		$("#dialogo-editar-cancelar").click(function() {
-			$("#modalEmpleado").modal("hide");
+$(document).ready(function () {
+	$('.selectpicker').selectpicker();
+	$("#dialogo-editar-cancelar").click(function() {
+		$("#modalEmpleado").modal("hide");		
+	});
+	
+	$("#crear").click(function() {
+		var d = parseInt($("#dni").val());
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+		 	url: "/persona/validarEmpleado",
+		 	data:{dni: d}
+		})
+		.done(function(result) {
+			if(result == "El empleado se guardo con exito"){
+				MensInfo("Informacion", result)
+				$("#crearEmpleado").submit();
+			}else{
+				MensError("Error", result)
+			}
+		})
+		.fail(function() {
+			alert("error");
 		});
 	});
-</script>
-
-<script>
-// $(document).ready(function () {
-// 	$('.selectpicker').selectpicker();
-// 	$("#dialogo-editar-cancelar").click(function() {
-// 		$("#modalEmpleado").modal("hide");		
-// 	});
-	
-// 	$("#crear").click(function() {
-// 		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
-// 			method: "GET",
-// 		 	url: "/persona/validarEmpleado",
-// 		 	data:{dni: parseInt($("#dni").val())}
-// 		})
-// 		.done(function(result) {
-// 			if(result == "El empleado se guardo con exito"){
-// 				MensInfo("Informacion", result)
-// 				$("#crearEmpleado").submit();
-// 			}else{
-// 				MensError("Error", result)
-// 			}
-// 		})
-// 		.fail(function() {
-// 			alert("error");
-// 		});
-// 	});
-// });
+});
 </script>
 
 <style>
