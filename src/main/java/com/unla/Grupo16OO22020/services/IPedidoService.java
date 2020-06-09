@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.unla.Grupo16OO22020.entities.Pedido;
+import com.unla.Grupo16OO22020.models.DetallePedidoEmpleadoModel;
 import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.models.PedidoModel;
+import com.unla.Grupo16OO22020.models.PlusSueldoModel;
 import com.unla.Grupo16OO22020.models.RankingModel;
 
 
@@ -32,5 +34,11 @@ public interface IPedidoService {
 	public ArrayList<RankingModel> obtenerRanking(LocalDate fechaDesde, LocalDate fechaHasta, int localId);
 
 	public List<Pedido> obtenerPedidosPropios(int localId, int estado);
+	
+	public List<PlusSueldoModel> calcularPlusPedido();
+	
+	public  List<DetallePedidoEmpleadoModel> obtenerPedidosPorEmpleado(int empleado_id);
+	
+	public int calcularPlusTotal(int empleado);
 }
 

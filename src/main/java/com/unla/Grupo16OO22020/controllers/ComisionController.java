@@ -12,6 +12,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.Grupo16OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo16OO22020.models.ComisionModel;
+import com.unla.Grupo16OO22020.models.EmpleadoModel;
+import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.services.IComisionService;
 
 @Controller
@@ -31,7 +33,7 @@ public class ComisionController {
 	
 	@GetMapping("/crear")
 	public ModelAndView create() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.COMISION_INDEX);
+		ModelAndView mAV = new ModelAndView("comision/crear"); //cambio de index a crear por rotura
 		mAV.addObject("comision", new ComisionModel());
 		return mAV;
 	}
@@ -40,5 +42,11 @@ public class ComisionController {
 	public RedirectView create(@ModelAttribute("comision") ComisionModel comisionModel) {
 		comisionService.insertOrUpdate(comisionModel);
 		return new RedirectView(ViewRouteHelper.COMISION_ROOT);
+	}
+	
+	@GetMapping("/calculo")
+	public ModelAndView calcular(int año,int mes,@ModelAttribute("empleado") EmpleadoModel EmpleadoModel) {
+		ModelAndView mAV = new ModelAndView();
+		return mAV;
 	}
 }
