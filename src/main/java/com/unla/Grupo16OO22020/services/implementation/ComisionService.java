@@ -49,30 +49,30 @@ public class ComisionService implements IComisionService{
 	
 	@Override
 	public List<Comision> getAll(){
-		return comisionRepository.findAll();
+		return comisionRepository.getAll(); //cambio de findAll a getAll
 	}
 	
-	@Override
-	public void calculoDeComision(int año,int mes,EmpleadoModel empleadoModel) {
-		List<PedidoModel> pedido=pedidoRepository.findBySolicitador_id(empleadoModel.getId());
-		int precio=0;
-		double comisionPorcentaje,comisionTotal=0;
-		ComisionModel comision=comisionRepository.traerMasReciente();
-		
-		for (PedidoModel pedidoModel : pedido) {
-			if(pedidoModel.getFecha().getYear()==año && pedidoModel.getFecha().getMonthValue()==mes) {
-			precio=precio+(pedidoModel.getProductoModel().getPrecioUnitario()*pedidoModel.getCantidadSolicitada());
-			comisionPorcentaje=comision.getPlusPedido()/100;
-			comisionTotal=comisionTotal+(comisionPorcentaje*precio);
-			}
-		}
-		empleadoModel.setSueldo((int)comisionTotal);
-		
-	}
+//	@Override
+//	public void calculoDeComision(int año,int mes,EmpleadoModel empleadoModel) {
+//		List<PedidoModel> pedido=pedidoRepository.findBySolicitador_id(empleadoModel.getId());
+//		int precio=0;
+//		double comisionPorcentaje,comisionTotal=0;
+//		ComisionModel comision=comisionRepository.traerMasReciente();
+//		
+//		for (PedidoModel pedidoModel : pedido) {
+//			if(pedidoModel.getFecha().getYear()==año && pedidoModel.getFecha().getMonthValue()==mes) {
+//			precio=precio+(pedidoModel.getProductoModel().getPrecioUnitario()*pedidoModel.getCantidadSolicitada());
+//			comisionPorcentaje=comision.getPlusPedido()/100;
+//			comisionTotal=comisionTotal+(comisionPorcentaje*precio);
+//			}
+//		}
+//		empleadoModel.setSueldo((int)comisionTotal);
+//		
+//	}
 	
-	@Override
-	public ComisionModel traerMasReciente() {
-		return comisionRepository.traerMasReciente();
-	}
+//	@Override
+//	public ComisionModel traerMasReciente() {
+//		return comisionRepository.traerMasReciente();
+//	}
 	
 }

@@ -2,7 +2,10 @@ package com.unla.Grupo16OO22020.services.implementation;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,15 +15,19 @@ import org.springframework.stereotype.Service;
 
 import com.unla.Grupo16OO22020.converters.PedidoConverter;
 import com.unla.Grupo16OO22020.converters.PersonaConverter;
+import com.unla.Grupo16OO22020.entities.Comision;
 import com.unla.Grupo16OO22020.entities.Empleado;
 import com.unla.Grupo16OO22020.entities.Local;
 import com.unla.Grupo16OO22020.entities.Lote;
 import com.unla.Grupo16OO22020.entities.Pedido;
 import com.unla.Grupo16OO22020.entities.Producto;
+import com.unla.Grupo16OO22020.models.DetallePedidoEmpleadoModel;
 import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.models.PedidoModel;
+import com.unla.Grupo16OO22020.models.PlusSueldoModel;
 import com.unla.Grupo16OO22020.models.ProductoModel;
 import com.unla.Grupo16OO22020.models.RankingModel;
+import com.unla.Grupo16OO22020.repositories.IComisionRepository;
 import com.unla.Grupo16OO22020.repositories.ILoteRepository;
 import com.unla.Grupo16OO22020.repositories.IPedidoRepository;
 import com.unla.Grupo16OO22020.repositories.IProductoRepository;
@@ -57,6 +64,12 @@ public class PedidoService implements IPedidoService {
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
+	@Autowired
+	@Qualifier("comisionService")
+	private ComisionService comisionService;
+	@Autowired
+	@Qualifier("comisionRepository")
+	private IComisionRepository comisionRepository;	
 	
 	@Override	
 	public List<Pedido> getAll() {
@@ -162,6 +175,35 @@ public class PedidoService implements IPedidoService {
 			    .filter(x -> x.getEstado() == estado)
 			    .collect(Collectors.toList());
 		return pedidos;
+	}
+
+	@Override
+	public List<PlusSueldoModel> calcularPlusPedido() {
+		LocalDate start = YearMonth.now().atDay(1);
+		LocalDate end   = YearMonth.now().atEndOfMonth();		
+		List<PlusSueldoModel> lista= pedidoRepository.calcularPlusPedido(userService.traerEmpleadoLogueado().getLocal().getId(), start, end);
+		List<Comision> listaComisiones =comisionService.getAll();
+		//Collections.sort(listaComisiones, Collections.reverseOrder());
+		Comision c = listaComisiones.get(0);
+		for (PlusSueldoModel p : lista) {
+		p.setPlus(p.getTotalPedidos() *  c.getPlusVenta() /100);	
+		}
+		
+		return lista;
+	}
+
+	@Override
+	public List<DetallePedidoEmpleadoModel> obtenerPedidosPorEmpleado(int empleado_id) {
+		LocalDate start = YearMonth.now().atDay(1);
+		LocalDate end   = YearMonth.now().atEndOfMonth();
+		return pedidoRepository.obtenerPedidosPorEmpleado(empleado_id, start, end);
+	}
+
+	@Override
+	public int calcularPlusTotal(int empleado) {
+		LocalDate start = YearMonth.now().atDay(1);
+		LocalDate end   = YearMonth.now().atEndOfMonth();
+		return  pedidoRepository.obtenerPedidosPorEmpleado(empleado, start, end).stream().filter(x->x.getSubTotal()>0).mapToInt(x->x.getSubTotal()).sum();
 	}
 
 }

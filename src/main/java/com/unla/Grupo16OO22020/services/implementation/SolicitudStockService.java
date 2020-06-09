@@ -1,5 +1,7 @@
 package com.unla.Grupo16OO22020.services.implementation;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -117,7 +119,5 @@ public class SolicitudStockService implements ISolicitudStockService{
 		pedidoService.insertOrUpdate(p);
 		solicitudStockRepository.save(soli);
 	    return true;
-	}
-	
-	
+	}	
 }

@@ -1,0 +1,79 @@
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<body>
+
+<div layout:fragment="content">
+
+<div class="row">
+     <h3 class="col-md-2">Reporte</h3>    
+ </div>        
+<br/>
+<table id="tabla" class="table table-striped table-bordered table-hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>Empleado</th>
+			<th>Sueldo</th>
+			<th>Plus</th> 
+ 			<th></th>
+            </tr>
+    </thead>
+    <tbody>        
+        <tr th:each="r : ${reporte}">  
+           <td><span th:text="${r.nombre}" /></td>
+		   <td><span th:text="${r.sueldo}" /></td>
+		   <td><span th:text="${r.plus}" /></td>
+		   
+		 <td>
+		 <div class="detalle" style="color: black;font-size: 20px;text-align: center;" th:data-value="${r.empleadoId}">
+		 <i class="fa fa-list-ul" aria-hidden="true"></i>
+		 </div>		 
+		 </td>  
+        </tr>        
+    </tbody>
+</table>
+
+<div id="detalle">
+
+</div>
+</div>
+</body>
+</html>
+<script>
+
+	$(document).ready(function() {
+		$(".detalle").click(function() {
+			var id = $(this)[0].getAttribute("data-value");
+			id = parseInt(id);
+			if ($.isNumeric(id)) {
+				$.ajax({
+					method : "GET",
+					url : "/reporteSueldo/detallePedido",
+					data : {
+						empleadoId : id
+					}
+				}).done(function(result) {
+					$("#detalle").html(result);
+					$("#modalDetalle").modal("show");	
+					
+				}).fail(function() {
+					alert("error");
+				});
+				
+				$.ajax({
+					method : "GET",
+					url : "/reporteSueldo/calcularPlusTotal",
+					data : {
+						empleado : id
+					}
+				}).done(function(result) {
+					$("#total").val(result);	
+					
+				}).fail(function() {
+					alert("error");
+				});
+				
+			} else
+				$("#detalle").html("");
+		});
+	});
+</script>

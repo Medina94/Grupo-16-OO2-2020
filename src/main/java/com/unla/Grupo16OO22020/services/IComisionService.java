@@ -8,13 +8,12 @@ import com.unla.Grupo16OO22020.models.EmpleadoModel;
 
 public interface IComisionService {
 
-	public List<Comision> getAll();
 	
 	public ComisionModel findById(int id);
 	
 	public ComisionModel insertOrUpdate(ComisionModel comisionModel);
 	
-	public void calculoDeComision(int año,int mes,EmpleadoModel empleadoModel);
+//	public void calculoDeComision(int año,int mes,EmpleadoModel empleadoModel);
 	
-	public ComisionModel traerMasReciente();
+	public List<Comision> getAll();
 }

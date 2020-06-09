@@ -1,6 +1,7 @@
 package com.unla.Grupo16OO22020.repositories;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,6 +19,9 @@ public interface ISolicitudStockRepository extends JpaRepository<SolicitudStock,
 	
 	@Query("Select s from SolicitudStock s join s.local l where (:localId) = 0 OR l.id = (:localId)")
 	public abstract List<SolicitudStock> obtenerSolicitudesRecibidas(int localId);
+	
+	
+//	public abstract List<SolicitudStock> calcularPlusCeder (int localId, LocalDate fechaDesde, LocalDate fechaHasta); 
 	
 	
 }

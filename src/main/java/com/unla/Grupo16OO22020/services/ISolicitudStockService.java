@@ -20,4 +20,5 @@ public interface ISolicitudStockService {
 	public boolean aceptarSolicitudStock(int soli);
 	
 	public boolean rechazarSolicitudStock(int soli);
+	
 }
