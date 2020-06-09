@@ -8,6 +8,7 @@
 
 }
  </style>
+ 
 <div class="modal fade" id="modalLote" tabindex="-1" role="dialog"
 	aria-labelledby="modal" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
@@ -40,14 +41,6 @@
 									Cantidad: <input class="form-control cantidad" id="algo"
 										 type="number"
 										th:field="*{cantidadSolicitada}" min="1" />
-								</p>
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-group col">
-								<p>
-									Fecha Ingreso: <input class="form-control"
-										type="date" th:field="*{fecha}" required/>
 								</p>
 							</div>
 						</div>
@@ -109,8 +102,47 @@
 
 </div>
 <script>
-$(document).ready(function () {
+/*var fechaHoy = new Date();
+var hoy = new String;
+if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+fechaHoy =fecha.getFullYear() + "-" +  fecha.getDate() + "-" + (fecha.getMonth() +1);
 
+today = new Date();
+fecha = new String;
+var dd = today.getDate();
+var mm = today.getMonth()+1; 
+var yyyy = today.getFullYear();
+
+if(dd<10) dd='0'+dd;
+if(mm<10) mm='0'+mm;
+
+hoy = "yyyy + "-" + dd + "-" mm";
+
+document.write(hoy) */
+
+
+
+
+
+
+$(document).ready(function () {
+ 	/*var now = new Date();
+
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+	$("#fecha").attr({
+       "max" : today,        
+       "min" : today          
+    });	
+	*/
 	$('.selectpicker').selectpicker();
 	
 	$("#dialogo-editar").click(function() {
@@ -151,6 +183,9 @@ $(document).ready(function () {
 		$("#aceptarSolicitud").hide();
 		$("#enviarSolicitud").removeAttr('hidden');
 		});
+
+		
+		
 });
 $("#enviarSolicitud").click(function(){
 	$("#consultaStock").modal("hide");
@@ -170,7 +205,9 @@ $("#enviarSolicitud").click(function(){
 		});
 });
 
+var today = new Date().toISOString().split('T')[0];
 
+document.getElementsByName("DateOfTravel")[0].setAttribute('min', today);
 
 </script>
 
