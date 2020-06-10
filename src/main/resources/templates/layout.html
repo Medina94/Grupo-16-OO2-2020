@@ -297,7 +297,7 @@ cursor: pointer;
                 <h6 class="dropdown-header">
                   Mis notificaciones
                 </h6>
-                <a class="dropdown-item d-flex align-items-center" href="/solicitudStock/#recibidos">
+                <a class="dropdown-item d-flex align-items-center" href="/solicitudStock#recibidos">
                   <div class="mr-3">
                     <div class="icon-circle bg-primary">
                       <i class="fas fa-file-alt text-white"></i>
@@ -305,20 +305,21 @@ cursor: pointer;
                   </div>
                   <div>
                     <div class="small text-gray-500" id="fecha"></div>
-                    <span class="font-weight-bold">Has recibido una solicitud de stock</span>
+                    <span class="font-weight-bold" id="cantidad"></span>
                   </div>
                 </a>
-<!--                 <a class="dropdown-item d-flex align-items-center" href="#"> -->
-<!--                   <div class="mr-3"> -->
-<!--                     <div class="icon-circle bg-success"> -->
-<!--                       <i class="fas fa-donate text-white"></i> -->
-<!--                     </div> -->
-<!--                   </div> -->
-<!--                   <div> -->
-<!--                     <div class="small text-gray-500">December 7, 2019</div> -->
-<!--                     $290.29 has been deposited into your account! -->
-<!--                   </div> -->
-<!--                 </a> -->
+                <!--  -->
+                <a class="dropdown-item d-flex align-items-center" href="/solicitudStock#recibidos">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-success">
+                      <i class="fas fa-donate text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500" id="fechaNoti"></div>
+                   	 <span class="font-weight-bold" id="mensaje"></span>
+                  </div>
+                </a>
 <!--                 <a class="dropdown-item d-flex align-items-center" href="#"> -->
 <!--                   <div class="mr-3"> -->
 <!--                     <div class="icon-circle bg-warning"> -->
@@ -409,6 +410,9 @@ function MensError(title, mensaje, callback){
 
 }
 
+var date = new Date();
+var fecha = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear();
+
 $(document).ready(function () {	
 	$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
 		method: "GET",
@@ -421,12 +425,11 @@ $(document).ready(function () {
 		alert("error");
 	});
 	cargar();
+	cargarNotificaciones();
 setInterval(function(){cargar()}, 60000);
  
 });
 function cargar(){
-	var date = new Date();
-	var fecha = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear();
 	$.ajax({
 		method: "GET",
 		url: "/solicitudStock/verificarSolicitudes",
@@ -436,6 +439,25 @@ function cargar(){
 			$("#count").html(result);
 			$("#verAlertas").removeAttr('hidden');
 			$("#fecha").text(fecha);
+			$("#cantidad").text("Recibiste "+result+" solicitudes");
+		}
+	})
+	.fail(function(){
+		alert("error");
+	});
+ }
+function cargarNotificaciones(){
+
+	$.ajax({
+		method: "GET",
+		url: "/solicitudStock/verificarNotificaciones",
+	})
+	.done(function(result){
+		if(result > 0){
+			$("#count").html(result);
+			$("#verAlertas").removeAttr('hidden');
+			$("#fecha").text(fecha);
+			$("#mensaje").text("Fueron confirmadas "+result+" solicitudes");
 		}
 	})
 	.fail(function(){

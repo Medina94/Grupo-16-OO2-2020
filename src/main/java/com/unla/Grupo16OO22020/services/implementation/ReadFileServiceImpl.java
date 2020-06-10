@@ -20,7 +20,7 @@ public class ReadFileServiceImpl implements ReadFileService{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	@PostConstruct
+	//@PostConstruct
 	public void insertarEmpleado() {
 		List<ClienteModel> lista = new ArrayList<>();
 		lista = (List<ClienteModel>)(Object)LeerTxt.leer(PATH_EMPLEADO);

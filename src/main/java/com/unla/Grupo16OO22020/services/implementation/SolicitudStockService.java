@@ -13,10 +13,12 @@ import com.unla.Grupo16OO22020.converters.ProductoConverter;
 import com.unla.Grupo16OO22020.converters.SolicitudStockConverter;
 import com.unla.Grupo16OO22020.entities.Empleado;
 import com.unla.Grupo16OO22020.entities.Local;
+import com.unla.Grupo16OO22020.entities.Notificacion;
 import com.unla.Grupo16OO22020.entities.SolicitudStock;
 import com.unla.Grupo16OO22020.enums.EstadoEnum;
 import com.unla.Grupo16OO22020.models.PedidoModel;
 import com.unla.Grupo16OO22020.models.SolicitudStockModel;
+import com.unla.Grupo16OO22020.repositories.INotificacionRepository;
 import com.unla.Grupo16OO22020.repositories.ISolicitudStockRepository;
 import com.unla.Grupo16OO22020.services.ILocalService;
 import com.unla.Grupo16OO22020.services.IPedidoService;
@@ -52,6 +54,9 @@ public class SolicitudStockService implements ISolicitudStockService{
 	@Autowired
 	@Qualifier("solicitudStockConverter")
 	private SolicitudStockConverter solicitudStockConverter;
+	@Autowired
+	@Qualifier("notificacionRepository")
+	private INotificacionRepository notificacionRepository;
 	
 	@Override
 	public SolicitudStock findById(int id) {
@@ -101,6 +106,8 @@ public class SolicitudStockService implements ISolicitudStockService{
 		soli.setColaborador(userService.traerEmpleadoLogueado());
 		pedidoService.actualizarStock(p);
 		pedidoService.insertOrUpdate(p);
+		Notificacion noti = new Notificacion(0, soli.getSolicitador());
+		notificacionRepository.save(noti);
 		solicitudStockRepository.save(soli);
 	    return true;
 	}
@@ -120,6 +127,13 @@ public class SolicitudStockService implements ISolicitudStockService{
 	@Override
 	public int consultarNotificaciones() {
 		int cantidad = obtenerSolicitudesRealizadas(EstadoEnum.ESTADO_PENDIENTE.getCodigo()).size();
+		return cantidad;
+	}
+
+	@Override
+	public int consultarNotificacionesConfirmadas() {
+		Empleado empleado = userService.traerEmpleadoLogueado();
+		int cantidad = notificacionRepository.traerNotificacionesPropias(empleado.getId()).size();
 		return cantidad;
 	}
 	

@@ -23,4 +23,5 @@ public interface ISolicitudStockService {
 	
 	public int consultarNotificaciones();
 	
+	public int consultarNotificacionesConfirmadas();
 }
