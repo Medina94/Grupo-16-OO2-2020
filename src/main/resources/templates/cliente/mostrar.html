@@ -21,8 +21,8 @@
             <th>Mail</th>
             <th>Nacimiento</th>
 			<th>Dni</th>
-			<th></th>
-			<th></th>
+			<th class="act"></th>
+			<th class="eliminar"></th>
         </tr>
     </thead>
     <tbody>        
@@ -32,11 +32,11 @@
             <td><span th:text="${cliente.mail}" /></td>
 			<td><span th:text="${cliente.fechaNacimiento}" /></td>
 			 <td><span th:text="${cliente.dni}" /></td>
-           <td style="text-align:center"><div class="actualizar" th:data-value="${cliente.id}">
+           <td style="text-align:center" class="act"><div class="actualizar" th:data-value="${cliente.id}">
            <i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
            </div>
            </td>
-            <td  style="text-align:center">
+            <td  style="text-align:center" class="eliminar">
             <form action="#" th:action="@{/persona/cliente/eliminar/{id}(id=${cliente.id})}" method="post">
 	              <button class="fa fa-trash" type="submit" style="font-size: 24px; color: black;border: 0 !important;" aria-hidden="true"></button>
             </form>
@@ -86,10 +86,24 @@ $(document).ready(function () {
 				.fail(function() {
 					alert("error");
 				});
-			}else $("#modalActualizar").html("");
-			
+			}else $("#modalActualizar").html("");			
 			
 		});
+		
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+		 	url: "/consultarRol"		 	
+		})
+		.done(function(result) {
+			if(result == "ROL_EMPLEADO"){
+				$(".abrirModal").hide();
+				$(".eliminar").hide();
+				$(".act").hide();
+			}
+		})
+		.fail(function() {
+			alert("error");
+		});	
 });
 
 

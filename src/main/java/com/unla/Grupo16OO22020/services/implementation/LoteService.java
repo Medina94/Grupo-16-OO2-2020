@@ -69,7 +69,7 @@ public class LoteService implements ILoteService {
 
 	@Override
 	public List<Lote> traerTodoLoteDelLocal(int localId) {
-		return loteRepository.traerTodoLoteDelLocal(localId);
+		return loteRepository.traerTodoLoteDelLocal(localId, userService.traerRol());
 	}
 
 }

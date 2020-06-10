@@ -25,6 +25,7 @@ import com.unla.Grupo16OO22020.models.RankingModel;
 import com.unla.Grupo16OO22020.services.ILocalService;
 import com.unla.Grupo16OO22020.services.IPedidoService;
 import com.unla.Grupo16OO22020.services.IProductoService;
+import com.unla.Grupo16OO22020.services.implementation.UserService;
 
 
 @Controller
@@ -39,6 +40,9 @@ public class HomeController {
 	@Autowired
 	@Qualifier("pedidoService")
 	private IPedidoService pedidoService;
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 	
 	//GET Example: SERVER/index
 	@GetMapping("/index")
@@ -64,15 +68,26 @@ public class HomeController {
 		LocalDate fechaHasta = LocalDate.parse(hasta);
 		ArrayList<RankingModel> productos = pedidoService.obtenerRanking(fechaDesde, fechaHasta, localId);
 		
-		if(orden == 0) {
+		if(orden == 1) {
 			Collections.sort(productos, 
 				    Comparator.comparingLong(RankingModel::getTotal).reversed());
-		}else{
+		}else if (orden == 2){
 			Collections.sort(productos, 
 				    Comparator.comparingLong(RankingModel::getTotal));
 		}
-		
-		modelAndView.addObject("productos", productos.size() > 2 ? productos.subList(0, 2): productos);
+		else {
+			modelAndView.addObject("productos", productos);
+			return modelAndView;
+		}
+		modelAndView.addObject("productos", productos.size() >= 2 ? productos.subList(0, 2): productos);
 		return modelAndView;
+	 }	
+	
+
+	@GetMapping("/consultarRol")
+	@ResponseBody
+	 public String consultarRol()
+	 {	
+		return userService.traerRol();
 	 }	
 }

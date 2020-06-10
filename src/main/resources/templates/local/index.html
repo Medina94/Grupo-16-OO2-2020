@@ -22,8 +22,8 @@
             <th>Longitud</th>
             <th>Latitud</th> 
             <th></th>
-            <th></th>
-             <th></th>
+            <th class="act"></th>
+            <th class="eliminar"></th>
     </thead>
     <tbody>        
         <tr th:each="local : ${locales}"> 
@@ -38,11 +38,11 @@
             </td>
 <!--             <td><span th:text="a"/></td> -->
 <!--             <td style="text-align:center"><a th:href="@{/local/{id}(id=${local.id})}"><i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i></a></td> -->
-           <td style="text-align:center"><div class="actualizar" th:data-value="${local.id}">
+           <td style="text-align:center" class="act"><div class="actualizar" th:data-value="${local.id}">
            <i class="fa fa-edit" style="font-size: 24px; color: grey;" aria-hidden="true"></i>
            </div>
            </td>
-            <td  style="text-align:center">
+            <td  style="text-align:center" class="eliminar">
             <form action="#" th:action="@{/local/eliminar/{id}(id=${local.id})}" method="post">
 	              <button class="fa fa-trash" type="submit" style="font-size: 24px; color: black;border: 0 !important;" aria-hidden="true"></button>
             </form>
@@ -114,6 +114,21 @@ $(document).ready(function () {
 			});
 			}else $("#modalCercanos").html("");
 		});
+		
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+		 	url: "/consultarRol"		 	
+		})
+		.done(function(result) {
+			if(result == "ROL_EMPLEADO" || result == "ROL_GERENTE"){
+				$(".abrirModal").hide();
+				$(".eliminar").hide();
+				$(".act").hide();
+			}
+		})
+		.fail(function() {
+			alert("error");
+		});	
 });
 
 

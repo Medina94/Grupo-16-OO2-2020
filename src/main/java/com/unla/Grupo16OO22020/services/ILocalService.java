@@ -11,6 +11,8 @@ public interface ILocalService {
 
 	public List<Local> getAll();
 	
+	public List<Local> traerLocalPorRol();
+	
 	public LocalModel findById(int id);
 	
 	public LocalModel insertOrUpdate(LocalModel localModel);

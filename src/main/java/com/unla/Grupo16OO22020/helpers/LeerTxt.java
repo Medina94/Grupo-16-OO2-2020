@@ -43,7 +43,7 @@ public class LeerTxt {
 				e2.printStackTrace();
 			}
 		}
-		return lista;
+	    return lista;
 	}
 	
 	/**
@@ -56,10 +56,11 @@ public class LeerTxt {
 		String apellido = (String) map.get("apellido");
 		LocalDate fecha = aFecha((String) map.get("fecha"));
 		String mail = (String) map.get("mail");
-		int sueldo = Integer.parseInt((String) map.get("telefono"));
+		int telefono = Integer.parseInt((String) map.get("telefono"));
 		int dni = Integer.parseInt((String) map.get("dni"));
 		
-		return new ClienteModel(0,dni,nombre, apellido, fecha, mail, sueldo, false); // seteo por default eliminado = false | leer desde txt
+		
+		return new ClienteModel(0,dni,nombre, apellido, fecha, mail, telefono, false);
 	}
 	
 	/**

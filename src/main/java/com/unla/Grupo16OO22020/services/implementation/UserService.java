@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -48,17 +49,27 @@ public class UserService implements UserDetailsService {
 		}
 		return new ArrayList<GrantedAuthority>(grantedAuthorities);
 	}
-	
+	public Authentication auth () {
+		 return SecurityContextHolder.getContext().getAuthentication();
+	}
 	public String mostrarUsuario() {
-		 org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		 org.springframework.security.core.userdetails.User a = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
-	     return a.getUsername();
+		Authentication authentication = this.auth();		
+		org.springframework.security.core.userdetails.User a = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();    
+	    
+		 return a.getUsername();
 	}
 	
 	public Empleado traerEmpleadoLogueado() {
-		 org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		 org.springframework.security.core.userdetails.User a = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
-	     return userRepository.findByUsername(a.getUsername()).getEmpleado();
+		Authentication authentication = this.auth();
+		org.springframework.security.core.userdetails.User a = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
+	    return userRepository.findByUsername(a.getUsername()).getEmpleado();
 	}	
+	
+	public String traerRol() {
+		Authentication authentication = this.auth();
+		org.springframework.security.core.userdetails.User a = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
+	    String rol = a.getAuthorities().iterator().next().toString();	    
+		return rol;
+	}
 	
 }
