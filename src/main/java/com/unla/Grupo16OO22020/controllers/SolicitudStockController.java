@@ -1,7 +1,5 @@
 package com.unla.Grupo16OO22020.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.unla.Grupo16OO22020.models.SolicitudStockModel;
 import com.unla.Grupo16OO22020.services.ISolicitudStockService;
 
 @Controller
@@ -51,4 +48,9 @@ public class SolicitudStockController {
 		return solicitudStockService.aceptarSolicitudStock(solicitud);
 	 }
 	
+	 @GetMapping("/verificarSolicitudes")
+	 @ResponseBody
+	 public int verificarSolicitudes() {
+		 return solicitudStockService.consultarNotificaciones();
+	 }
 }

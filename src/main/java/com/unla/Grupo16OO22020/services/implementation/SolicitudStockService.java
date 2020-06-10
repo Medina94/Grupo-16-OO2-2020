@@ -1,6 +1,5 @@
 package com.unla.Grupo16OO22020.services.implementation;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +13,6 @@ import com.unla.Grupo16OO22020.converters.ProductoConverter;
 import com.unla.Grupo16OO22020.converters.SolicitudStockConverter;
 import com.unla.Grupo16OO22020.entities.Empleado;
 import com.unla.Grupo16OO22020.entities.Local;
-import com.unla.Grupo16OO22020.entities.Pedido;
 import com.unla.Grupo16OO22020.entities.SolicitudStock;
 import com.unla.Grupo16OO22020.enums.EstadoEnum;
 import com.unla.Grupo16OO22020.models.PedidoModel;
@@ -117,6 +115,12 @@ public class SolicitudStockService implements ISolicitudStockService{
 		pedidoService.insertOrUpdate(p);
 		solicitudStockRepository.save(soli);
 	    return true;
+	}
+
+	@Override
+	public int consultarNotificaciones() {
+		int cantidad = obtenerSolicitudesRealizadas(EstadoEnum.ESTADO_PENDIENTE.getCodigo()).size();
+		return cantidad;
 	}
 	
 	
