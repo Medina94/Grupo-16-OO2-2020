@@ -126,7 +126,7 @@ public class SolicitudStockService implements ISolicitudStockService{
 
 	@Override
 	public int consultarNotificaciones() {
-		int cantidad = obtenerSolicitudesRealizadas(EstadoEnum.ESTADO_PENDIENTE.getCodigo()).size();
+		int cantidad = obtenerSolicitudesRecibidas(EstadoEnum.ESTADO_PENDIENTE.getCodigo()).size();
 		return cantidad;
 	}
 

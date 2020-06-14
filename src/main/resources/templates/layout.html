@@ -426,8 +426,10 @@ $(document).ready(function () {
 	});
 	cargar();
 	cargarNotificaciones();
-setInterval(function(){cargar()}, 60000);
- 
+setInterval(function(){
+	cargar();
+	cargarNotificaciones()}, 10000);
+
 });
 function cargar(){
 	$.ajax({
