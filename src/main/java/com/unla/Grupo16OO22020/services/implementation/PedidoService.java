@@ -15,6 +15,7 @@ import com.unla.Grupo16OO22020.converters.PersonaConverter;
 import com.unla.Grupo16OO22020.entities.Comision;
 import com.unla.Grupo16OO22020.entities.Lote;
 import com.unla.Grupo16OO22020.entities.Pedido;
+import com.unla.Grupo16OO22020.enums.EstadoEnum;
 import com.unla.Grupo16OO22020.models.DetallePedidoEmpleadoModel;
 import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.models.MailModel;
@@ -81,8 +82,11 @@ public class PedidoService implements IPedidoService {
 		pedidoModel.setSolicitadorModel(personaConverter.EmpleadoEntitytoModel(userService.traerEmpleadoLogueado()));
 		Pedido pedido = pedidoRepository.save(pedidoConverter.modelToEntity(pedidoModel));
 		
-		MailModel mail = new MailModel().buildConfirmado(pedidoModel);
-		mailService.enviarMail(mail, false);
+		// envio mail de confirmado al cliente solo si el estado es == 1 (ACEPTADO)
+		if(pedidoModel.getEstado() == EstadoEnum.ESTADO_ACEPTADO.getCodigo()) {
+			MailModel mail = new MailModel().buildConfirmado(pedidoModel);
+			mailService.enviarMail(mail, false);
+		}
 		
 		return pedidoConverter.entityToModel(pedido);
 	}
