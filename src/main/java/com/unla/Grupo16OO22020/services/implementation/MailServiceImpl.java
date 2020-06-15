@@ -27,9 +27,9 @@ public class MailServiceImpl implements IMailService {
 	
 	@Override
 	@Async
-	public boolean enviarMail(MailModel mail, boolean adjunto) {
+	public void enviarMail(MailModel mail, boolean adjunto) {
 		LOGGER.info("MailModel: {}", mail.toString());
-		return enviarMailDestinatario(mail, adjunto);
+		enviarMailDestinatario(mail, adjunto);
 	}
 
 	private boolean enviarMailDestinatario(MailModel mail, boolean adjunto) {

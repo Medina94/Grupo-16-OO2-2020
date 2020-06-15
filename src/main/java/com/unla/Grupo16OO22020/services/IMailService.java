@@ -13,6 +13,6 @@ public interface IMailService {
 	 * @param mail
 	 * @return
 	 */
-	public boolean enviarMail(MailModel mail, boolean adjunto);
+	public void enviarMail(MailModel mail, boolean adjunto);
 	
 }
