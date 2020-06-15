@@ -15,7 +15,6 @@ import com.unla.Grupo16OO22020.entities.User;
 import com.unla.Grupo16OO22020.entities.UserRole;
 import com.unla.Grupo16OO22020.models.ClienteModel;
 import com.unla.Grupo16OO22020.models.EmpleadoModel;
-import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.repositories.IClienteRepository;
 import com.unla.Grupo16OO22020.repositories.IEmpleadoRepository;
 import com.unla.Grupo16OO22020.repositories.IRoleRepository;
@@ -156,6 +155,11 @@ public class PersonaService implements IPersonaService {
 			}
 		}
 		return listaEmpleados;
+	}
+
+	@Override
+	public List<Empleado> traerEmpleadosLocal(int idLocal) {
+		return empleadoRepository.getEmpleadosByLocal(idLocal);
 	}
 
 }

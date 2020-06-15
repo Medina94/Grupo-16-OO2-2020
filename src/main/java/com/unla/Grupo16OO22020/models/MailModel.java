@@ -1,5 +1,7 @@
 package com.unla.Grupo16OO22020.models;
 
+import com.unla.Grupo16OO22020.enums.AsuntoMailEnum;
+
 /**
  * Clase que establece la estructura básica de un mail
  * @author Cristian
@@ -10,7 +12,6 @@ public class MailModel {
 	private String receptor;
 	private String asunto;
 	private String mensaje;
-	private static final String ASUNTO = "Confirmación de pedido";
 	
 	public MailModel() {}
 	
@@ -58,11 +59,55 @@ public class MailModel {
 		return "emisor=" + emisor + ", receptor=" + receptor + ", asunto=" + asunto + ", mensaje=" + mensaje;
 	}
 	
-	public MailModel build(PedidoModel pedido) {
+	// Defino constructores para enviar mail en las 3 posibles respuestas al pedido del cliente
+	public MailModel buildConfirmado(PedidoModel pedido) {
 		this.emisor = "emisor";
 		this.receptor = pedido.getClienteModel().getMail();
-		this.mensaje = "Tu pedido fue confirmado con éxito";
-		this.asunto = ASUNTO;
+		this.mensaje = AsuntoMailEnum.ASUNTO_MAIL_CLIENTE_CONFIRMADO.getMensaje();
+		this.asunto = AsuntoMailEnum.ASUNTO_MAIL_CLIENTE_CONFIRMADO.getAsunto();
+		return this;
+	}
+	
+	public MailModel buildPendiente(PedidoModel pedido) {
+		this.emisor = "emisor";
+		this.receptor = pedido.getClienteModel().getMail();
+		this.mensaje = AsuntoMailEnum.ASUNTO_MAIL_CLIENTE_PENDIENTE.getMensaje();
+		this.asunto = AsuntoMailEnum.ASUNTO_MAIL_CLIENTE_PENDIENTE.getAsunto();
+		return this;
+	}
+	
+	public MailModel buildRechazado(PedidoModel pedido) {
+		this.emisor = "emisor";
+		this.receptor = pedido.getClienteModel().getMail();
+		this.mensaje = AsuntoMailEnum.ASUNTO_MAIL_CLIENTE_RECHAZADO.getMensaje();
+		this.asunto = AsuntoMailEnum.ASUNTO_MAIL_CLIENTE_RECHAZADO.getAsunto();
+		return this;
+	}
+	//--------------------------------------------------------------------------
+	/**
+	 * Este metodo se debe llamar cuando un colaborador responde a la solicitud de stock
+	 * @param pedido
+	 * @return
+	 */
+	public MailModel buildMailSolicitante(String mailSolicitante) {
+		this.emisor = "emisor";
+		this.receptor = mailSolicitante;
+		this.mensaje = AsuntoMailEnum.ASUNTO_MAIL_SOLICITANTE.getMensaje();
+		this.asunto = AsuntoMailEnum.ASUNTO_MAIL_SOLICITANTE.getAsunto();
+		return this;
+	}
+	
+	/**
+	 * Este metodo deberia de usarse para enviar el mail a cada uno de los empleados
+	 *  que pertenecen al local al que se realiza la solicitud de stock
+	 * @param mailColaborador
+	 * @return
+	 */
+	public MailModel buildMailColaborador(String mailColaborador) {
+		this.emisor = "emisor";
+		this.receptor = mailColaborador;
+		this.mensaje = AsuntoMailEnum.ASUNTO_MAIL_COLABORADOR.getMensaje();
+		this.asunto = AsuntoMailEnum.ASUNTO_MAIL_COLABORADOR.getAsunto();
 		return this;
 	}
 }

@@ -81,8 +81,8 @@ public class PedidoService implements IPedidoService {
 		pedidoModel.setSolicitadorModel(personaConverter.EmpleadoEntitytoModel(userService.traerEmpleadoLogueado()));
 		Pedido pedido = pedidoRepository.save(pedidoConverter.modelToEntity(pedidoModel));
 		
-		MailModel mail = new MailModel().build(pedidoModel);
-		mailService.enviarMailCliente(mail);
+		MailModel mail = new MailModel().buildConfirmado(pedidoModel);
+		mailService.enviarMail(mail, false);
 		
 		return pedidoConverter.entityToModel(pedido);
 	}

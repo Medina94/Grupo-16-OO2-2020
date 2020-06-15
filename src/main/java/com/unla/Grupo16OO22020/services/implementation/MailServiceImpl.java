@@ -27,12 +27,12 @@ public class MailServiceImpl implements IMailService {
 	
 	@Override
 	@Async
-	public boolean enviarMailCliente(MailModel mail) {
+	public boolean enviarMail(MailModel mail, boolean adjunto) {
 		LOGGER.info("MailModel: {}", mail.toString());
-		return enviarMail(mail);
+		return enviarMailDestinatario(mail, adjunto);
 	}
 
-	private boolean enviarMail(MailModel mail) {
+	private boolean enviarMailDestinatario(MailModel mail, boolean adjunto) {
 		boolean send = false;
 		MimeMessage message = mailSender.createMimeMessage();
 		try {
@@ -42,9 +42,10 @@ public class MailServiceImpl implements IMailService {
 			helper.setText(mail.getMensaje());
 			helper.setSubject(mail.getAsunto());
 			// Obtengo un archivo del sistema y lo adjunto en el mail
-			//FileSystemResource file = new FileSystemResource("C:\\Users\\Cristian\\Desktop\\Plantilla Informe de Avance.pdf");
-			//helper.addAttachment(file.getFilename(), file);
-			
+			if(adjunto) {
+				//FileSystemResource file = new FileSystemResource("C:\\Users\\Cristian\\Desktop\\Plantilla Informe de Avance.pdf");
+				//helper.addAttachment(file.getFilename(), file);
+			}
 			mailSender.send(message);
 			send = true;
 			LOGGER.info("Mail enviado!!");

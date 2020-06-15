@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.unla.Grupo16OO22020.entities.Cliente;
 import com.unla.Grupo16OO22020.entities.Empleado;
 
 @Repository("empleadoRepository")
@@ -18,5 +17,8 @@ public interface IEmpleadoRepository extends JpaRepository<Empleado, Serializabl
 	
 	@Query("SELECT e FROM Empleado e join e.local l WHERE ((:rol) = 'ROL_ADMIN' OR l.id = (:local)) AND e.eliminado=false")
 	public abstract List<Empleado> getAllEmpleado(int local, String rol);
+	
+	@Query("SELECT e from Empleado e join e.local l where l.id = (:idLocal)")
+	public abstract List<Empleado> getEmpleadosByLocal(int idLocal);
 	
 }
