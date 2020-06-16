@@ -1,7 +1,5 @@
 package com.unla.Grupo16OO22020.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.unla.Grupo16OO22020.models.SolicitudStockModel;
+import com.unla.Grupo16OO22020.enums.EstadoEnum;
 import com.unla.Grupo16OO22020.services.ISolicitudStockService;
 
 @Controller
@@ -24,8 +22,8 @@ public class SolicitudStockController {
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView("solicitudStock/index");
-		mAV.addObject("solicitudesRealizadas", solicitudStockService.obtenerSolicitudesRealizadas(1));
-		mAV.addObject("solicitudesRecibidas", solicitudStockService.obtenerSolicitudesRecibidas(1));
+		mAV.addObject("solicitudesRealizadas", solicitudStockService.obtenerSolicitudesRealizadas(EstadoEnum.ESTADO_PENDIENTE.getCodigo()));
+		mAV.addObject("solicitudesRecibidas", solicitudStockService.obtenerSolicitudesRecibidas(EstadoEnum.ESTADO_PENDIENTE.getCodigo()));
 		return mAV;
 	}
 	
@@ -51,4 +49,15 @@ public class SolicitudStockController {
 		return solicitudStockService.aceptarSolicitudStock(solicitud);
 	 }
 	
+	 @GetMapping("/verificarSolicitudes")
+	 @ResponseBody
+	 public int verificarSolicitudes() {
+		 return solicitudStockService.consultarNotificaciones();
+	 }
+	 
+	 @GetMapping("/verificarNotificaciones")
+	 @ResponseBody
+	 public int verificarNotificaciones() {
+		 return solicitudStockService.consultarNotificacionesConfirmadas();
+	 }
 }

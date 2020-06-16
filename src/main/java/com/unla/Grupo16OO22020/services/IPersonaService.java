@@ -31,4 +31,6 @@ public interface IPersonaService{
 	 */
 	public List<EmpleadoModel> obtenerEmpleados(int id);
 	
+	public List<Empleado> traerEmpleadosLocal(int idLocal);
+	
 }

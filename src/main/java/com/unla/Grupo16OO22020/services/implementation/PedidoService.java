@@ -1,11 +1,8 @@
 package com.unla.Grupo16OO22020.services.implementation;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,13 +13,12 @@ import org.springframework.stereotype.Service;
 import com.unla.Grupo16OO22020.converters.PedidoConverter;
 import com.unla.Grupo16OO22020.converters.PersonaConverter;
 import com.unla.Grupo16OO22020.entities.Comision;
-import com.unla.Grupo16OO22020.entities.Empleado;
-import com.unla.Grupo16OO22020.entities.Local;
 import com.unla.Grupo16OO22020.entities.Lote;
 import com.unla.Grupo16OO22020.entities.Pedido;
-import com.unla.Grupo16OO22020.entities.Producto;
+import com.unla.Grupo16OO22020.enums.EstadoEnum;
 import com.unla.Grupo16OO22020.models.DetallePedidoEmpleadoModel;
 import com.unla.Grupo16OO22020.models.LocalModel;
+import com.unla.Grupo16OO22020.models.MailModel;
 import com.unla.Grupo16OO22020.models.PedidoModel;
 import com.unla.Grupo16OO22020.models.PlusSueldoModel;
 import com.unla.Grupo16OO22020.models.ProductoModel;
@@ -30,7 +26,7 @@ import com.unla.Grupo16OO22020.models.RankingModel;
 import com.unla.Grupo16OO22020.repositories.IComisionRepository;
 import com.unla.Grupo16OO22020.repositories.ILoteRepository;
 import com.unla.Grupo16OO22020.repositories.IPedidoRepository;
-import com.unla.Grupo16OO22020.repositories.IProductoRepository;
+import com.unla.Grupo16OO22020.services.IMailService;
 import com.unla.Grupo16OO22020.services.IPedidoService;
 
 
@@ -70,6 +66,9 @@ public class PedidoService implements IPedidoService {
 	@Autowired
 	@Qualifier("comisionRepository")
 	private IComisionRepository comisionRepository;	
+	@Autowired
+	@Qualifier("mailService")
+	private IMailService mailService;
 	
 	@Override	
 	public List<Pedido> getAll() {
@@ -82,6 +81,13 @@ public class PedidoService implements IPedidoService {
 		pedidoModel.setClienteModel(personaService.clienteFindById(pedidoModel.getClienteModel().getId()));
 		pedidoModel.setSolicitadorModel(personaConverter.EmpleadoEntitytoModel(userService.traerEmpleadoLogueado()));
 		Pedido pedido = pedidoRepository.save(pedidoConverter.modelToEntity(pedidoModel));
+		
+		// envio mail de confirmado al cliente solo si el estado es == 1 (ACEPTADO)
+		if(pedidoModel.getEstado() == EstadoEnum.ESTADO_ACEPTADO.getCodigo()) {
+			MailModel mail = new MailModel().buildConfirmado(pedidoModel);
+			mailService.enviarMail(mail, false);
+		}
+		
 		return pedidoConverter.entityToModel(pedido);
 	}
 
