@@ -23,7 +23,11 @@ public class ReadFileServiceImpl implements ReadFileService{
 	private LocalService localService;
 	@Autowired
 	private ProductoService productoService;
+	@Autowired
 	private LoteService loteService;
+	@Autowired
+	private LeerTxt leerTxt;
+	
 	private static final String PATH_EMPLEADO = "src\\main\\resources\\text\\empleado";
 	private static final String PATH_LOCAL = "src\\main\\resources\\text\\local";
 	private static final String PATH_PRODUCTO = "src\\main\\resources\\text\\producto";
@@ -31,10 +35,9 @@ public class ReadFileServiceImpl implements ReadFileService{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	
 	public void insertarEmpleado() {
 		List<ClienteModel> lista = new ArrayList<>();
-		lista = (List<ClienteModel>)(Object)LeerTxt.leer(PATH_EMPLEADO);
+		lista = (List<ClienteModel>)(Object)leerTxt.leer(PATH_EMPLEADO);
 		for(ClienteModel em : lista) {
 			
 			personaService.clienteInsertOrUpdate(em);
@@ -44,10 +47,10 @@ public class ReadFileServiceImpl implements ReadFileService{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	@PostConstruct
+	//@PostConstruct
 	public void insertarLocal() {
 		List<LocalModel> lista = new ArrayList<>();
-		lista = (List<LocalModel>)(Object)LeerTxt.leer(PATH_LOCAL);
+		lista = (List<LocalModel>)(Object)leerTxt.leer(PATH_LOCAL);
 		for(LocalModel em : lista) {
 			
 			LocalModel l = localService.insertOrUpdate(em);
@@ -59,7 +62,7 @@ public class ReadFileServiceImpl implements ReadFileService{
 	@PostConstruct
 	public void insertarProducto() {
 		List<ProductoModel> lista = new ArrayList<>();
-		lista = (List<ProductoModel>)(Object)LeerTxt.leer(PATH_PRODUCTO);
+		lista = (List<ProductoModel>)(Object)leerTxt.leer(PATH_PRODUCTO);
 		for(ProductoModel em : lista) {
 			productoService.insertOrUpdate(em);
 		}
@@ -67,10 +70,9 @@ public class ReadFileServiceImpl implements ReadFileService{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	
 	public void insertarLote() {
 		List<LoteModel> lista = new ArrayList<>();
-		lista = (List<LoteModel>)(Object)LeerTxt.leer(PATH_LOTE);
+		lista = (List<LoteModel>)(Object)leerTxt.leer(PATH_LOTE);
 		for(LoteModel em : lista) {
 			loteService.insertOrUpdate(em);
 		}

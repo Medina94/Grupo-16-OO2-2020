@@ -17,21 +17,19 @@ import org.springframework.stereotype.Service;
 import com.unla.Grupo16OO22020.entities.Empleado;
 import com.unla.Grupo16OO22020.entities.User;
 import com.unla.Grupo16OO22020.models.ClienteModel;
-import com.unla.Grupo16OO22020.models.EmpleadoModel;
 import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.models.LoteModel;
 import com.unla.Grupo16OO22020.models.ProductoModel;
 import com.unla.Grupo16OO22020.services.ILocalService;
 
 @Service("leerTxt")
-public class LeerTxt {
-	
+public class LeerTxt { 
 
-
+	@Autowired
 	@Qualifier("localService")
-	private static ILocalService localService;
+	private ILocalService localService;
 	
-	public static List<Object> leer(String path) {
+	public List<Object> leer(String path) {
 		List<Object> lista = new ArrayList<>();
 		File archivo = null;
 		FileReader fr = null;
@@ -70,7 +68,7 @@ public class LeerTxt {
 	 * @param map
 	 * @return
 	 */
-	public static ClienteModel empleadosTxt(Map<String, Object> map) {
+	public ClienteModel empleadosTxt(Map<String, Object> map) {
 		String nombre = (String) map.get("nombre");
 		String apellido = (String) map.get("apellido");
 		LocalDate fecha = aFecha((String) map.get("fecha"));
@@ -82,7 +80,7 @@ public class LeerTxt {
 		return new ClienteModel(0,dni,nombre, apellido, fecha, mail, telefono, false);
 	}
 	
-	public static LocalModel localTxt(Map<String, Object> map) {
+	public LocalModel localTxt(Map<String, Object> map) {
 		int telefono = Integer.parseInt((String) map.get("telefono"));
 		String direccion = (String) map.get("direccion");
 		double latitud = Double.parseDouble((String) map.get("latitud"));
@@ -91,7 +89,7 @@ public class LeerTxt {
 		return new LocalModel(0,telefono,direccion, latitud, longitud);
 	}
 	
-	public static ProductoModel productoTxt(Map<String, Object> map) {
+	public ProductoModel productoTxt(Map<String, Object> map) {
 		String descripcion = (String) map.get("descripcion");
 		int precioUnitario = Integer.parseInt((String) map.get("precioUnitario"));
 		
@@ -105,7 +103,7 @@ public class LeerTxt {
 		return new ProductoModel(0,descripcion,precioUnitario,local,fechaAlta,false,codigo,imagenUrl);
 	}
 	
-	public static LoteModel loteTxt(Map<String, Object> map) {
+	public LoteModel loteTxt(Map<String, Object> map) {
 		int cantidad = (int) map.get("cantidad");
 		LocalDate fechaIngreso = aFecha((String) map.get("fechaIngreso"));	
 		ProductoModel productolModel = (ProductoModel) map.get("productolModel");
@@ -113,7 +111,7 @@ public class LeerTxt {
 		return new LoteModel(0,cantidad,fechaIngreso,productolModel);
 	}
 	
-	public static User userTxt(Map<String, Object> map) {
+	public User userTxt(Map<String, Object> map) {
 		String username = (String) map.get("username");
 		String password = (String) map.get("password");
 		Empleado empleado = (Empleado) map.get("empleado");
@@ -121,7 +119,7 @@ public class LeerTxt {
 		return new User(username,password,true,empleado);
 	}
 	
-	public static User roleTxt(Map<String, Object> map) {
+	public User roleTxt(Map<String, Object> map) {
 		String username = (String) map.get("username");
 		String password = (String) map.get("password");
 		Empleado empleado = (Empleado) map.get("empleado");
@@ -133,7 +131,7 @@ public class LeerTxt {
 	 * @param linea
 	 * @return
 	 */
-	public static Map<String, Object> parse(String linea) {
+	private static Map<String, Object> parse(String linea) {
 		Map<String, Object> map = new HashMap<>();
 		int pos = 0;
 		String key = "";
