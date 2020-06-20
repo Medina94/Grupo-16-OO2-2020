@@ -196,7 +196,8 @@ public class PedidoService implements IPedidoService {
 	public List<DetallePedidoEmpleadoModel> obtenerPedidosPorEmpleado(int empleado_id) {
 		LocalDate start = YearMonth.now().atDay(1);
 		LocalDate end   = YearMonth.now().atEndOfMonth();
-		return pedidoRepository.obtenerPedidosPorEmpleado(empleado_id, start, end);
+		List<DetallePedidoEmpleadoModel> lista=pedidoRepository.obtenerPedidosPorEmpleado(empleado_id, start, end);
+		return lista;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.unla.Grupo16OO22020.controllers;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -40,6 +42,7 @@ public class ComisionController {
 	
 	@PostMapping("/crear")
 	public RedirectView create(@ModelAttribute("comision") ComisionModel comisionModel) {
+		comisionModel.setFecha(LocalDate.now());
 		comisionService.insertOrUpdate(comisionModel);
 		return new RedirectView(ViewRouteHelper.COMISION_ROOT);
 	}
