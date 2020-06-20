@@ -1,4 +1,4 @@
-package com.unla.Grupo16OO22020.controllers;
+/*package com.unla.Grupo16OO22020.controllers;
 
 import java.util.List;
 
@@ -54,3 +54,4 @@ public class RestPersona {
 
 	
 }
+*/
