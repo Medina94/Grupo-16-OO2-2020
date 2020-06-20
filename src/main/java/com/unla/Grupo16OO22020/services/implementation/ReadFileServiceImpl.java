@@ -16,14 +16,14 @@ import com.unla.Grupo16OO22020.services.ReadFileService;
 public class ReadFileServiceImpl implements ReadFileService{
 	@Autowired
 	private PersonaService personaService;
-	private static final String PATH_EMPLEADO = "src\\main\\resources\\text\\empleado";
+	private static final String PATH_CLIENTE = "src\\main\\resources\\text\\cliente";
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	//@PostConstruct
 	public void insertarEmpleado() {
 		List<ClienteModel> lista = new ArrayList<>();
-		lista = (List<ClienteModel>)(Object)LeerTxt.leer(PATH_EMPLEADO);
+		lista = (List<ClienteModel>)(Object)LeerTxt.leer(PATH_CLIENTE);
 		for(ClienteModel em : lista) {
 			personaService.clienteInsertOrUpdate(em);
 		}

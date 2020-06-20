@@ -46,6 +46,7 @@
 			id = parseInt(id);
 			if ($.isNumeric(id)) {
 				$.ajax({
+					async: false, 
 					method : "GET",
 					url : "/reporteSueldo/detallePedido",
 					data : {
@@ -67,6 +68,32 @@
 					}
 				}).done(function(result) {
 					$("#total").val(result);	
+					
+				}).fail(function() {
+					alert("error");
+				});
+				
+				$.ajax({
+					method : "GET",
+					url : "/reporteSueldo/calcularPlusTotalSolicitado",
+					data : {
+						empleado : id
+					}
+				}).done(function(result) {
+					$("#totalPedir").val(result);	
+					
+				}).fail(function() {
+					alert("error");
+				});
+				
+				$.ajax({
+					method : "GET",
+					url : "/reporteSueldo/calcularPlusTotalCedido",
+					data : {
+						empleado : id
+					}
+				}).done(function(result) {
+					$("#totalCeder").val(result);	
 					
 				}).fail(function() {
 					alert("error");

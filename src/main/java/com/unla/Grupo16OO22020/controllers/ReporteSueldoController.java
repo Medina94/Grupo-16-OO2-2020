@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.Grupo16OO22020.models.PlusSueldoModel;
 import com.unla.Grupo16OO22020.services.IPedidoService;
+import com.unla.Grupo16OO22020.services.ISolicitudStockService;
 
 @Controller
 @RequestMapping("/reporteSueldo")
@@ -20,19 +21,25 @@ public class ReporteSueldoController {
 	@Autowired
 	@Qualifier("pedidoService")
 	private IPedidoService pedidoService;
+	@Autowired
+	@Qualifier("solicitudStockService")
+	private ISolicitudStockService solicitudStockService;
 	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView("reporteSueldo/index");
-		List<PlusSueldoModel> lista = pedidoService.calcularPlusPedido();
-		mAV.addObject("reporte", lista);			
+		mAV.addObject("reporte", pedidoService.calcularPlusPedido());
+		mAV.addObject("reportePedir", solicitudStockService.calcularPlusSolicitar());
+		mAV.addObject("reporteCeder", solicitudStockService.calcularPlusCeder());
 		return mAV;
 	}
 	
 	@GetMapping("/detallePedido")
 	public ModelAndView DetallePedido(int empleadoId) {
 		ModelAndView mAV = new ModelAndView("reporteSueldo/detallePedido");
-		mAV.addObject("detalle", pedidoService.obtenerPedidosPorEmpleado(empleadoId));			
+		mAV.addObject("detalle", pedidoService.obtenerPedidosPorEmpleado(empleadoId));	
+		mAV.addObject("detallePedido", solicitudStockService.obtenerSolicitudesConfirmadasPorEmpleado(empleadoId));
+		mAV.addObject("cedido", solicitudStockService.obtenerSolicitudesCedidasAOtroEmpleado(empleadoId));
 		return mAV;
 	}
 	
@@ -41,6 +48,20 @@ public class ReporteSueldoController {
 	 public int calcularPlusTotal(int empleado)
 	 {				
 		return pedidoService.calcularPlusTotal(empleado);
+	 }
+	
+	@GetMapping("/calcularPlusTotalSolicitado")
+	@ResponseBody
+	 public int calcularPlusTotalSolicitado(int empleado)
+	 {				
+		return solicitudStockService.calcularPlusTotalSolicitado(empleado);
+	 }
+	
+	@GetMapping("/calcularPlusTotalCedido")
+	@ResponseBody
+	 public int calcularPlusTotalCedido(int empleado)
+	 {				
+		return solicitudStockService.calcularPlusTotalCeder(empleado);
 	 }
 	
 }

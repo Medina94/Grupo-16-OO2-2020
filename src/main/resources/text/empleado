@@ -1,3 +1,5 @@
-nombre=Annie;apellido=Byrge;fecha=1994-11-22;mail=AnnieAByrge@gmail.com;telefono=699697750;dni=39049201;eliminado=false;
-nombre=Jayne;apellido=Richardson;fecha=1987-12-07;mail=JayneGRichardson@gmail.com;telefono=769790306;dni=32710452;eliminado=false;
-nombre=Lawrence;apellido=Owen;fecha=1992-07-28;mail=LawrenceSOwen@gmail.com;telefono=674564621;dni=37890400;eliminado=false;
+dni=42041762;nombre=Carol;mail=CarolJMiller@gustr.com;apellido=Miller;fecha=1994-08-12;sueldo=25000;esGerente=true;local=1;
+dni=47981300;nombre=Flora;mail=FloraGGibson@gustr.com;apellido=Gibson;fecha=1985-12-31;sueldo=15000;esGerente=false;local=1;
+
+dni=31992544;nombre=Jeffrey;mail=JeffreyDAllen@superrito.com;apellido=Allen;fecha=1985-05-07;sueldo=21556;esGerente=true;local=2;
+dni=29004731;nombre=Edward;mail=EdwardRWise@gustr.com;apellido=Wise;fecha=1979-07-25;sueldo=19000;esGerente=false;local=2;

@@ -30,7 +30,7 @@ public class LeerTxt {
 			String linea;
 			while ((linea = br.readLine()) != null) {				
 				Map<String, Object> map = parse(linea);
-				lista.add(empleadosTxt(map));
+				//lista.add(clientesTxt(map));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,7 +51,7 @@ public class LeerTxt {
 	 * @param map
 	 * @return
 	 */
-	public static ClienteModel empleadosTxt(Map<String, Object> map) {
+	public static ClienteModel clientesTxt(Map<String, Object> map) {
 		String nombre = (String) map.get("nombre");
 		String apellido = (String) map.get("apellido");
 		LocalDate fecha = aFecha((String) map.get("fecha"));

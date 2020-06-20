@@ -1,5 +1,8 @@
 package com.unla.Grupo16OO22020.services.implementation;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,13 +14,17 @@ import com.unla.Grupo16OO22020.converters.LocalConverter;
 import com.unla.Grupo16OO22020.converters.PedidoConverter;
 import com.unla.Grupo16OO22020.converters.ProductoConverter;
 import com.unla.Grupo16OO22020.converters.SolicitudStockConverter;
+import com.unla.Grupo16OO22020.entities.Comision;
 import com.unla.Grupo16OO22020.entities.Empleado;
 import com.unla.Grupo16OO22020.entities.Local;
+import com.unla.Grupo16OO22020.entities.Pedido;
 import com.unla.Grupo16OO22020.entities.Notificacion;
 import com.unla.Grupo16OO22020.entities.SolicitudStock;
+import com.unla.Grupo16OO22020.models.DetallePedidoEmpleadoModel;
 import com.unla.Grupo16OO22020.enums.EstadoEnum;
 import com.unla.Grupo16OO22020.models.MailModel;
 import com.unla.Grupo16OO22020.models.PedidoModel;
+import com.unla.Grupo16OO22020.models.PlusSueldoModel;
 import com.unla.Grupo16OO22020.models.SolicitudStockModel;
 import com.unla.Grupo16OO22020.repositories.INotificacionRepository;
 import com.unla.Grupo16OO22020.repositories.ISolicitudStockRepository;
@@ -66,6 +73,9 @@ public class SolicitudStockService implements ISolicitudStockService{
 	@Autowired
 	@Qualifier("personaService")
 	private IPersonaService personaService;
+	@Autowired
+	@Qualifier("comisionService")
+	private ComisionService comisionService;
 	
 	@Override
 	public SolicitudStock findById(int id) {
@@ -167,6 +177,63 @@ public class SolicitudStockService implements ISolicitudStockService{
 		Empleado empleado = userService.traerEmpleadoLogueado();
 		int cantidad = notificacionRepository.traerNotificacionesPropias(empleado.getId()).size();
 		return cantidad;
+	}
+	
+	
+	
+	@Override
+	public List<DetallePedidoEmpleadoModel> obtenerSolicitudesConfirmadasPorEmpleado(int empleadoId) {
+		LocalDate start = YearMonth.now().atDay(1);
+		LocalDate end   = YearMonth.now().atEndOfMonth();
+		List<DetallePedidoEmpleadoModel> lista=solicitudStockRepository.obtenerSolicitudesConfirmadasPorEmpleado(empleadoId, start, end);
+		return lista;
+	}
+
+	@Override
+	public List<PlusSueldoModel> calcularPlusSolicitar() {
+		LocalDate inicio = YearMonth.now().atDay(1);
+		LocalDate fin   = YearMonth.now().atEndOfMonth();
+		List<PlusSueldoModel> lista=solicitudStockRepository.calcularPlusSolicitar(userService.traerEmpleadoLogueado().getLocal().getId(), inicio, fin);
+		List<Comision> listaComisiones =comisionService.getAll();
+		Comision comision=listaComisiones.get(0);
+		for (PlusSueldoModel plus : lista) {
+			plus.setPlus(plus.getTotalPedidos() * comision.getPlusPedido()/100);
+		}
+		return lista;
+	}
+	@Override
+	public List<DetallePedidoEmpleadoModel> obtenerSolicitudesCedidasAOtroEmpleado(int empleadoId) {
+		LocalDate start = YearMonth.now().atDay(1);
+		LocalDate end   = YearMonth.now().atEndOfMonth();
+		List<DetallePedidoEmpleadoModel> lista=solicitudStockRepository.obtenerSolicitudesCedidasAOtroEmpleado(empleadoId, start, end);
+		return lista;
+	}
+
+	@Override
+	public List<PlusSueldoModel> calcularPlusCeder() {
+		LocalDate inicio = YearMonth.now().atDay(1);
+		LocalDate fin   = YearMonth.now().atEndOfMonth();
+		List<PlusSueldoModel> lista=solicitudStockRepository.calcularPlusCeder(userService.traerEmpleadoLogueado().getLocal().getId(), inicio, fin);
+		List<Comision> listaComisiones =comisionService.getAll();
+		Comision comision=listaComisiones.get(0);
+		for (PlusSueldoModel plus : lista) {
+			plus.setPlus(plus.getTotalPedidos() * comision.getPlusCeder()/100);
+		}
+		return lista;
+	}
+
+	@Override
+	public int calcularPlusTotalSolicitado(int empleado) {
+		LocalDate start = YearMonth.now().atDay(1);
+		LocalDate end   = YearMonth.now().atEndOfMonth();
+		return solicitudStockRepository.obtenerSolicitudesConfirmadasPorEmpleado(empleado, start, end).stream().filter(x->x.getSubTotal()>0).mapToInt(x->x.getSubTotal()).sum();
+	}
+	
+	@Override
+	public int calcularPlusTotalCeder(int empleado) {
+		LocalDate start = YearMonth.now().atDay(1);
+		LocalDate end   = YearMonth.now().atEndOfMonth();
+		return solicitudStockRepository.obtenerSolicitudesCedidasAOtroEmpleado(empleado, start, end).stream().filter(x->x.getSubTotal()>0).mapToInt(x->x.getSubTotal()).sum();
 	}
 	
 	
