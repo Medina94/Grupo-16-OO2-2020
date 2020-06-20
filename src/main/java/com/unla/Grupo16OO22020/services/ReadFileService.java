@@ -6,4 +6,9 @@ public interface ReadFileService {
 	public void insertarProducto();
 	public void insertarLote();
 	public void insertarEmpleado();
+	//public void crearUsuario();
+	public void crearUserRole();
+	public void crearUser();
+	
+	
 }
