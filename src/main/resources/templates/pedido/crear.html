@@ -91,8 +91,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" id="aceptarSolicitud" class="btn boton btn-primary">Aceptar</button>
-        <button type="button" id="enviarSolicitud" class="btn boton btn-primary" hidden>Solicitar</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="enviarSolicitud" class="btn boton btn-primary"  hidden>Solicitar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -156,16 +156,24 @@ $(document).ready(function () {
 		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
 			method: "GET",
 		 	url: "/pedido/consultarStock",
-		 	data:{idProducto:parseInt($("#producto").val()),cantidadSolicitada:parseInt($(".cantidad").val())}
+		 	data:{idProducto:parseInt($("#producto").val())}
 		})
 		.done(function(result) {
-			if(result == "ok"){
+			if(result >= parseInt($(".cantidad").val())){
 				MensInfo("Informacion", "Stock Disponible")
 				$(".crear").removeAttr('hidden');
 				$(".crear").show();
 				$("#consultar").hide();
-			}else{
+			}else if(result == 0){
 				MensError("Error", "Sin stock disponible", function(){
+					return $("#consultaStock").modal('show');
+				});
+			}else{
+				var mensaje = "Solo contamos con el stock de una unidad del producto seleccionado";
+				if (result > 1){
+				 mensaje = "Solo contamos con el stock de " + result + " unidades del producto seleccionado";
+				}
+				MensError("Error", mensaje, function(){
 					return $("#consultaStock").modal('show');
 				});
 			}

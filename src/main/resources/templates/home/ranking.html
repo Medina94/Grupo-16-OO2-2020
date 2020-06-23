@@ -3,16 +3,23 @@
 <html>
 <body>
 <link rel="stylesheet" href="/css/ProductoCard.css">
+
 <div id="filtroProductos">
 <div th:each="productos : ${productos}" >
-            <div class="pricing-table" style="float: left ">
+             <div class="pricing-table" style="float: left; " >
                 <div class="pricing-card">
-                    <h3 class="pricing-card-header"><span th:text="${productos.descripcion}"></span></h3>
-                    <div class="price"><sup>$</sup><span th:text="${productos.precioUnitario}" ></span><span>/CU</span></div>
+                    <div class="pricing-card-header">
+                    <span th:text="${productos.descripcion}"></span> 
+                    <br/>               
+                    <span th:text="${productos.total} != 0 ? 'Total vendidos: ': 'Sin ventas'"></span>
+                      <span th:text="${productos.total} != 0  ? ${productos.total} : ''" ></span>
+                    </div>
+                    <div class="price">
+                    <span>$</span><span th:text="${productos.precioUnitario}" ></span><span></span>                    
+                    </div>
                     <ul>
-                        <img th:src="@{/css/productos/{image}(image=${productos.url})}" style="max-height: 100px;">
-                    </ul>
-                    
+                        <img th:src="@{/css/productos/{image}(image=${productos.url})}" style="max-height: 143px;">
+                    </ul>                    
                 </div>
             </div>
           </div>

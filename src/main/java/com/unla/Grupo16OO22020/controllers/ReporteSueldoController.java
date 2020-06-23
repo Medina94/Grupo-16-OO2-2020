@@ -28,9 +28,10 @@ public class ReporteSueldoController {
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView("reporteSueldo/index");
-		mAV.addObject("reporte", pedidoService.calcularPlusPedido());
+		mAV.addObject("reporte", solicitudStockService.listarReportePlus());
 		mAV.addObject("reportePedir", solicitudStockService.calcularPlusSolicitar());
 		mAV.addObject("reporteCeder", solicitudStockService.calcularPlusCeder());
+		mAV.addObject("plus", solicitudStockService.listarReportePlus());
 		return mAV;
 	}
 	
@@ -63,5 +64,7 @@ public class ReporteSueldoController {
 	 {				
 		return solicitudStockService.calcularPlusTotalCeder(empleado);
 	 }
+	
+	
 	
 }

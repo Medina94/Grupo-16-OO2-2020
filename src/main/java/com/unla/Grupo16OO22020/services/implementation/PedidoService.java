@@ -1,6 +1,8 @@
 package com.unla.Grupo16OO22020.services.implementation;
 
 import java.time.LocalDate;
+import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
+import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ import com.unla.Grupo16OO22020.converters.PersonaConverter;
 import com.unla.Grupo16OO22020.entities.Comision;
 import com.unla.Grupo16OO22020.entities.Lote;
 import com.unla.Grupo16OO22020.entities.Pedido;
+import com.unla.Grupo16OO22020.entities.Producto;
 import com.unla.Grupo16OO22020.enums.EstadoEnum;
 import com.unla.Grupo16OO22020.models.DetallePedidoEmpleadoModel;
 import com.unla.Grupo16OO22020.models.LocalModel;
@@ -108,13 +111,23 @@ public class PedidoService implements IPedidoService {
 
 	@Override
 	public boolean consultarStock(int idProducto, int cantidadSolicitada) {
-		ProductoModel producto = productoService.findById(idProducto);
-		List<Lote> lotes = loteService.traerTodoLoteDelLocalPorProducto(producto.getCodigo(), producto.getLocalModel().getId());
-		int stock = lotes.stream().filter(x->x.getCantidad()>0).mapToInt(x->x.getCantidad()).sum();
+		
+		int stock = devolverCantidadStockDisponible(this.lotes(idProducto));
 		if(stock >= cantidadSolicitada) {
 			return true;
 		}		
 		return false;
+	}
+	
+	public List<Lote> lotes (int idProducto) {
+		 
+		ProductoModel producto = productoService.findById(idProducto);
+		List<Lote> lotes = loteService.traerTodoLoteDelLocalPorProducto(producto.getCodigo(), producto.getLocalModel().getId());
+	    return lotes;
+	}
+	
+	public int devolverCantidadStockDisponible(List<Lote> lotes) {
+		return lotes.stream().filter(x->x.getCantidad()>0).mapToInt(x->x.getCantidad()).sum();
 	}
 	
 
@@ -169,9 +182,14 @@ public class PedidoService implements IPedidoService {
 
 	@Override
 	public ArrayList<RankingModel> obtenerRanking(LocalDate fechaDesde, LocalDate fechaHasta, int localId) {
-		
-		return pedidoRepository.obtenerRanking(fechaDesde, fechaHasta, localId);
-		
+		ArrayList <RankingModel> ranking = pedidoRepository.obtenerRanking(fechaDesde, fechaHasta, localId);
+		for(Producto p : productoService.getAll()) {
+			if(!ranking.stream().filter(x->x.getCodigo().equals(p.getCodigo())).findFirst().isPresent()) {
+					RankingModel m = new RankingModel(0, p.getCodigo(), p.getDescripcion(), p.getImagenUrl(), p.getPrecioUnitario());
+					ranking.add(m);				
+			}
+		}		
+		return ranking;		
 	}
 	
 	@Override
@@ -212,5 +230,18 @@ public class PedidoService implements IPedidoService {
 		LocalDate end   = YearMonth.now().atEndOfMonth();
 		return  pedidoRepository.obtenerPedidosPorEmpleado(empleado, start, end).stream().filter(x->x.getSubTotal()>0).mapToInt(x->x.getSubTotal()).sum();
 	}
+	
+	public LocalDate obtenerUltimoDiaDelAño() {
+		
 
+		LocalDate now = LocalDate.now(); 
+		LocalDate ultimoDia = now.with(lastDayOfYear()); 
+		return ultimoDia;
+	}
+
+	public LocalDate obtenerPrimerDiaDelAño() {
+		LocalDate now = LocalDate.now();
+		 LocalDate primerDia = now.with(firstDayOfYear());
+		 return primerDia;
+	}
 }

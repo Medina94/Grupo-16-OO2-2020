@@ -30,7 +30,8 @@
    						 <thead>
         					<tr>        					
             				<th>Colaborador</th>
-            				<th>Producto solicitado</th>
+            				<th>Producto</th>
+            				<th>Cantidad</th>
             				<th>Estado</th>   
              				</tr>
     					</thead>
@@ -39,6 +40,7 @@
        	    					<td><span th:text="${solicitud.colaborador != null && solicitud.colaborador.nombre !=null} ? ${solicitud.colaborador.nombre} : 'Sin asignar'"></span></td>
        	    					<!-- <td><span th:if="${solicitud.colaborador != null && solicitud.colaborador != null}" th:text="${recibida.solicitador.nombre}" /></td>-->                         					
             					<td><span th:text="${solicitud.pedido.producto.descripcion}" /></td>
+            					<td><span th:text="${solicitud.pedido.cantidadSolicitada}" /></td>
             					<td>
             						<span th:switch="${solicitud.estado}">
             							<p th:case="1" style="color: green"><strong>Confirmado</strong></p>
@@ -56,8 +58,9 @@
    						 <thead>
         					<tr>
             				<th>Solicitante</th>
-            				<th>Producto solicitado</th>
-            				<th>Estado</th> 
+            				<th>Producto </th>
+            				<th>Cantidad </th>
+            				<th>Estado</th>             				
            				    <th class="aceptar"></th>  
 		           		    <th class="rechazar"></th> 
              				</tr>
@@ -67,6 +70,7 @@
        						 <td><span th:text="${recibida.solicitador != null && recibida.solicitador.nombre != null} ? ${recibida.solicitador.nombre} : 'Sin asignar'"></span></td> 	    					
 <!--        	    					<td><span th:if="${recibida.solicitador != null && recibida.solicitador.nombre != null}" th:text="${recibida.solicitador.nombre}" /></td>                       					 -->
             					<td><span th:text="${recibida.pedido.producto.descripcion}" /></td>
+            					<td><span th:text="${recibida.pedido.cantidadSolicitada}" /></td>
             					<td>
             						<span th:switch="${recibida.estado}">
             							<p th:case="1" style="color: green"><strong>Confirmado</strong></p>
@@ -172,7 +176,7 @@ $(document).ready(
 		 	url: "/consultarRol"		 	
 		})
 		.done(function(result) {
-			if(result == "ROL_ADMIN"){
+			if(result == "ROLE_ADMIN"){
 				$(".aceptar").hide();
 				$(".rechazar").hide();
 			}
