@@ -1,6 +1,7 @@
 package com.unla.Grupo16OO22020.entities;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,8 @@ public class Notificacion {
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Empleado empleado;
 	
+	private boolean confirmado;
+	
 	public int getId() {
 		return id;
 	}
@@ -28,11 +31,17 @@ public class Notificacion {
 	}
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
+	}	
+	public boolean isConfirmado() {
+		return confirmado;
 	}
-	
-	public Notificacion(int id, Empleado empleado) {
+	public void setConfirmado(boolean confirmado) {
+		this.confirmado = confirmado;
+	}
+	public Notificacion(int id, Empleado empleado, boolean confirmado) {
 		this.id = id;
 		this.empleado = empleado;
+		this.confirmado = confirmado;
 	}
 	public Notificacion() {}
 	

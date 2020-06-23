@@ -135,7 +135,7 @@ public class SolicitudStockService implements ISolicitudStockService{
 		soli.setColaborador(userService.traerEmpleadoLogueado());
 		pedidoService.actualizarStock(p);
 		pedidoService.insertOrUpdate(p);
-		Notificacion noti = new Notificacion(0, soli.getSolicitador());
+		Notificacion noti = new Notificacion(0, soli.getSolicitador(), true);
 		notificacionRepository.save(noti);
 		solicitudStockRepository.save(soli);
 		
@@ -155,6 +155,8 @@ public class SolicitudStockService implements ISolicitudStockService{
 		soli.setEstado(EstadoEnum.ESTADO_RECHAZADO.getCodigo());
 		soli.setColaborador(userService.traerEmpleadoLogueado());
 		pedidoService.insertOrUpdate(p);
+		Notificacion noti = new Notificacion(0, soli.getSolicitador(), false);
+		notificacionRepository.save(noti);
 		solicitudStockRepository.save(soli);
 		
 		// envio mail con el estado del pedido al solicitante
@@ -179,6 +181,26 @@ public class SolicitudStockService implements ISolicitudStockService{
 		return cantidad;
 	}
 	
+	@Override
+	public int consultarNotificacionesRechazadas() {
+		Empleado empleado = userService.traerEmpleadoLogueado();
+		int cantidad = notificacionRepository.traerNotificacionesPropiasRechazadas(empleado.getId()).size();
+		return cantidad;
+	}
+	
+	public boolean remove() {
+		try {
+			Empleado empleado = userService.traerEmpleadoLogueado();
+			List<Notificacion> lista=notificacionRepository.traerTodas(empleado.getId());
+			for (Notificacion notificacion : lista) {
+				notificacionRepository.deleteById(notificacion.getId());
+			}
+			
+			return true;
+		}catch (Exception e) {
+			return false;
+		}
+	}
 	
 	
 	@Override
