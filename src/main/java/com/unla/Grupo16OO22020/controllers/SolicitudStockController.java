@@ -4,11 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.Grupo16OO22020.enums.EstadoEnum;
+import com.unla.Grupo16OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo16OO22020.services.ISolicitudStockService;
 
 @Controller
@@ -60,4 +64,23 @@ public class SolicitudStockController {
 	 public int verificarNotificaciones() {
 		 return solicitudStockService.consultarNotificacionesConfirmadas();
 	 }
+	 
+	 @GetMapping("/verificarNotisRechazadas")
+	 @ResponseBody
+	 public int verificarNotificacionesRechazadas() {
+		 return solicitudStockService.consultarNotificacionesRechazadas();
+	 }
+	 
+	 @GetMapping("/verificarNotisTotales")
+	 @ResponseBody
+	 public int verificarNotisTotales() {
+		 return solicitudStockService.consultarNotificaciones()+solicitudStockService.consultarNotificacionesConfirmadas()+solicitudStockService.consultarNotificacionesRechazadas();
+	 }
+	 
+	 @GetMapping("/eliminar")
+		@ResponseBody
+		public void delete() {
+			solicitudStockService.remove();
+			
+		}
 }

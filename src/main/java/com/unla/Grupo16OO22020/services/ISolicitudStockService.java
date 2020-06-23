@@ -26,6 +26,9 @@ public interface ISolicitudStockService {
 	public int consultarNotificaciones();
 	
 	public int consultarNotificacionesConfirmadas();
+	
+	public int consultarNotificacionesRechazadas();
+	
 	public List<DetallePedidoEmpleadoModel>obtenerSolicitudesConfirmadasPorEmpleado(int empleadoId);
 	
 	public List<PlusSueldoModel> calcularPlusSolicitar();
@@ -37,4 +40,6 @@ public interface ISolicitudStockService {
 	public int calcularPlusTotalSolicitado(int empleado);
 	
 	public int calcularPlusTotalCeder(int empleado);
+	
+	public boolean remove();
 }

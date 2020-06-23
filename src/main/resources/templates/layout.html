@@ -309,7 +309,7 @@ cursor: pointer;
                   </div>
                 </a>
                 <!--  -->
-                <a class="dropdown-item d-flex align-items-center" href="/solicitudStock#recibidos">
+                <a class="dropdown-item d-flex align-items-center" style="cursor:pointer;" id="confirmado">
                   <div class="mr-3">
                     <div class="icon-circle bg-success">
                       <i class="fas fa-donate text-white"></i>
@@ -318,6 +318,17 @@ cursor: pointer;
                   <div>
                     <div class="small text-gray-500" id="fechaNoti"></div>
                    	 <span class="font-weight-bold" id="mensaje"></span>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" style="cursor:pointer;" id="rechazado">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-danger">
+                      <i class="fa fa-ban" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500" id="fechaNotifi"></div>
+                   	 <span class="font-weight-bold" id="mensajes"></span>
                   </div>
                 </a>
 <!--                 <a class="dropdown-item d-flex align-items-center" href="#"> -->
@@ -414,6 +425,7 @@ var date = new Date();
 var fecha = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear();
 
 $(document).ready(function () {	
+	
 	$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
 		method: "GET",
 		url: "/mostrarUsuario",
@@ -426,9 +438,18 @@ $(document).ready(function () {
 	});
 	cargar();
 	cargarNotificaciones();
+	cargarNotificacionesRechazadas();
+	cargarTotales();
+	eliminarConfirmadas();
+	eliminarRechazadas();
 setInterval(function(){
 	cargar();
-	cargarNotificaciones()}, 10000);
+	cargarNotificaciones();
+	cargarNotificacionesRechazadas();
+	cargarTotales();
+	eliminarConfirmadas();
+	eliminarRechazadas();}, 10000);
+	
 
 });
 function cargar(){
@@ -438,7 +459,7 @@ function cargar(){
 	})
 	.done(function(result){
 		if(result > 0){
-			$("#count").html(result);
+			
 			$("#verAlertas").removeAttr('hidden');
 			$("#fecha").text(fecha);
 			$("#cantidad").text("Recibiste "+result+" solicitudes");
@@ -456,7 +477,7 @@ function cargarNotificaciones(){
 	})
 	.done(function(result){
 		if(result > 0){
-			$("#count").html(result);
+			
 			$("#verAlertas").removeAttr('hidden');
 			$("#fecha").text(fecha);
 			$("#mensaje").text("Fueron confirmadas "+result+" solicitudes");
@@ -466,6 +487,76 @@ function cargarNotificaciones(){
 		alert("error");
 	});
  }
+function cargarNotificacionesRechazadas(){
+
+	$.ajax({
+		method: "GET",
+		url: "/solicitudStock/verificarNotisRechazadas",
+	})
+	.done(function(result){
+		if(result > 0){
+			
+			$("#verAlertas").removeAttr('hidden');
+			$("#fechanotifi").text(fecha);
+			$("#mensajes").text("Fueron Rechazadas "+result+" solicitudes");
+		}
+	})
+	.fail(function(){
+		alert("error");
+	});
+ }
+ 
+function cargarTotales(){
+
+	$.ajax({
+		method: "GET",
+		url: "/solicitudStock/verificarNotisTotales",
+	})
+	.done(function(result){
+		if(result > 0){
+			$("#count").html(result);
+		}
+	})
+	.fail(function(){
+		alert("error");
+	});
+ }
+
+function eliminarConfirmadas(){
+	$("#confirmado").click(function() {
+
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+		 	url: "/solicitudStock/eliminar",
+		})
+		.done(function(result) {
+			//$("#modalActualizar").html(result);
+		 window.location.href = '/solicitudStock#solicitados'; 
+		})
+		.fail(function() {
+			alert("error");
+		});
+	
+});
+}
+
+function eliminarRechazadas(){
+	$("#rechazado").click(function() {
+
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+		 	url: "/solicitudStock/eliminar",
+		})
+		.done(function(result) {
+			//$("#modalActualizar").html(result);
+		 window.location.href = '/solicitudStock#solicitados'; 
+		})
+		.fail(function() {
+			alert("error");
+		});
+	
+});
+}
 </script>
 </body>
 </html>
