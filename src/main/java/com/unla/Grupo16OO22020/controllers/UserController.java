@@ -45,4 +45,19 @@ public class UserController {
 		return userService.mostrarUsuario();
 	  
 	 }	
+	
+	@GetMapping("/mostrarRole")
+	@ResponseBody
+	 public String mostrarRole()
+	 {	
+		String role = userService.traerRol();
+		String l = "";
+		for(int i=0; i < role.length(); i++) {
+			if(role.charAt(i) == '_') {
+				 l = role.substring(i+1, role.length());					
+			}
+		}
+		return l;
+	  
+	 }	
 }
