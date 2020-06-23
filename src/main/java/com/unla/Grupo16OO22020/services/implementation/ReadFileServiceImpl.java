@@ -1,4 +1,4 @@
-package com.unla.Grupo16OO22020.services.implementation;
+/*package com.unla.Grupo16OO22020.services.implementation;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public class ReadFileServiceImpl implements ReadFileService{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	@PostConstruct
+	//@PostConstruct
 	public void insertarEmpleado() {
 		List<ClienteModel> lista = new ArrayList<>();
 		lista = (List<ClienteModel>)(Object)leerTxt.leer(PATH_EMPLEADO);
@@ -70,7 +70,7 @@ public class ReadFileServiceImpl implements ReadFileService{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	@PostConstruct
+	//@PostConstruct
 	public void insertarLocal() {
 		List<LocalModel> lista = new ArrayList<>();
 		lista = (List<LocalModel>)(Object)leerTxt.leer(PATH_LOCAL);
@@ -92,7 +92,7 @@ public class ReadFileServiceImpl implements ReadFileService{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	@PostConstruct
+	//@PostConstruct
 	public void insertarLote() {
 		List<LoteModel> lista = new ArrayList<>();
 		lista = (List<LoteModel>)(Object)leerTxt.leer(PATH_LOTE);
@@ -103,7 +103,7 @@ public class ReadFileServiceImpl implements ReadFileService{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	@PostConstruct
+	//@PostConstruct
 	public void crearUser() {
 		List<User> lista = new ArrayList<>();
 		lista = (List<User>)(Object)leerTxt.leer(PATH_USER);
@@ -114,7 +114,7 @@ public class ReadFileServiceImpl implements ReadFileService{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	@PostConstruct
+	//@PostConstruct
 	public void crearUserRole() {
 		List<UserRole> lista = new ArrayList<>();
 		lista = (List<UserRole>)(Object)leerTxt.leer(PATH_ROLE);
@@ -130,3 +130,4 @@ public class ReadFileServiceImpl implements ReadFileService{
 	
 }
 
+*/
