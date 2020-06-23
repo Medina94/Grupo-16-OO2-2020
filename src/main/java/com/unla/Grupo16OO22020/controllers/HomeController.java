@@ -1,11 +1,9 @@
 package com.unla.Grupo16OO22020.controllers;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,9 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -50,7 +46,9 @@ public class HomeController {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDEX);
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		modelAndView.addObject("username", user.getUsername());
-		modelAndView.addObject("productos", productoService.getAll());
+		modelAndView.addObject("productos", 
+	    pedidoService.obtenerRanking(pedidoService.obtenerPrimerDiaDelAño(),
+	    		                     pedidoService.obtenerUltimoDiaDelAño(), 0));
 		modelAndView.addObject("locales", localService.getAll());
 		return modelAndView;
 	}

@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.unla.Grupo16OO22020.entities.Lote;
 import com.unla.Grupo16OO22020.entities.Pedido;
 import com.unla.Grupo16OO22020.models.DetallePedidoEmpleadoModel;
 import com.unla.Grupo16OO22020.models.LocalModel;
@@ -40,5 +41,13 @@ public interface IPedidoService {
 	public  List<DetallePedidoEmpleadoModel> obtenerPedidosPorEmpleado(int empleado_id);
 	
 	public int calcularPlusTotal(int empleado);
+	
+	public LocalDate obtenerUltimoDiaDelAño();
+	
+	public LocalDate obtenerPrimerDiaDelAño();
+	
+	public List<Lote> lotes (int idProducto);
+	
+	public int devolverCantidadStockDisponible(List<Lote> lotes);
 }
 

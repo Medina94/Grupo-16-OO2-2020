@@ -6,7 +6,10 @@ public class PlusSueldoModel {
 	private String nombre;
 	private int sueldo;
 	private double plus;
+	private double plusSolicitudRealizada;
+	private double plusSolicitudRecibida;
 	private long totalPedidos;
+	private double sueldoTotal;
 //	public PlusSueldoModel(String nombre, int sueldo, long plus, long totalPedidos) {
 //		super();
 //		this.nombre = nombre;
@@ -18,6 +21,30 @@ public class PlusSueldoModel {
 	
 	
 	public PlusSueldoModel() {}
+
+	public double getPlusSolicitudRealizada() {
+		return plusSolicitudRealizada;
+	}
+
+	public double getSueldoTotal() {
+		return sueldoTotal;
+	}
+
+	public void setSueldoTotal(double sueldoTotal) {
+		this.sueldoTotal = sueldoTotal;
+	}
+
+	public void setPlusSolicitudRealizada(double plusSolicitudRealizada) {
+		this.plusSolicitudRealizada = plusSolicitudRealizada;
+	}
+
+	public double getPlusSolicitudRecibida() {
+		return plusSolicitudRecibida;
+	}
+
+	public void setPlusSolicitudRecibida(double plusSolicitudRecibida) {
+		this.plusSolicitudRecibida = plusSolicitudRecibida;
+	}
 
 	public PlusSueldoModel(int empleadoId,String nombre, int sueldo, long totalPedidos) {
 	super();

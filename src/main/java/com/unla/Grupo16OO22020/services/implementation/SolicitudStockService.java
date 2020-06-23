@@ -3,7 +3,9 @@ package com.unla.Grupo16OO22020.services.implementation;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -219,7 +221,7 @@ public class SolicitudStockService implements ISolicitudStockService{
 		List<Comision> listaComisiones =comisionService.getAll();
 		Comision comision=listaComisiones.get(0);
 		for (PlusSueldoModel plus : lista) {
-			plus.setPlus(plus.getTotalPedidos() * comision.getPlusPedido()/100);
+			plus.setPlusSolicitudRealizada(plus.getTotalPedidos() * comision.getPlusPedido()/100);
 		}
 		return lista;
 	}
@@ -239,7 +241,7 @@ public class SolicitudStockService implements ISolicitudStockService{
 		List<Comision> listaComisiones =comisionService.getAll();
 		Comision comision=listaComisiones.get(0);
 		for (PlusSueldoModel plus : lista) {
-			plus.setPlus(plus.getTotalPedidos() * comision.getPlusCeder()/100);
+			plus.setPlusSolicitudRecibida(plus.getTotalPedidos() * comision.getPlusCeder()/100);
 		}
 		return lista;
 	}
@@ -258,5 +260,38 @@ public class SolicitudStockService implements ISolicitudStockService{
 		return solicitudStockRepository.obtenerSolicitudesCedidasAOtroEmpleado(empleado, start, end).stream().filter(x->x.getSubTotal()>0).mapToInt(x->x.getSubTotal()).sum();
 	}
 	
-	
+	public List<PlusSueldoModel> listarReportePlus(){
+		
+		List<PlusSueldoModel> ventasPropias = pedidoService.calcularPlusPedido();		
+		List<PlusSueldoModel> solicitudesAceptadas = this.calcularPlusCeder();
+		List<PlusSueldoModel> solicitudesRealizadas = this.calcularPlusSolicitar();
+		
+		List<PlusSueldoModel> plusSueldo = ventasPropias;
+//		Map<Object, List<PlusSueldoModel>> agrupoPorEmpleado =
+//				reportesSueldo.stream().collect(Collectors.groupingBy(w -> w.getEmpleadoId()));
+//		
+		for(PlusSueldoModel p : solicitudesRealizadas) {
+			if(plusSueldo.stream().filter(x->x.getEmpleadoId() == p.getEmpleadoId()).findFirst().isPresent()) {
+				plusSueldo.stream().filter(x->x.getEmpleadoId() == p.getEmpleadoId()).findFirst().get().setPlusSolicitudRealizada(p.getPlusSolicitudRealizada());
+			}else {
+				plusSueldo.add(p);
+			}
+			
+		}
+		for(PlusSueldoModel p : solicitudesAceptadas) {
+			if(plusSueldo.stream().filter(x->x.getEmpleadoId() == p.getEmpleadoId()).findFirst().isPresent()) {
+				plusSueldo.stream().filter(x->x.getEmpleadoId() == p.getEmpleadoId()).findFirst().get().setPlusSolicitudRecibida(p.getPlusSolicitudRecibida());
+			
+			}else {
+				plusSueldo.add(p);
+			}		
+			
+		}
+		
+		for(PlusSueldoModel plus : plusSueldo) {
+			plus.setSueldoTotal(plus.getSueldo() + plus.getPlus() + plus.getPlusSolicitudRealizada() + plus.getPlusSolicitudRecibida());
+		}
+		
+		return plusSueldo;
+	}
 }

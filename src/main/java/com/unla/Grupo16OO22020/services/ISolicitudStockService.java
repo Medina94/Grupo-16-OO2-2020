@@ -42,4 +42,6 @@ public interface ISolicitudStockService {
 	public int calcularPlusTotalCeder(int empleado);
 	
 	public boolean remove();
+	
+	public List<PlusSueldoModel> listarReportePlus();
 }

@@ -115,13 +115,9 @@ public class PedidoController {
 	
 	@GetMapping("/consultarStock")
 	@ResponseBody
-	 public String getConsultarStock(int idProducto, int cantidadSolicitada)
+	 public int getConsultarStock(int idProducto)
 	 {	
-		boolean res = pedidoService.consultarStock(idProducto, cantidadSolicitada);
-	      if(res) {
-	    	return "ok";  
-	      }
-	      	return "error";
+		return pedidoService.devolverCantidadStockDisponible(pedidoService.lotes(idProducto));	    
 	 }	
 	
 	@GetMapping("/visualizarPedido")

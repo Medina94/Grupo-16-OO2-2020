@@ -73,7 +73,7 @@ $(document).ready(function () {
 				.done(function(result) {
 					$("#modal").html(result);
 					$("#modalEmpleado").modal("show");
-			     	if($("#rol").text() == "ROL_GERENTE"){						
+			     	if($("#rol").text() == "ROLE_GERENTE"){						
 						$(".gerente").hide()
 					}
 				
@@ -106,7 +106,7 @@ $(document).ready(function () {
 		 	url: "/consultarRol"		 	
 		})
 		.done(function(result) {
-			if(result == "ROL_EMPLEADO"){
+			if(result == "ROLE_EMPLEADO"){
 				$(".abrirModal").hide();
 				$(".eliminado").hide();
 				$(".act").hide();

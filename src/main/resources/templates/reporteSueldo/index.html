@@ -12,8 +12,11 @@
     <thead>
         <tr>
             <th>Empleado</th>
-			<th>Sueldo</th>
-			<th>Plus</th> 
+			<th>Sueldo Bruto</th>
+			<th>Plus Venta Propia</th> 	
+			<th>Plus Solicitudes Aprobadas</th> 		
+			<th>Plus Solicitudes Recibidas</th> 
+			<th>Sueldo Neto</th> 			
  			<th></th>
             </tr>
     </thead>
@@ -22,7 +25,9 @@
            <td><span th:text="${r.nombre}" /></td>
 		   <td><span th:text="${r.sueldo}" /></td>
 		   <td><span th:text="${r.plus}" /></td>
-		   
+		   <td><span th:text="${r.plusSolicitudRealizada}" /></td>
+		   <td><span th:text="${r.plusSolicitudRecibida}" /></td>
+		   <td><span th:text="${r.sueldoTotal}" /></td>
 		 <td>
 		 <div class="detalle" style="color: black;font-size: 20px;text-align: center;" th:data-value="${r.empleadoId}">
 		 <i class="fa fa-list-ul" aria-hidden="true"></i>

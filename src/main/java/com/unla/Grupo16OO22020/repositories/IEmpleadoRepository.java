@@ -15,7 +15,7 @@ public interface IEmpleadoRepository extends JpaRepository<Empleado, Serializabl
 
 	public abstract Empleado findByDni(int dni);
 	
-	@Query("SELECT e FROM Empleado e join e.local l WHERE ((:rol) = 'ROL_ADMIN' OR l.id = (:local)) AND e.eliminado=false")
+	@Query("SELECT e FROM Empleado e join e.local l WHERE ((:rol) = 'ROLE_ADMIN' OR l.id = (:local)) AND e.eliminado=false")
 	public abstract List<Empleado> getAllEmpleado(int local, String rol);
 	
 	@Query("SELECT e from Empleado e join e.local l where l.id = (:idLocal)")
