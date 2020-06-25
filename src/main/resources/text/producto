@@ -15,7 +15,6 @@ descripcion=Funko Pop Hulk;precioUnitario=2300;fechaAlta=2020-05-16;codigo=FPH;i
 descripcion=Funko Pop Mercy Overwacht;precioUnitario=1500;fechaAlta=2020-05-16;codigo=FPMO;imagenUrl=mercy.png;localModel=2;
 descripcion=Funko Michonne The Walking Dead;precioUnitario=1750;fechaAlta=2020-05-16;codigo=FPMTWD;imagenUrl=michone.png;localModel=2;
 descripcion=Funko Pop Tsunade Naruto;precioUnitario=1750;fechaAlta=2020-05-16;codigo=FPTN;imagenUrl=tsunade.png;localModel=2;
-descripcion=Funko Pop Asuka Evangelion;precioUnitario=2100;fechaAlta=2020-05-16;codigo=FPAE;imagenUrl=azuka.png;localModel=2;
 descripcion=Funko Pop Jhon Wick;precioUnitario=2500;fechaAlta=2020-05-16;codigo=FPJW;imagenUrl=jhon.png;localModel=3;
 descripcion=Funko Pop Rei Ayanami Evangelion;precioUnitario=3000;fechaAlta=2020-05-16;codigo=FPRA;imagenUrl=rei.png;localModel=3;
 descripcion=Funko Pop Khaleesi GOT;precioUnitario=1200;fechaAlta=2020-05-16;codigo=FPKG;imagenUrl=kalesi.png;localModel=3;
@@ -24,7 +23,6 @@ descripcion=Funko Pop Hulk;precioUnitario=2300;fechaAlta=2020-05-16;codigo=FPH;i
 descripcion=Funko Pop Mercy Overwacht;precioUnitario=1500;fechaAlta=2020-05-16;codigo=FPMO;imagenUrl=mercy.png;localModel=3;
 descripcion=Funko Michonne The Walking Dead;precioUnitario=1750;fechaAlta=2020-05-16;codigo=FPMTWD;imagenUrl=michone.png;localModel=3;
 descripcion=Funko Pop Tsunade Naruto;precioUnitario=1750;fechaAlta=2020-05-16;codigo=FPTN;imagenUrl=tsunade.png;localModel=3;
-descripcion=Funko Pop Asuka Evangelion;precioUnitario=2100;fechaAlta=2020-05-16;codigo=FPAE;imagenUrl=azuka.png;localModel=3;
 descripcion=Funko Pop Jhon Wick;precioUnitario=2500;fechaAlta=2020-05-16;codigo=FPJW;imagenUrl=jhon.png;localModel=4;
 descripcion=Funko Pop Rei Ayanami Evangelion;precioUnitario=3000;fechaAlta=2020-05-16;codigo=FPRA;imagenUrl=rei.png;localModel=4;
 descripcion=Funko Pop Khaleesi GOT;precioUnitario=1200;fechaAlta=2020-05-16;codigo=FPKG;imagenUrl=kalesi.png;localModel=1;
@@ -33,7 +31,6 @@ descripcion=Funko Pop Hulk;precioUnitario=2300;fechaAlta=2020-05-16;codigo=FPH;i
 descripcion=Funko Pop Mercy Overwacht;precioUnitario=1500;fechaAlta=2020-05-16;codigo=FPMO;imagenUrl=mercy.png;localModel=4;
 descripcion=Funko Michonne The Walking Dead;precioUnitario=1750;fechaAlta=2020-05-16;codigo=FPMTWD;imagenUrl=michone.png;localModel=4;
 descripcion=Funko Pop Tsunade Naruto;precioUnitario=1750;fechaAlta=2020-05-16;codigo=FPTN;imagenUrl=tsunade.png;localModel=4;
-descripcion=Funko Pop Asuka Evangelion;precioUnitario=2100;fechaAlta=2020-05-16;codigo=FPAE;imagenUrl=azuka.png;localModel=4;
 descripcion=Funko Pop Jhon Wick;precioUnitario=2500;fechaAlta=2020-05-16;codigo=FPJW;imagenUrl=jhon.png;localModel=5;
 descripcion=Funko Pop Rei Ayanami Evangelion;precioUnitario=3000;fechaAlta=2020-05-16;codigo=FPRA;imagenUrl=rei.png;localModel=5;
 descripcion=Funko Pop Khaleesi GOT;precioUnitario=1200;fechaAlta=2020-05-16;codigo=FPKG;imagenUrl=kalesi.png;localModel=5;
@@ -42,4 +39,3 @@ descripcion=Funko Pop Hulk;precioUnitario=2300;fechaAlta=2020-05-16;codigo=FPH;i
 descripcion=Funko Pop Mercy Overwacht;precioUnitario=1500;fechaAlta=2020-05-16;codigo=FPMO;imagenUrl=mercy.png;localModel=5;
 descripcion=Funko Michonne The Walking Dead;precioUnitario=1750;fechaAlta=2020-05-16;codigo=FPMTWD;imagenUrl=michone.png;localModel=5;
 descripcion=Funko Pop Tsunade Naruto;precioUnitario=1750;fechaAlta=2020-05-16;codigo=FPTN;imagenUrl=tsunade.png;localModel=5;
-descripcion=Funko Pop Asuka Evangelion;precioUnitario=2100;fechaAlta=2020-05-16;codigo=FPAE;imagenUrl=azuka.png;localModel=5;

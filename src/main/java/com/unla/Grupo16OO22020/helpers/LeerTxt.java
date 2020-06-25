@@ -27,6 +27,7 @@ import com.unla.Grupo16OO22020.models.ProductoModel;
 import com.unla.Grupo16OO22020.repositories.IUserRepository;
 import com.unla.Grupo16OO22020.services.ILocalService;
 import com.unla.Grupo16OO22020.services.IPersonaService;
+import com.unla.Grupo16OO22020.services.IProductoService;
 
 @Service("leerTxt")
 public class LeerTxt { 
@@ -34,9 +35,10 @@ public class LeerTxt {
 	@Qualifier("personaConverter")
 	private PersonaConverter personaConverter;
 	
+	
 	@Autowired
 	@Qualifier("localService")
-	private ILocalService localService;
+	private  ILocalService localService;
 	
 
 	@Autowired
@@ -46,6 +48,10 @@ public class LeerTxt {
 	@Autowired
 	@Qualifier("userRepository")
     private IUserRepository userRepository;
+	
+	@Autowired
+	@Qualifier("productoService")
+	private IProductoService productoService;
 	
 	public List<Object> leer(String path) {
 		
@@ -65,6 +71,9 @@ public class LeerTxt {
 			String linea;
 			while ((linea = br.readLine()) != null) {				
 				Map<String, Object> map = parse(linea);
+				if(path.contains("cliente")){
+					lista.add(clientesTxt(map));
+				}
 				if(path.contains("empleado")){
 					lista.add(empleadosTxt(map));
 				}
@@ -74,12 +83,16 @@ public class LeerTxt {
 				if(path.contains("producto")){
 					lista.add(productoTxt(map));
 				}
+				if(path.contains("lote")){
+					lista.add(loteTxt(map));
+				}
 				if(path.contains("user")){
 					lista.add(userTxt(map));
 				}
 				if(path.contains("role")){
 					lista.add(roleTxt(map));
 				}
+		
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,7 +113,7 @@ public class LeerTxt {
 	 * @param map
 	 * @return
 	 */
-	public static ClienteModel empleadosTxt(Map<String, Object> map) {
+	public static ClienteModel clientesTxt(Map<String, Object> map) {
 		String nombre = (String) map.get("nombre");
 		String apellido = (String) map.get("apellido");
 		LocalDate fecha = aFecha((String) map.get("fecha"));
@@ -110,6 +123,21 @@ public class LeerTxt {
 		
 		
 		return new ClienteModel(0,dni,nombre, apellido, fecha, mail, telefono, false);
+	}
+	
+	public EmpleadoModel empleadosTxt(Map<String, Object> map) {
+		String nombre = (String) map.get("nombre");
+		String apellido = (String) map.get("apellido");
+		LocalDate fecha = aFecha((String) map.get("fecha"));
+		String mail = (String) map.get("mail");
+		int dni = Integer.parseInt((String) map.get("dni"));
+		int sueldo = Integer.parseInt((String) map.get("sueldo"));
+		boolean esGerente = Boolean.parseBoolean((String) map.get("esGerente"));
+		int localModel = Integer.parseInt((String) map.get("localModel"));
+		LocalModel local = localService.findById(localModel);
+	
+		
+		return new EmpleadoModel(0,dni,nombre,mail,apellido,fecha,sueldo,esGerente,local,false);
 	}
 	
 	public LocalModel localTxt(Map<String, Object> map) {
@@ -135,11 +163,13 @@ public class LeerTxt {
 	}
 	
 	public LoteModel loteTxt(Map<String, Object> map) {
-		int cantidad = (int) map.get("cantidad");
+		int cantidad = Integer.parseInt((String) map.get("cantidad"));
 		LocalDate fechaIngreso = aFecha((String) map.get("fechaIngreso"));	
-		ProductoModel productolModel = (ProductoModel) map.get("productolModel");
+		int productoModel = Integer.parseInt((String) map.get("productolModel"));
+		ProductoModel producto = productoService.findById(productoModel);
 		
-		return new LoteModel(0,cantidad,fechaIngreso,productolModel);
+		
+		return new LoteModel(0,cantidad,fechaIngreso,producto);
 	}
 	public User userTxt(Map<String, Object> map) {
 		String username = (String) map.get("username");

@@ -1,4 +1,4 @@
-/*package com.unla.Grupo16OO22020.services.implementation;
+package com.unla.Grupo16OO22020.services.implementation;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.unla.Grupo16OO22020.converters.PersonaConverter;
@@ -55,18 +56,31 @@ public class ReadFileServiceImpl implements ReadFileService{
 	private static final String PATH_LOTE = "src\\main\\resources\\text\\lote";
 	private static final String PATH_USER = "src\\main\\resources\\text\\user";
 	private static final String PATH_ROLE = "src\\main\\resources\\text\\role";
+	private static final String PATH_CLIENTE = "src\\main\\resources\\text\\cliente";
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	//@PostConstruct
-	public void insertarEmpleado() {
+	public void insertarCliente() {
 		List<ClienteModel> lista = new ArrayList<>();
-		lista = (List<ClienteModel>)(Object)leerTxt.leer(PATH_EMPLEADO);
+		lista = (List<ClienteModel>)(Object)leerTxt.leer(PATH_CLIENTE);
 		for(ClienteModel em : lista) {
 			
 			personaService.clienteInsertOrUpdate(em);
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	//@PostConstruct
+		public void insertarEmpleado() {
+			List<EmpleadoModel> lista = new ArrayList<>();
+			lista = (List<EmpleadoModel>)(Object)leerTxt.leer(PATH_EMPLEADO);
+			for(EmpleadoModel em : lista) {
+				
+				personaService.empleadoInsertOrUpdate(em);
+			}
+		}
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -81,7 +95,7 @@ public class ReadFileServiceImpl implements ReadFileService{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	@PostConstruct
+	//@PostConstruct
 	public void insertarProducto() {
 		List<ProductoModel> lista = new ArrayList<>();
 		lista = (List<ProductoModel>)(Object)leerTxt.leer(PATH_PRODUCTO);
@@ -123,11 +137,23 @@ public class ReadFileServiceImpl implements ReadFileService{
 		}
 	}
 
-
+	@Override
+    @PostConstruct
+    public void InsertarTodo() {
+      if(userRepository.findAll().isEmpty()) {//se busca si un repositorio tiene datos para que al moment de ejecutar el programa no se recargen los datos
+    	  									//por segunda vez
+		insertarLocal();
+        insertarEmpleado();
+        insertarCliente();
+        insertarProducto();
+        insertarLote();
+        crearUser();
+        crearUserRole();
+      }
+    }
 
 
 
 	
 }
 
-*/

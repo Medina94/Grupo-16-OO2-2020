@@ -9,6 +9,8 @@ public interface ReadFileService {
 	//public void crearUsuario();
 	public void crearUserRole();
 	public void crearUser();
+	public void insertarCliente();
+	public void InsertarTodo();
 	
 	
 }
