@@ -6,6 +6,7 @@ import java.util.List;
 import com.unla.Grupo16OO22020.entities.Lote;
 import com.unla.Grupo16OO22020.entities.Pedido;
 import com.unla.Grupo16OO22020.models.DetallePedidoEmpleadoModel;
+import com.unla.Grupo16OO22020.models.FacturaModel;
 import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.models.PedidoModel;
 import com.unla.Grupo16OO22020.models.PlusSueldoModel;
@@ -49,5 +50,7 @@ public interface IPedidoService {
 	public List<Lote> lotes (int idProducto);
 	
 	public int devolverCantidadStockDisponible(List<Lote> lotes);
+	
+	public List<FacturaModel> generarFactura(int pedidoId);
 }
 

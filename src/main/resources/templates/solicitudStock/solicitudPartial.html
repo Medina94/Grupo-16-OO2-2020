@@ -11,7 +11,9 @@
             				<th>Producto</th>
 							<th>Fecha</th>
 							<th>Cantidad</th>
+							<th>Local<th/>
             				<th>Estado</th> 
+            				
              				</tr>
     					</thead>
     					<tbody>        
@@ -20,6 +22,7 @@
             					<td><span th:text="${solicitud.pedido.producto.descripcion}" /></td>
 								<td><span th:text="${solicitud.pedido.fecha}" /></td>
 								<td><span th:text="${solicitud.pedido.cantidadSolicitada}" /></td>
+            					<td><span th:text="${solicitud.local.direccion}" /></td>
             					<td>
             						<span th:switch="${solicitud.estado}">
             							<p th:case="1" style="color: green"><strong>Confirmado</strong></p>
@@ -39,7 +42,8 @@
             				<th>Solicitante</th>
             				<th>Producto</th>
 							<th>Fecha</th>
-							<th>Cantidad</th>
+							<th>Cantidad</th>							
+            				<th>Local</th>
             				<th>Estado</th> 
               				<th class="aceptar"></th>  
               			    <th class="rechazar"></th> 
@@ -49,8 +53,9 @@
        						 <tr th:each="recibida : ${solicitudesRecibidas}">        	    					
        	    					<td><span th:text="${recibida.solicitador != null && recibida.solicitador.nombre !=null} ? ${recibida.solicitador.nombre} : 'Sin asignar'"></span></td>                  					
             					<td><span th:text="${recibida.pedido.producto.descripcion}" /></td>
-								<td><span th:text="${solicitud.pedido.fecha}" /></td>
+								<td><span th:text="${recibida.pedido.fecha}" /></td>
 								<td><span th:text="${recibida.pedido.cantidadSolicitada}" /></td>
+								<td><span th:text="${recibida.pedido.producto.local.direccion}" /></td>
             					<td>
             						<span th:switch="${recibida.estado}">
             							<p th:case="1" style="color: green"><strong>Confirmado</strong></p>

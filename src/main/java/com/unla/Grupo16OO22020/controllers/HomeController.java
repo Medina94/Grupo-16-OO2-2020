@@ -21,7 +21,9 @@ import com.unla.Grupo16OO22020.models.RankingModel;
 import com.unla.Grupo16OO22020.services.ILocalService;
 import com.unla.Grupo16OO22020.services.IPedidoService;
 import com.unla.Grupo16OO22020.services.IProductoService;
+import com.unla.Grupo16OO22020.services.implementation.JasperReportService;
 import com.unla.Grupo16OO22020.services.implementation.UserService;
+
 
 
 @Controller
@@ -38,8 +40,7 @@ public class HomeController {
 	private IPedidoService pedidoService;
 	@Autowired
 	@Qualifier("userService")
-	private UserService userService;
-	
+	private UserService userService;	
 	//GET Example: SERVER/index
 	@GetMapping("/index")
 	public ModelAndView index() {
@@ -49,7 +50,7 @@ public class HomeController {
 		modelAndView.addObject("productos", 
 	    pedidoService.obtenerRanking(pedidoService.obtenerPrimerDiaDelAño(),
 	    		                     pedidoService.obtenerUltimoDiaDelAño(), 0));
-		modelAndView.addObject("locales", localService.getAll());
+		modelAndView.addObject("locales", localService.getAll());		
 		return modelAndView;
 	}
 	

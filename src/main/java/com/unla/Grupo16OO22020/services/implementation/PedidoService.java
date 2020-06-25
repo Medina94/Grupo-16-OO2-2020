@@ -3,6 +3,8 @@ package com.unla.Grupo16OO22020.services.implementation;
 import java.time.LocalDate;
 import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
 import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
+
+import java.io.FileNotFoundException;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.unla.Grupo16OO22020.converters.PedidoConverter;
 import com.unla.Grupo16OO22020.converters.PersonaConverter;
@@ -20,6 +23,7 @@ import com.unla.Grupo16OO22020.entities.Pedido;
 import com.unla.Grupo16OO22020.entities.Producto;
 import com.unla.Grupo16OO22020.enums.EstadoEnum;
 import com.unla.Grupo16OO22020.models.DetallePedidoEmpleadoModel;
+import com.unla.Grupo16OO22020.models.FacturaModel;
 import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.models.MailModel;
 import com.unla.Grupo16OO22020.models.PedidoModel;
@@ -31,6 +35,8 @@ import com.unla.Grupo16OO22020.repositories.ILoteRepository;
 import com.unla.Grupo16OO22020.repositories.IPedidoRepository;
 import com.unla.Grupo16OO22020.services.IMailService;
 import com.unla.Grupo16OO22020.services.IPedidoService;
+
+import net.sf.jasperreports.engine.JRException;
 
 
 @Service("pedidoService")
@@ -72,6 +78,9 @@ public class PedidoService implements IPedidoService {
 	@Autowired
 	@Qualifier("mailService")
 	private IMailService mailService;
+	@Autowired
+	@Qualifier("jasperService")
+	private JasperReportService jasperService;
 	
 	@Override	
 	public List<Pedido> getAll() {
@@ -87,8 +96,14 @@ public class PedidoService implements IPedidoService {
 		
 		// envio mail de confirmado al cliente solo si el estado es == 1 (ACEPTADO)
 		if(pedidoModel.getEstado() == EstadoEnum.ESTADO_ACEPTADO.getCodigo()) {
-			MailModel mail = new MailModel().buildConfirmado(pedidoModel);
-			mailService.enviarMail(mail, false);
+			MailModel mail = new MailModel().buildConfirmado(pedidoModel);	
+			try {
+				jasperService.exportReport("pdf", pedido.getId());
+			} catch (FileNotFoundException | JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			mailService.enviarMail(mail, true);
 		}
 		
 		return pedidoConverter.entityToModel(pedido);
@@ -243,5 +258,9 @@ public class PedidoService implements IPedidoService {
 		LocalDate now = LocalDate.now();
 		 LocalDate primerDia = now.with(firstDayOfYear());
 		 return primerDia;
+	}
+	
+	public List<FacturaModel> generarFactura(int pedidoId){
+		return pedidoRepository.generarFactura(pedidoId);
 	}
 }

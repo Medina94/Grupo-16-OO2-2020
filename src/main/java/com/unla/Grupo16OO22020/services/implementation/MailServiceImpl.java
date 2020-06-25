@@ -1,17 +1,24 @@
 package com.unla.Grupo16OO22020.services.implementation;
 
+import java.io.FileNotFoundException;
+
 import javax.mail.internet.MimeMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.unla.Grupo16OO22020.models.MailModel;
+import com.unla.Grupo16OO22020.models.PedidoModel;
 import com.unla.Grupo16OO22020.services.IMailService;
+
+import net.sf.jasperreports.engine.JRException;
 /**
  * Service para el envio de mails
  * @author Cristian
@@ -42,9 +49,10 @@ public class MailServiceImpl implements IMailService {
 			helper.setText(mail.getMensaje());
 			helper.setSubject(mail.getAsunto());
 			// Obtengo un archivo del sistema y lo adjunto en el mail
-			if(adjunto) {
-				//FileSystemResource file = new FileSystemResource("C:\\Users\\Cristian\\Desktop\\Plantilla Informe de Avance.pdf");
-				//helper.addAttachment(file.getFilename(), file);
+			if(adjunto) {				
+				
+				FileSystemResource file = new FileSystemResource("C:\\documentopdf\\factura.pdf");
+				helper.addAttachment(file.getFilename(), file);
 			}
 			mailSender.send(message);
 			send = true;

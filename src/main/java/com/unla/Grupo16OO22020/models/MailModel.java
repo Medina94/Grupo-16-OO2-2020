@@ -12,14 +12,16 @@ public class MailModel {
 	private String receptor;
 	private String asunto;
 	private String mensaje;
+	private int id;
 	
 	public MailModel() {}
 	
-	public MailModel(String emisor, String receptor, String asunto, String mensaje) {
+	public MailModel(int id, String emisor, String receptor, String asunto, String mensaje) {
 		this.emisor = emisor;
 		this.receptor = receptor;
 		this.asunto = asunto;
 		this.mensaje = mensaje;
+		this.id = id;
 	}
 
 	public String getEmisor() {
@@ -65,6 +67,7 @@ public class MailModel {
 		this.receptor = pedido.getClienteModel().getMail();
 		this.mensaje = AsuntoMailEnum.ASUNTO_MAIL_CLIENTE_CONFIRMADO.getMensaje();
 		this.asunto = AsuntoMailEnum.ASUNTO_MAIL_CLIENTE_CONFIRMADO.getAsunto();
+		this.id = pedido.getId();
 		return this;
 	}
 	
@@ -81,6 +84,7 @@ public class MailModel {
 		this.receptor = pedido.getClienteModel().getMail();
 		this.mensaje = AsuntoMailEnum.ASUNTO_MAIL_CLIENTE_RECHAZADO.getMensaje();
 		this.asunto = AsuntoMailEnum.ASUNTO_MAIL_CLIENTE_RECHAZADO.getAsunto();
+		this.id = pedido.getId();
 		return this;
 	}
 	//--------------------------------------------------------------------------
@@ -109,5 +113,13 @@ public class MailModel {
 		this.mensaje = AsuntoMailEnum.ASUNTO_MAIL_COLABORADOR.getMensaje();
 		this.asunto = AsuntoMailEnum.ASUNTO_MAIL_COLABORADOR.getAsunto();
 		return this;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

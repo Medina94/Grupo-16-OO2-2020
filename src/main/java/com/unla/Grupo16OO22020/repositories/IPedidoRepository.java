@@ -46,5 +46,11 @@ public interface IPedidoRepository extends JpaRepository<Pedido, Serializable> {
 			+ " AND p.id not in (SELECT s.pedido FROM SolicitudStock s)")
 	public abstract List<DetallePedidoEmpleadoModel> obtenerPedidosPorEmpleado(int empleado_id, LocalDate fechaDesde, LocalDate fechaHasta);
 	
-	
+	@Query("SELECT new com.unla.Grupo16OO22020.models.FacturaModel"
+			+ "(c.nombre, c.apellido, c.fechaNacimiento, c.telefono, c.mail, c.dni, "
+			+ "p.cantidadSolicitada, p.fecha, pro.descripcion, pro.imagenUrl, pro.precioUnitario, "
+			+ "l.direccion, l.telefono) "
+			+ " from Pedido p JOIN p.producto pro Join p.cliente c "
+			+ "join pro.local l WHERE p.id = (:pedidoId)")
+	public abstract List<FacturaModel> generarFactura(int pedidoId);
 }
