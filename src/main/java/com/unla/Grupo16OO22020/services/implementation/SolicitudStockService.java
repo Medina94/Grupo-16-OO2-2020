@@ -294,4 +294,18 @@ public class SolicitudStockService implements ISolicitudStockService{
 		
 		return plusSueldo;
 	}
+	
+	public SolicitudStock buscarPedidosExistentes(int pedidoId) {
+		
+		return solicitudStockRepository.buscarPedidosExistentes(pedidoId);
+
+	}
+	
+	public List<SolicitudStock> traerSolicitudesRecibidasLocalPedido(int localId) {
+		List<SolicitudStock> lista = solicitudStockRepository.obtenerSolicitudesRecibidas(localId);		
+		lista = lista.stream()
+			    .filter(x -> x.getEstado() == EstadoEnum.ESTADO_PENDIENTE.getCodigo())
+			    .collect(Collectors.toList());
+		return lista;
+	}
 }

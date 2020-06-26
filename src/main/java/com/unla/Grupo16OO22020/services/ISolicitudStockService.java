@@ -44,4 +44,6 @@ public interface ISolicitudStockService {
 	public boolean remove();
 	
 	public List<PlusSueldoModel> listarReportePlus();
+	
+	public List<SolicitudStock> traerSolicitudesRecibidasLocalPedido(int localId);
 }
