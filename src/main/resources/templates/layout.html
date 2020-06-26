@@ -88,10 +88,11 @@ cursor: pointer;
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/index">
-                <div class="sidebar-brand-on ">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/index" >
+                
+				<div class="sidebar-brand-on ">
                     <div class="sidebar-brand-icon">
-<!--                         <img src="~/Content/Images/agro.png" id="imgLogo" alt="" style="height:50px;"> -->
+        	        <i class="fas fa-home"></i>
                     </div>
                     <div class="sidebar-brand-text">
 <!--                         <img src="~/Content/Images/Logo.png" id="imgLogo" alt="" style="height:30px;margin-top:-10px"> -->
@@ -112,7 +113,7 @@ cursor: pointer;
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" id="navLocales">
                     <i class="fas fa-store"></i>
                     <span>Locales</span>
                 </a>
@@ -125,7 +126,7 @@ cursor: pointer;
             </li>
     <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities" id="navPedido">
                     <i class="fa fa-shopping-cart"></i>
                     <span>Pedido</span>
                 </a>
@@ -138,7 +139,7 @@ cursor: pointer;
             </li>
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLote" aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLote" aria-expanded="true" aria-controls="collapseUtilities" id="navLote">
                     <i class="fa fa-chart-pie"></i>
                     <span>Lote</span>
                 </a>
@@ -151,7 +152,7 @@ cursor: pointer;
             </li>
               <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducto" aria-expanded="true" aria-controls="collapseProducto">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducto" aria-expanded="true" aria-controls="collapseProducto" id="navProducto">
                     <i class="fa fa-shopping-bag"></i>
                     <span>Producto</span>
                 </a>
@@ -162,8 +163,8 @@ cursor: pointer;
                     </div>
                 </div>
             </li>   
-             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmpleado" aria-expanded="true" aria-controls="collapseProducto">
+             <li class="nav-item" >
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmpleado" aria-expanded="true" aria-controls="collapseProducto" id="navEmpleado">
                     <i class="fa fa-user-circle"></i>
                     <span>Empleado</span>
                 </a>
@@ -175,7 +176,7 @@ cursor: pointer;
                 </div>
             </li>    
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCliente" aria-expanded="true" aria-controls="collapseProducto">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCliente" aria-expanded="true" aria-controls="collapseProducto" id="navCliente">
                     <i class="fa fa-user"></i>
                     <span>Cliente</span>
                 </a>
@@ -188,7 +189,7 @@ cursor: pointer;
             </li>
 <!--             aca termina    -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseComision" aria-expanded="true" aria-controls="collapseProducto">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseComision" aria-expanded="true" aria-controls="collapseProducto" id="navComision">
                     <i class="fa fa-percent" aria-hidden="true"></i>
                     <span>Comision</span>
                 </a>
@@ -201,7 +202,7 @@ cursor: pointer;
             </li> 
             
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSolicitud" aria-expanded="true" aria-controls="collapseProducto">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSolicitud" aria-expanded="true" aria-controls="collapseProducto" id="navSolicitudStock">
                     <i class="fa fa-user"></i>
                     <span>Solicitud Stock</span>
                 </a>
@@ -220,7 +221,7 @@ cursor: pointer;
             <!-- Nav Item - Pages Collapse Menu -->
        
             <li class="nav-item">
-            <a class="nav-link " href="/reporteSueldo">
+            <a class="nav-link " href="/reporteSueldo" id="navReporte">
                 <i class="fa fa-fw fa-cog"></i>
                 <span>Reporte</span>
                 
@@ -572,6 +573,37 @@ function eliminarRechazadas(){
 	
 });
 }
+//ESCONDER LAYOUT PARA GERENTE
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+		 	url: "/consultarRol"		 	
+		})
+		.done(function(result) {
+			if(result == "ROLE_GERENTE"){
+				$("#navComision").hide();
+			}
+		})
+		.fail(function() {
+			alert("error");
+});
+
+//ESCONDER LAYOUT PARA EMPLEADO
+		$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+			method: "GET",
+		 	url: "/consultarRol"		 	
+		})
+		.done(function(result) {
+			if(result == "ROLE_EMPLEADO"){
+				$("#navComision").hide();
+				$("#navEmpleado").hide();
+				$("#navReporte").hide();
+			}
+		})
+		.fail(function() {
+			alert("error");
+});
+
+
 </script>
 </body>
 </html>
