@@ -52,4 +52,7 @@ public interface ISolicitudStockRepository extends JpaRepository<SolicitudStock,
 			+ "JOIN s.colaborador e JOIN e.local l where l.id=(:localId) AND p.fecha>=(:fechaDesde) AND p.fecha<=(:fechaHasta) AND s.estado=1"
 			+ " GROUP BY e.id")
 	public abstract List<PlusSueldoModel> calcularPlusCeder(int localId, LocalDate fechaDesde, LocalDate fechaHasta);
+	
+	@Query("Select s from SolicitudStock s join s.pedido p where p.id=(:pedidoId)")
+	public abstract SolicitudStock buscarPedidosExistentes(int pedidoId);
 }

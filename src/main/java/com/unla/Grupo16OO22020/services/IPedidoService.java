@@ -52,5 +52,7 @@ public interface IPedidoService {
 	public int devolverCantidadStockDisponible(List<Lote> lotes);
 	
 	public List<FacturaModel> generarFactura(int pedidoId);
+	
+	public int cantidadStock(int idProducto, int cantidadSolicitada);
 }
 

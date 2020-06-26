@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.unla.Grupo16OO22020.converters.LocalConverter;
 import com.unla.Grupo16OO22020.entities.Empleado;
 import com.unla.Grupo16OO22020.entities.Local;
+import com.unla.Grupo16OO22020.entities.SolicitudStock;
+import com.unla.Grupo16OO22020.enums.EstadoEnum;
 import com.unla.Grupo16OO22020.models.LocalModel;
 import com.unla.Grupo16OO22020.models.ProductoModel;
 import com.unla.Grupo16OO22020.repositories.ILocalRepository;
@@ -18,6 +20,7 @@ import com.unla.Grupo16OO22020.services.ILocalService;
 import com.unla.Grupo16OO22020.services.ILoteService;
 import com.unla.Grupo16OO22020.services.IPedidoService;
 import com.unla.Grupo16OO22020.services.IProductoService;
+import com.unla.Grupo16OO22020.services.ISolicitudStockService;
 
 
 
@@ -48,6 +51,10 @@ public class LocalService implements ILocalService{
 	@Autowired
 	@Qualifier("pedidoService")
 	private IPedidoService pedidoService;
+	
+	@Autowired
+	@Qualifier("solicitudStockService")
+	private ISolicitudStockService solicitudStockService;
 	
 	
 	@Override
@@ -123,7 +130,10 @@ public class LocalService implements ILocalService{
 		
 		for(LocalModel local : locales) {
 			ProductoModel prod = productoService.findByCodigoAndLocal(producto.getCodigo(), local.getId());
-			if(pedidoService.consultarStock(prod.getId(), cantidadSolicitada)) {
+			//boolean estado= solicitudStockService.traerSolicitudesRecibidasLocalPedido(local.getId()).isEmpty();
+			int calculo=pedidoService.cantidadStock(prod.getId(), cantidadSolicitada)-(cantidadSolicitada+cantidadTotalProductosPendientes(local.getId()));
+			//if(calculo>=0) {
+			if(calculo>=0&&pedidoService.consultarStock(prod.getId(), cantidadSolicitada)) {
 				localConStock.add(local);
 			}
 		}
@@ -144,6 +154,15 @@ public class LocalService implements ILocalService{
 	public List<Local> traerLocalPorRol() {
 		return localRepository.traerTodo(userService.traerEmpleadoLogueado().getLocal().getId(), userService.traerRol());
 	
+	}
+	
+	public int cantidadTotalProductosPendientes(int localId) { //trae todas las solicitudes pendientes del local que tiene stock para sacar la cantidad total y posteriormente hacer la resta
+		List<SolicitudStock>lista=solicitudStockService.traerSolicitudesRecibidasLocalPedido(localId);
+		int total=0;
+		for (SolicitudStock solicitudStock : lista) {
+			total=total+solicitudStock.getPedido().getCantidadSolicitada();
+		}
+		return total;
 	}
 	
 }

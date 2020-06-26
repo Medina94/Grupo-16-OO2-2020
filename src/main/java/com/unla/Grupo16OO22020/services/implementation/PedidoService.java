@@ -21,6 +21,7 @@ import com.unla.Grupo16OO22020.entities.Comision;
 import com.unla.Grupo16OO22020.entities.Lote;
 import com.unla.Grupo16OO22020.entities.Pedido;
 import com.unla.Grupo16OO22020.entities.Producto;
+import com.unla.Grupo16OO22020.entities.SolicitudStock;
 import com.unla.Grupo16OO22020.enums.EstadoEnum;
 import com.unla.Grupo16OO22020.models.DetallePedidoEmpleadoModel;
 import com.unla.Grupo16OO22020.models.FacturaModel;
@@ -81,6 +82,9 @@ public class PedidoService implements IPedidoService {
 	@Autowired
 	@Qualifier("jasperService")
 	private JasperReportService jasperService;
+	@Autowired
+	@Qualifier("solicitudStockService")
+	private SolicitudStockService solicitudStockService;
 	
 	@Override	
 	public List<Pedido> getAll() {
@@ -150,6 +154,11 @@ public class PedidoService implements IPedidoService {
 	@Override
 	public void actualizarStock(PedidoModel pedidoModel) {
 		ProductoModel producto = productoService.findById(pedidoModel.getProductoModel().getId());
+		SolicitudStock solicitud = solicitudStockService.buscarPedidosExistentes(pedidoModel.getId());
+		if(solicitud!=null) {
+			ProductoModel producto1=productoService.findByCodigoAndLocal(pedidoModel.getProductoModel().getCodigo(), solicitud.getLocal().getId());
+			producto = producto1;
+		}
 		List<Lote> lotes = loteService.traerTodoLoteDelLocalPorProducto(producto.getCodigo(), producto.getLocalModel().getId());
 		int cantidadActualizada = pedidoModel.getCantidadSolicitada();
 		for(Lote l: lotes) {
@@ -262,5 +271,12 @@ public class PedidoService implements IPedidoService {
 	
 	public List<FacturaModel> generarFactura(int pedidoId){
 		return pedidoRepository.generarFactura(pedidoId);
+	}
+	
+	@Override
+	public int cantidadStock(int idProducto, int cantidadSolicitada) {
+		
+		return devolverCantidadStockDisponible(this.lotes(idProducto));
+
 	}
 }
